@@ -1142,7 +1142,7 @@ Create and return a new image for a spot specified by id.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: POST
-  * URL: /images/:imageType/:spotId
+  * URL: /images/:spotId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1189,7 +1189,7 @@ Create and return a new image for a review specified by id.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: POST
-  * URL: /images/:imageType/:reviewId
+  * URL: /images/:reviewId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1251,7 +1251,7 @@ Delete an existing image.
   the image's imageableId and imageableType
 * Request
   * Method: DELETE
-  * URL: /images/:imageType/:imageId
+  * URL: /images/:imageId
   * Body: none
 
 * Successful Response
