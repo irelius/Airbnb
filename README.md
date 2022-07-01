@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![Schema Image](https://github.com/irelius/AirBnB/blob/main/assets/schema/airbnbSchema.png)]
+![Schema Image](https://github.com/irelius/AirBnB/blob/main/assets/schema/airbnbSchema.png)
 
 ## API Documentation
 
