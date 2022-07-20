@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model, Sequelize
+  Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
@@ -10,22 +10,24 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Spot.belongsTo(
-        models.User,
-        { foreignKey: "ownerId" }
-      )
-
-      Spot.hasMany(
-        models.Review,
-        { foreignKey: "spotId" }
-      )
-      Spot.hasMany(
-        models.Booking,
-        { foreignKey: "spotId" }
-      )
       Spot.hasMany(
         models.Image,
-        { foriengKey: "imageableId" }
+        {foreignKey: "imageableId"}
+      )
+
+
+      Spot.belongsTo(
+        models.User,
+        { foreignKey: "ownerId"}
+      )
+
+      Spot.belongsToMany(
+        models.User,
+        { through: models.Review}
+      )
+      Spot.belongsToMany(
+        models.User,
+        { through: models.Booking}
       )
     }
   }
@@ -66,7 +68,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL,
       allowNull: false
     },
     previewImg: {
