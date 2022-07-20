@@ -11,18 +11,18 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert("Users", [
+    await queryInterface.bulkInsert("Bookings", [
       {
-        firstName: "John",
-        lastName: "Doe",
-        email: "lostidentity@gmail.com",
-        password: "doyouknowwhoIam?",
+        spotId: 1,
+        userId: 1,
+        startDate: 2022-01-17,
+        endDate: 2023-01-17
       },
       {
-        firstName: "Alan",
-        lastName: "Smithee",
-        email: "hiddenidentity@gmail.com",
-        password: "youdon'tknowwhoIam"
+        spotId: 2,
+        userId: 2,
+        startDate: 2022-06-23,
+        endDate: 2023-06-23
       }
     ])
   },
@@ -34,6 +34,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Users', null, {});
+     await queryInterface.bulkDelete('Bookings', null, {});
   }
 };
