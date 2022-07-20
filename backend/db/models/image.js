@@ -10,14 +10,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Image.belongsTo(
-        models.Review,
-        { foreignKey: "imageableId" }
-      )
-      Image.belongsTo(
-        models.Spot,
-        { foreignKey: "imageableId" }
-      )
+      // define association here
+      // Image.belongsTo(
+      //   models.Review,
+      //   {foreignKey: "imageableId"}
+      // )
+
+      // Image.belongsTo(
+      //   models.Spot,
+      //   {foreignKey: "imageableId"}
+      // )
     }
   }
   Image.init({
@@ -25,10 +27,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     imageableType: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     url: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
   }, {
     sequelize,
