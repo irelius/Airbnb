@@ -11,18 +11,24 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert("Users", [
+    await queryInterface.bulkInsert("Reviews", [
       {
-        firstName: "John",
-        lastName: "Doe",
-        email: "lostidentity@gmail.com",
-        password: "doyouknowwhoIam?",
+        review: "Strictly speaking of quality, it's ok. But for the price, great value.",
+        stars: 4,
+        userId: 1,
+        spotId: 1
       },
       {
-        firstName: "Alan",
-        lastName: "Smithee",
-        email: "hiddenidentity@gmail.com",
-        password: "youdon'tknowwhoIam"
+        review: "crappy location. rude hosts.",
+        stars: 1,
+        userId: 1,
+        spotId: 2
+      },
+      {
+        review: "Amazing sights and venue.",
+        stars: 5,
+        userId: 2,
+        spotId: 3
       }
     ])
   },
@@ -34,6 +40,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Users', null, {});
+     await queryInterface.bulkDelete('Reviews', null, {});
   }
 };

@@ -11,18 +11,21 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert("Users", [
+    await queryInterface.bulkInsert("Images", [
       {
-        firstName: "John",
-        lastName: "Doe",
-        email: "lostidentity@gmail.com",
-        password: "doyouknowwhoIam?",
+        imageableId: 1,
+        imageableType: "Spots",
+        url: "https://en.wikipedia.org/wiki/Ocean"
       },
       {
-        firstName: "Alan",
-        lastName: "Smithee",
-        email: "hiddenidentity@gmail.com",
-        password: "youdon'tknowwhoIam"
+        imageableId: 2,
+        imageableType: "Spots",
+        url: "https://en.wikipedia.org/wiki/Mountain"
+      },
+      {
+        imageableId: 3,
+        imageableType: "Spots",
+        url: "https://en.wikipedia.org/wiki/Beach"
       }
     ])
   },
@@ -34,6 +37,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Users', null, {});
+     await queryInterface.bulkDelete('Images', null, {});
   }
 };
