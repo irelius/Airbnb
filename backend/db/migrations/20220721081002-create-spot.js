@@ -12,7 +12,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: "Users",
-        }
+        },
+        allowNull: true,
       },
       address: {
         type: Sequelize.STRING,
@@ -52,7 +53,7 @@ module.exports = {
       },
       previewImg: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
@@ -66,11 +67,11 @@ module.exports = {
       },
       numReviews: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       avgStarRating: {
         type: Sequelize.DECIMAL,
-        allowNull: false
+        allowNull: true
       }
     });
   },
