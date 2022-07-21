@@ -8,11 +8,19 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      imageableId: {
+      reviewId: {
         type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "Reviews"
+        }
       },
-      imageableType: {
-        type: Sequelize.STRING
+      spotId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "Spots"
+        }
       },
       url: {
         type: Sequelize.STRING,
