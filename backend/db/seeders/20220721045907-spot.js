@@ -53,18 +53,10 @@ const spots = [
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    console.log("spot seeder placeholder")
     try {
-      for(let spot of spots) {
-        const {address, city, state, country, lat, lng, name, description, price, previewImg, numReviews, avgStarRating, ownerId} = spot
+      for (let spot of spots) {
+        const { address, city, state, country, lat, lng, name, description, price, previewImg, numReviews, avgStarRating, ownerId } = spot
         const foundOwner = await User.findOne({
           where: {
             id: spot.ownerId
@@ -93,12 +85,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-    await queryInterface.bulkDelete('Spots', null, {});
+    await queryInterface.bulkDelete("Spots", null, {});
   }
 };

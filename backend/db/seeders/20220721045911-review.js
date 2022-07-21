@@ -24,19 +24,10 @@ const reviews = [
 ]
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-    try {
-      for (let reviewEl of reviews) {
-        const { review, stars, userId, spotId } = reviewEl
+  async up (queryInterface, Sequelize) {
+     try {
+      for(let reviewEl of reviews) {
+        const {review, stars, userId, spotId} = reviewEl
         const foundSpotId = await Spot.findOne({
           where: {
             id: reviewEl.spotId
@@ -60,13 +51,7 @@ module.exports = {
     }
   },
 
-  async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+  async down (queryInterface, Sequelize) {
     await queryInterface.bulkDelete("Reviews", null, {});
   }
 };
