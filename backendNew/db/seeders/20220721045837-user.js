@@ -1,5 +1,5 @@
 'use strict';
-
+const bcrypt = require("bcryptjs");
 const { User } = require("../models")
 
 const user = [
@@ -7,19 +7,19 @@ const user = [
     firstName: "John",
     lastName: "Doe",
     email: "lostidentity@gmail.com",
-    password: "doyouknowwhoIam?",
+    password: bcrypt.hashSync("doyouknowwhoIam?"),
   },
   {
     firstName: "Alan",
     lastName: "Smithee",
     email: "hiddenidentity@gmail.com",
-    password: "whocouldIbe?"
+    password: bcrypt.hashSync("whocouldIbe?")
   },
   {
     firstName: "Anon",
     lastName: "Ymous",
     email: "deletedidentity@gmail.com",
-    password: "youdon'tknowwhoIam"
+    password: bcrypt.hashSync("youdon'tknowwhoIam")
   }
 ]
 

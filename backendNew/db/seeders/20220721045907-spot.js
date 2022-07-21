@@ -53,7 +53,6 @@ const spots = [
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    console.log("spot seeder placeholder")
     try {
       for (let spot of spots) {
         const { address, city, state, country, lat, lng, name, description, price, previewImg, numReviews, avgStarRating, ownerId } = spot
