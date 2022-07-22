@@ -6,9 +6,11 @@ const { Spot, User } = require("../db/models")
 
 // Get all Spots
 router.get("/", async (req, res, next) => {
-    let allSpots = await Spot.findAll();
+    let Spots = await Spot.findAll();
     // res.status(200);
-    res.json(allSpots)
+    res.json({
+        Spots
+    })
 })
 
 
@@ -25,7 +27,7 @@ router.get("/", async (req, res, next) => {
 
 
 // Get Spots by spot id
-// TODO response needs to include images and owner
+// TODO response needs to include images and owner tables
 router.get("/:spotId", async (req, res, next) => {
     let spotId = req.params.spotId;
     let spot = await Spot.findByPk(spotId);
