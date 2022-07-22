@@ -4,32 +4,32 @@ const router = express.Router();
 const { Booking, Spot } = require("../db/models")
 
 // Helper function for validation error
-// const validationError = (code) => {
-//     let error = new Error("Validation error");
-//     error.statusCode = code;
-//     error.errors = {
-//         "endDate": "endDate cannot be on or before startDate"
-//     }
-//     return error;
-// }
+const validationError = (message, code) => {
+    let error = new Error("Validation error");
+    error.statusCode = code;
+    error.errors = {
+        "endDate": message
+    }
+    return error;
+}
 
 // helper function for a particular element not found
-// const notFound = (el, code) => {
-//     let error = new Error(`${el} couldn't be found`);
-//     error.statusCode = code;
-//     return error
-// }
+const notFound = (el, code) => {
+    let error = new Error(`${el} couldn't be found`);
+    error.statusCode = code;
+    return error
+}
 
 // helper function for a review that already exists, may not need since this only occurs once?
-// const bookingExists = () => {
-//     let error = new Error("Sorry, this spot is already booked for the specified dates");
-//     error.statusCode = 403;
-//     error.errors = {
-//         "startDate": "Start date conflicts with an existing booking",
-//         "endDate": "End date conflicts with an existing booking"
-//     }
-//     return error
-// }
+const bookingExists = () => {
+    let error = new Error("Sorry, this spot is already booked for the specified dates");
+    error.statusCode = 403;
+    error.errors = {
+        "startDate": "Start date conflicts with an existing booking",
+        "endDate": "End date conflicts with an existing booking"
+    }
+    return error
+}
 
 
 // Get all Bookings
@@ -60,10 +60,7 @@ router.get("/:spotId", async (req, res, next) => {
 
     // error response for no spots
     if (Bookings.length < 1) {
-        const error = new Error("Spot couldn't be found");
-        error.statusCode = 404;
-        return next(error);
-        // next(notFound("Spot", 404))
+        return next(notFound("Spot", 404))
     } else {
         // successful response with all Bookings based on Spot id
         res.statusCode = 200;
@@ -83,19 +80,12 @@ router.post("/:spotId", async (req, res, next) => {
 
     // error response: body validation errors
     if(endDate <= startDate) {
-        const error = new Error("Validation error");
-        error.statusCode = 400;
-        error.errors = {
-            endDate: "endDate cannot be on or before startDate"
-        }
-        return next(error);
+        return next(validationError("endDate cannot be on or before startDate", 400))
     }
 
     // error response: couldn't find a Spot with the specified id
     if(!findSpot) {
-        const error = new Error("Spot couldn't be found");
-        error.statusCode = 404;
-        return next(error);
+        return next(notFound("Spot", 404))
     }
 
     // error response: booking conflict
@@ -107,31 +97,13 @@ router.post("/:spotId", async (req, res, next) => {
 
     for(let booking of bookingCheck) {
         if(startDate <= booking.startDate && startDate <= booking.endDate && endDate >= booking.startDate) {
-            const error = new Error("Sorry, this spot is already booked for the specified dates")
-            error.statusCode = 403;
-            error.errors = {
-                "startDate": "Start date conflicts with an existing booking",
-                "endDate": "End date conflicts with an existing booking"
-            }
-            return next(error);
+            return next(bookingExists())
         }
         if(startDate >= booking.startDate && startDate <= booking.endDate && endDate >= booking.endDate) {
-            const error = new Error("Sorry, this spot is already booked for the specified dates")
-            error.statusCode = 403;
-            error.errors = {
-                "startDate": "Start date conflicts with an existing booking",
-                "endDate": "End date conflicts with an existing booking"
-            }
-            return next(error);
+            return next(bookingExists())
         }
         if(startDate >= booking.startDate && startDate <= booking.endDate && endDate <= booking.endDate) {
-            const error = new Error("Sorry, this spot is already booked for the specified dates")
-            error.statusCode = 403;
-            error.errors = {
-                "startDate": "Start date conflicts with an existing booking",
-                "endDate": "End date conflicts with an existing booking"
-            }
-            return next(error);
+            return next(bookingExists())
         }
     }
 
@@ -166,12 +138,7 @@ router.put("/:bookingId", async (req, res, next) => {
 
     // body validation error: endDate cannot come before startDate
     if (endDate <= startDate) {
-        const error = new Error("Validation error")
-        error.statusCode = 400;
-        error.errors = {
-            endDate: "endDate cannot come before startDate"
-        }
-        return next(error);
+        return next(validationError("endDate cannot come before startDate", 400))
     }
 
 
@@ -186,31 +153,13 @@ router.put("/:bookingId", async (req, res, next) => {
     // booking conflict
     for(let booking of bookingCheck) {
         if(startDate <= booking.startDate && startDate <= booking.endDate && endDate >= booking.startDate) {
-            const error = new Error("Sorry, this spot is already booked for the specified dates")
-            error.statusCode = 403;
-            error.errors = {
-                "startDate": "Start date conflicts with an existing booking",
-                "endDate": "End date conflicts with an existing booking"
-            }
-            return next(error);
+            return next(bookingExists())
         }
         if(startDate >= booking.startDate && startDate <= booking.endDate && endDate >= booking.endDate) {
-            const error = new Error("Sorry, this spot is already booked for the specified dates")
-            error.statusCode = 403;
-            error.errors = {
-                "startDate": "Start date conflicts with an existing booking",
-                "endDate": "End date conflicts with an existing booking"
-            }
-            return next(error);
+            return next(bookingExists())
         }
         if(startDate >= booking.startDate && startDate <= booking.endDate && endDate <= booking.endDate) {
-            const error = new Error("Sorry, this spot is already booked for the specified dates")
-            error.statusCode = 403;
-            error.errors = {
-                "startDate": "Start date conflicts with an existing booking",
-                "endDate": "End date conflicts with an existing booking"
-            }
-            return next(error);
+            return next(bookingExists())
         }
     }
 
@@ -228,9 +177,7 @@ router.put("/:bookingId", async (req, res, next) => {
             updateBooking
         })
     } else {
-        const error = new Error("Booking couldn't be found");
-        error.statusCode = 404;
-        return next(error);
+        return next(notFound("Booking", 404))
     }
 })
 
@@ -251,13 +198,9 @@ router.delete("/:bookingId", async(req, res, next) => {
             statusCode: 200
         })
     } else {
-        const error = new Error("Booking couldn't be found")
-        error.statusCode = 404;
-        return next(error);
+        return next(notFound("Booking", 404))
     }
 })
-
-
 
 
 // Error middleware
