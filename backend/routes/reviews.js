@@ -6,7 +6,7 @@ const { Review, Spot } = require("../db/models")
 // Helper function for validation error
 const validationError = (code) => {
     let error = new Error("Validation error");
-    error.status = code;
+    error.statusCode = code;
     error.errors = {
         "review": "Review text is required",
         "stars": "Stars must be an integer from 1 to 5",
@@ -17,14 +17,14 @@ const validationError = (code) => {
 // helper function for a particular element not found
 const notFound = (el, code) => {
     let error = new Error(`${el} couldn't be found`);
-    error.status = code;
+    error.statusCode = code;
     return error
 }
 
 // helper function for a review that already exists, may not need since this only occurs once?
 const reviewExists = (el, code) => {
     let error = new Error(`${el} already has a review for this spot`);
-    error.status = code;
+    error.statusCode = code;
     return error
 }
 
@@ -160,7 +160,7 @@ router.delete("/reviewId", async (req, res, next) => {
 router.use((error, req, res, next) => {
     res.json({
         message: error.message,
-        statusCode: error.status,
+        statusCode: error.statusCode,
         errors: error.errors
     })
 })
