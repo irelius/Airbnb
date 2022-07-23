@@ -6,6 +6,7 @@ const { Spot, User } = require("../db/models")
 
 // Helper function for validation error
 const validationError = (code) => {
+    console.log("validationError helper function activated")
     let error = new Error("Validation error");
     error.statusCode = code;
     error.errors = {
@@ -54,7 +55,7 @@ router.get("/", async (req, res, next) => {
 // })
 
 
-// Get Spots by spot id
+// Get details of a Spot from an id
 // TODO response needs to include images and owner tables
 router.get("/:spotId", async (req, res, next) => {
     let spotId = req.params.spotId;
@@ -70,6 +71,7 @@ router.get("/:spotId", async (req, res, next) => {
 
 // Create a Spot
 // TODO, get access to the current user id to add as the ownerId
+// TODO, figure out how to get validations to work
 router.post("/", async (req, res, next) => {
     try {
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -98,44 +100,54 @@ router.post("/", async (req, res, next) => {
 // TODO: figure out a way to make sure that the updated information complies with the validations
 // TODO: authenticaiton required, spot must belong to user
 router.put("/:spotId", async (req, res, next) => {
-    try {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
-        const updateSpot = await Spot.findByPk(req.params.spotId)
-        if (updateSpot) {
-            updateSpot.update({
-                address: address,
-                city: city,
-                state: state,
-                country: country,
-                lat: lat,
-                lng: lng,
-                name: name,
-                description: description,
-                price: price,
-            })
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
-            res.statusCode = 200;
-            updateSpot.updatedAt = new Date()
-            res.json(
-                updateSpot
-            )
-        } else {
-            return next(notFound("Spot", 404));
-        }
-    }
-    catch (e) {
+    // check if updated information follows the validation. I don't like this, try to fix this.
+    if (!address || !city || !state || !country || !description) {
         return next(validationError(400));
+    }
+    if (!lat || !lng || !price || !Number.isInteger(Math.floor(lat)) || !Number.isInteger(Math.floor(lng)) || !Number.isInteger(Math.floor(price))) {
+        return next(validationError(400));
+    }
+    if (name.length >= 50) {
+        return next(validationError(400));
+    }
+
+
+    // find spot to update and update
+    const updateSpot = await Spot.findByPk(req.params.spotId)
+    if (updateSpot) {
+        updateSpot.update({
+            address: address,
+            city: city,
+            state: state,
+            country: country,
+            lat: lat,
+            lng: lng,
+            name: name,
+            description: description,
+            price: price,
+        })
+
+        res.statusCode = 200;
+        updateSpot.updatedAt = new Date()
+        res.json(
+            updateSpot
+        )
+    } else {
+        return next(notFound("Spot", 404));
     }
 })
 
 // Delete a Spot
 // TODO: requires proper authorization. spot must belong to current user
 router.delete("/:spotId", async (req, res, next) => {
-    const spot = await Spot.findByPk(req.params.spotId);
-    if (spot) {
+    const spotId = req.params.spotId;
+    const deleteSpot = await Spot.findByPk(spotId);
+    if (deleteSpot) {
         await Spot.destroy({
             where: {
-                id: req.params.spotId
+                id: spotId
             }
         })
         res.statusCode = 200;
@@ -151,6 +163,7 @@ router.delete("/:spotId", async (req, res, next) => {
 
 // Error middleware
 router.use((error, req, res, next) => {
+    console.log("error middleware activated")
     res.json({
         message: error.message,
         statusCode: error.statusCode,

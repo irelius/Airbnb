@@ -14,6 +14,7 @@ module.exports = {
           model: "Users",
         },
         allowNull: true,
+        onDelete: "CASCADE"
       },
       address: {
         type: Sequelize.STRING,
