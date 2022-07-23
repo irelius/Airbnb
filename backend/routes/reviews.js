@@ -110,7 +110,7 @@ router.put("/:reviewId", async (req, res, next) => {
 
 
     // error response: validation error
-    if(review.length === 0 || !Number.isInteger(stars)) {
+    if (review.length === 0 || !Number.isInteger(stars)) {
         return next(validationError(400));
     }
 
