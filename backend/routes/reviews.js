@@ -24,9 +24,15 @@ const notFound = (el, code) => {
 // helper function for a review that already exists, may not need since this only occurs once?
 const reviewExists = (el, code) => {
     let error = new Error(`${el} already has a review for this spot`);
-    error.statusCode = code;
+    error.statusCode = 403;
+    error.errors = {
+        "startDate": "Start date conflicts with an existing booking",
+        "endDate": "End date conflicts with an existing booking"
+    }
     return error
 }
+
+
 
 // Get all Reviews
 router.get("/", async (req, res, next) => {
@@ -56,7 +62,7 @@ router.get("/:spotId", async (req, res, next) => {
             Reviews
         })
     } else {
-        next(notFound("Spot"))
+        return next(notFound("Spot"))
     }
 })
 
@@ -77,67 +83,57 @@ router.post("/:spotId", async (req, res, next) => {
         // check if the spot exists to post the new review
         const findSpot = await Spot.findByPk(spotId)
         if (!findSpot) {
-            next(notFound("Spot", 404));
+            return next(notFound("Spot", 404));
         }
 
         // check if user already has a review for this spot
         // if() {
-        //     next(reviewExists("User", 403))
+        //     return next(reviewExists("User", 403))
         // }
 
         res.statusCode = 200;
-        res.json({
-            id: newReview.id,
-            // userId: newReview.userid,
-            spotId: spotId,
-            review: review,
-            stars: stars,
-            createdAt: newReview.createdAt,
-            updatedAt: newReview.updatedAt
-        })
+        res.json(
+            newReview
+        )
     }
     catch (e) {
-        next(validationError(400));
+        return next(validationError(400));
     }
 })
 
 
+// Edit a Review
+// TODO: i don't like how i have the validation here, try to figure out how to implement validation on models and format the try-catch
 router.put("/:reviewId", async (req, res, next) => {
-    try {
-        const { review, stars } = req.body;
+    const { review, stars } = req.body;
+    const updateReview = await Review.findByPk(req.params.reviewId)
 
-        const updateReview = await Review.findByPk(req.params.reviewId)
-        if (updateReview) {
-            updateReview.update({
-                review: review,
-                stars: stars
-            })
-        }
 
-        // check if the spot exists to post the new review
-        const findReview = await Review.findByPk(req.params.reviewId)
-        if (!findReview) {
-            next(notFound("Review", 404));
-        }
+    // error response: validation error
+    if(review.length === 0 || !Number.isInteger(stars)) {
+        return next(validationError(400));
+    }
+
+
+    // update or check if review exists to edit
+    if (updateReview) {
+        updateReview.update({
+            review: review,
+            stars: stars
+        })
 
         res.statusCode = 200;
-        res.json({
-            id: updateReview.id,
-            userId: updateReview.userId,
-            spotId: updateReview.spotId,
-            review: review,
-            stars: stars,
-            createdAt: updateReview.createdAt,
-            updatedAt: new Date()
-        })
-    }
-    catch (e) {
-        next(validationError(400));
+        updateReview.updatedAt = new Date()
+        res.json(
+            updateReview
+        )
+    } else {
+        return next(notFound("Review", 404));
     }
 })
 
 
-router.delete("/reviewId", async (req, res, next) => {
+router.delete("/:reviewId", async (req, res, next) => {
     const review = await Review.findByPk(req.params.reviewId);
     if (review) {
         await Review.destroy({
@@ -151,7 +147,7 @@ router.delete("/reviewId", async (req, res, next) => {
             "statusCode": 200
         })
     } else {
-        next(notFound("Review", 404));
+        return next(notFound("Review", 404));
     }
 })
 
