@@ -95,7 +95,7 @@ router.get('/restore', restoreUser, (req, res) => {
 
 
 // Sign up
-router.post('/', [validateSignup, checkUser], async (req, res, next) => {
+router.post('/signup', [validateSignup, checkUser], async (req, res, next) => {
     const { firstName, lastName, email, password } = req.body;
     const user = await User.signup({ firstName, lastName, email, password });
     await setTokenCookie(res, user);

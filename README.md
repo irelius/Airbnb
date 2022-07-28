@@ -76,7 +76,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /login
+  * URL: /users/login
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -142,7 +142,7 @@ user's information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /signup
+  * URL: /users/signup
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1179,7 +1179,7 @@ Create and return a new image for a spot specified by id.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: POST
-  * URL: /images/:spotId
+  * URL: /images/spots/:spotId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1225,7 +1225,7 @@ Create and return a new image for a review specified by id.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: POST
-  * URL: /images/:reviewId
+  * URL: /images/reviews/:reviewId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1320,7 +1320,7 @@ Return spots filtered by query parameters.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /spots/filter/
+  * URL: /spots?
   * Query Parameters
     * page: integer, minimum: 0, maximum: 10, default: 0
     * size: integer, minimum: 0, maximum: 20, default: 20
