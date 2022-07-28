@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Spot.belongsTo(
         models.User,
+        {as: "Owner"},
         { foreignKey: "ownerId" }
       )
     }
@@ -74,16 +75,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
-    previewImg: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
     numReviews: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
     avgStarRating: {
       type: DataTypes.DECIMAL,
+      allowNull: true
+    },
+    previewImg: {
+      type: DataTypes.STRING,
       allowNull: true
     }
   }, {
