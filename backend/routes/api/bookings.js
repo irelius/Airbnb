@@ -29,7 +29,6 @@ const notFound = (el, code) => {
 
 // helper function for a review that already exists, may not need since this only occurs once?
 const bookingExists = (bookingError) => {
-    console.log("helper function activated")
     let error = new Error("Sorry, this spot is already booked for the specified dates");
     error.status = 403;
     error.statusCode = 403;

@@ -4,7 +4,7 @@ const router = express.Router();
 
 const apiRouter = require('./api');
 
-router.use('/api', apiRouter);
+router.use('/', apiRouter);
 
 // Add a XSRF-TOKEN cookie
 // should not be available in production
