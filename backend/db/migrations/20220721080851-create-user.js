@@ -18,10 +18,11 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique:true
       },
-      password: {
-        type: Sequelize.STRING,
+      hashedPassword: {
+        type: Sequelize.STRING.BINARY,
         allowNull: false
       },
       createdAt: {
