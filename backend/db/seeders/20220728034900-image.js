@@ -13,11 +13,11 @@ const images = [
   },
   {
     spotId: 2,
-    url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80"
+    url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80"
   },
   {
     reviewId: 3,
-    url: "https://expertreviews.b-cdn.net/sites/expertreviews/files/2019/01/three_mobile_review_0.jpg"
+    url: "https://image.shutterstock.com/image-illustration/five-golden-stars-best-rating-260nw-657712999.jpg"
   },
   {
     spotId: 4,
@@ -25,7 +25,7 @@ const images = [
   },
   {
     reviewId: 5,
-    url: "https://static.vecteezy.com/system/resources/thumbnails/004/256/658/small/five-star-customer-product-ratings-review-flat-icons-for-apps-and-websites-illustration-of-five-golden-yellow-stars-in-a-row-isolated-in-a-white-background-concepts-for-ratings-customers-review-free-vector.jpg"
+    url: "https://www.pngkey.com/png/detail/4-47353_3-stars-3-.png"
   }
 ]
 
