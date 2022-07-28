@@ -31,7 +31,7 @@ const images = [
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    try{for (let image of images) {
+    for (let image of images) {
       const { url, reviewId, spotId } = image
       let foundId;
 
@@ -50,9 +50,6 @@ module.exports = {
           url
         })
       }
-    }}
-    catch(e) {
-      console.log(e)
     }
   },
 
