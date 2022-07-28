@@ -15,8 +15,8 @@ const spots = [
     description: "First place to ever exist",
     price: 111.11,
     previewImg: "https://en.wikipedia.org/wiki/Ocean",
-    numReviews: 1,
-    avgStarRating: 1.1
+    numReviews: null,
+    avgStarRating: null
   },
   {
     ownerId: 2,
@@ -30,8 +30,8 @@ const spots = [
     description: "Second place to ever exist",
     price: 222.22,
     previewImg: "https://en.wikipedia.org/wiki/Beach",
-    numReviews: 2,
-    avgStarRating: 2.2
+    numReviews: null,
+    avgStarRating: null
   },
   {
     ownerId: 3,
@@ -45,15 +45,44 @@ const spots = [
     description: "Third place to ever exist",
     price: 333.33,
     previewImg: "https://en.wikipedia.org/wiki/Mountain",
-    numReviews: 3,
-    avgStarRating: 3.3
+    numReviews: null,
+    avgStarRating: null
+  },
+  {
+    ownerId: 1,
+    address: "444 Fourth Lane",
+    city: "Fourth City",
+    state: "Fourth State",
+    country: "Fourth Country",
+    lat: 44.44,
+    lng: 44.44,
+    name: "Fourth Place",
+    description: "Fourth place to ever exist",
+    price: 444.44,
+    previewImg: "https://en.wikipedia.org/wiki/Atlantis",
+    numReviews: null,
+    avgStarRating: null
+  },
+  {
+    ownerId: 2,
+    address: "555 Fifth Lane",
+    city: "Fifth City",
+    state: "Fifth State",
+    country: "Fifth Country",
+    lat: 55.55,
+    lng: 55.55,
+    name: "Fifth Place",
+    description: "Fifth place to ever exist",
+    price: 555.55,
+    previewImg: "https://en.wikipedia.org/wiki/Mount_Olympus",
+    numReviews: null,
+    avgStarRating: null
   }
 ]
 
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    console.log("spot seeder placeholder")
     try {
       for (let spot of spots) {
         const { address, city, state, country, lat, lng, name, description, price, previewImg, numReviews, avgStarRating, ownerId } = spot

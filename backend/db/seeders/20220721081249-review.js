@@ -20,6 +20,18 @@ const reviews = [
     spotId: 3,
     review: "Amazing sights and venue.",
     stars: 5,
+  },
+  {
+    userId: 3,
+    spotId: 4,
+    review: "Lots of water",
+    stars: 2,
+  },
+  {
+    userId: 3,
+    spotId: 5,
+    review: "meh",
+    stars: 3
   }
 ]
 
