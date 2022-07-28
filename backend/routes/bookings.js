@@ -205,7 +205,7 @@ router.delete("/:bookingId", async(req, res, next) => {
 
 // Error middleware
 router.use((error, req, res, next) => {
-    res.send({
+    res.json({
         message: error.message,
         statusCode: error.statusCode,
         errors: error.errors

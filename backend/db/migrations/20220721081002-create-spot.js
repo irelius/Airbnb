@@ -52,10 +52,6 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false
       },
-      previewImg: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -65,6 +61,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+      },
+      previewImg: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       numReviews: {
         type: Sequelize.INTEGER,
