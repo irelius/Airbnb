@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
     }
     static getCurrentUserById(id) {
-      return User.scope("currentUser").findByPk(id);
+      return User.scope('currentUser').findByPk(id);
     }
     static async login({ email, password }) {
       const { Op } = require('sequelize');
@@ -40,15 +40,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(
         models.Spot,
-        { foreignKey: "ownerId" }
+        { foreignKey: 'ownerId' }
       )
       User.hasMany(
         models.Review,
-        { foreignKey: "userId" }
+        { foreignKey: 'userId' }
       )
       User.hasMany(
         models.Booking,
-        { foreignKey: "userId" }
+        { foreignKey: 'userId' }
       )
     }
   }
@@ -80,12 +80,12 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
     defaultScope: {
       attributes: {
-        exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
+        exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']
       }
     },
     scopes: {
       currentUser: {
-        attributes: { exclude: ["hashedPassword", "createdAt", "updatedAt"] }
+        attributes: { exclude: ['hashedPassword', 'createdAt', 'updatedAt'] }
       },
       loginUser: {
         attributes: {}
