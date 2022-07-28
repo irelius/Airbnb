@@ -1,25 +1,25 @@
 'use strict';
-
 const { User } = require("../models")
+const bcrypt = require("bcryptjs");
 
 const user = [
   {
     firstName: "John",
     lastName: "Doe",
     email: "lostidentity@gmail.com",
-    password: "doyouknowwhoIam?",
+    hashedPassword: bcrypt.hashSync("doyouknowwhoIam?")
   },
   {
     firstName: "Alan",
     lastName: "Smithee",
     email: "hiddenidentity@gmail.com",
-    password: "whocouldIbe?"
+    hashedPassword: bcrypt.hashSync("whocouldIbe?")
   },
   {
     firstName: "Anon",
     lastName: "Ymous",
     email: "deletedidentity@gmail.com",
-    password: "youdon'tknowwhoIam"
+    hashedPassword: bcrypt.hashSync("youdon'tknowwhoIam")
   }
 ]
 

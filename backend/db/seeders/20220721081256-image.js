@@ -4,30 +4,34 @@ const { Review, Image, Spot } = require("../models")
 
 const images = [
   {
-    imageableId: 1,
     reviewId: 1,
-    url: "https://en.wikipedia.org/wiki/Ocean"
+    url: "https://i.pcmag.com/imagery/reviews/05b8x8deW1h5MNBu9zcqYUx-1.fit_scale.size_760x427.v1644512187.png"
   },
   {
-    imageableId: 1,
     spotId: 1,
-    url: "https://en.wikipedia.org/wiki/Ocean"
+    url: "https://res.cloudinary.com/dtpgi0zck/image/upload/s--IJwO_Hss--/c_fill,h_580,w_860/v1/EducationHub/photos/ocean-waves.webp"
   },
   {
-    imageableId: 2,
     spotId: 2,
-    url: "https://en.wikipedia.org/wiki/Mountain"
+    url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80"
   },
   {
-    imageableId: 3,
     reviewId: 3,
-    url: "https://en.wikipedia.org/wiki/Beach"
+    url: "https://expertreviews.b-cdn.net/sites/expertreviews/files/2019/01/three_mobile_review_0.jpg"
+  },
+  {
+    spotId: 4,
+    url: "https://www.worldatlas.com/r/w1200/upload/7a/f8/f7/lost-city-of-atlantis.jpg"
+  },
+  {
+    reviewId: 5,
+    url: "https://static.vecteezy.com/system/resources/thumbnails/004/256/658/small/five-star-customer-product-ratings-review-flat-icons-for-apps-and-websites-illustration-of-five-golden-yellow-stars-in-a-row-isolated-in-a-white-background-concepts-for-ratings-customers-review-free-vector.jpg"
   }
 ]
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    for (let image of images) {
+    try{for (let image of images) {
       const { url, reviewId, spotId } = image
       let foundId;
 
@@ -46,6 +50,9 @@ module.exports = {
           url
         })
       }
+    }}
+    catch(e) {
+      console.log(e)
     }
   },
 
