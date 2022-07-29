@@ -144,7 +144,7 @@ router.get("/", validateFilters, async (req, res, next) => {
     let page = parseInt(req.query.page);
     let size = parseInt(req.query.size);
 
-    if(isNaN(page)) page = 0;
+    if(isNaN(page) || page === 0) page = 1;
     if(isNaN(size)) size = 20
 
     let minLat = parseInt(req.query.minLat) || -90;
@@ -175,7 +175,7 @@ router.get("/", validateFilters, async (req, res, next) => {
         },
         attributes: { exclude: ["numReviews", "avgStarRating"] },
         limit: size,
-        offset: size * (page - 1)
+        offset: (size * (page - 1))
     })
 
     res.json({
