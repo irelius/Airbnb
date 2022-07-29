@@ -119,10 +119,6 @@ router.post("/:spotId", [validateReviews, restoreUser, authenticationRequired], 
 router.put("/:reviewId", [validateReviews, restoreUser, authenticationRequired, authorizationRequiredReviews], async (req, res, next) => {
     const { review, stars } = req.body;
     const updateReview = await Review.findByPk(req.params.reviewId)
-    // error if review doesn't exist
-    if (!updateReview) {
-        return next(notFound("Review", 404))
-    }
     // update review
     updateReview.update({
         review: review,
@@ -135,11 +131,6 @@ router.put("/:reviewId", [validateReviews, restoreUser, authenticationRequired, 
 
 // Delete a Review
 router.delete("/:reviewId", [restoreUser, authenticationRequired, authorizationRequiredReviews], async (req, res, next) => {
-    const deleteReview = await Review.findByPk(req.params.reviewId);
-    // if there is no such review
-    if (!deleteReview) {
-        return next(notFound("Review", 404))
-    }
     // destroy review
     await Review.destroy({
         where: {

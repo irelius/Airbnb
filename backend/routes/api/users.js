@@ -52,8 +52,8 @@ const checkUser = async (req, res, next) => {
             "email": "User with that email already exists"
         }
         return next(error);
-
     }
+    return next();
 }
 
 

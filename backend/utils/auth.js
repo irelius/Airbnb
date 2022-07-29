@@ -6,6 +6,20 @@ const { User, Spot, Image, Review, Booking } = require('../db/models');
 const { secret, expiresIn } = jwtConfig;
 
 
+// helper function for a particular element not found
+const notFound = (el, code) => {
+    let error = new Error(`${el} couldn't be found`);
+    error.status = code;
+    error.statusCode = code;
+    return error
+}
+
+const forbidden = () => {
+    let error = new Error("Forbidden");
+    error.status = 403;
+    error.statusCode = 403;
+    return error;
+}
 
 
 // Sends a JWT Cookie
@@ -82,11 +96,11 @@ const authenticationRequired = function (req, res, next) {
 // Authorization required for Spots
 const authorizationRequiredSpots = async function (req, res, next) {
     const spot = await Spot.findByPk(req.params.spotId)
+    if (!spot) {
+        return next(notFound("Spot", 404))
+    }
     if (req.user.id !== spot.ownerId) {
-        const error = new Error("Forbidden");
-        error.statusCode = 403;
-        error.status = 403
-        return next(error);
+        return next(forbidden())
     }
     return next();
 }
@@ -94,75 +108,62 @@ const authorizationRequiredSpots = async function (req, res, next) {
 // Authorization required for Reviews
 const authorizationRequiredReviews = async function (req, res, next) {
     const review = await Review.findByPk(req.params.reviewId);
+    if (!review) {
+        return next(notFound("Review", 404))
+    }
     if (req.user.id !== review.userId) {
-        const error = new Error("Forbidden");
-        error.statusCode = 403;
-        error.status = 403
-        return next(error);
+        return next(forbidden())
     }
     return next();
 }
 
 // Authorization not required for Booking
 const authorizationNotRequiredBookings = async function (req, res, next) {
-    const booking = await Booking.findByPk(req.params.spotId);
-    if (req.user.id === booking.userId) {
-        const error = new Error("Forbidden");
-        error.statusCode = 403;
-        error.status = 403
-        return next(error);
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        return next(notFound("Spot", 404))
+    }
+    if (req.user.id === spot.ownerId) {
+        return next(forbidden())
     }
     return next();
 }
 
 // Authorization required for Booking
 const authorizationRequiredBookings = async function (req, res, next) {
-    if (req.params.spotId) {
-        const spot = await Spot.findByPk(req.params.spotId);
-        if (req.user.id !== spot.ownerId) {
-            const error = new Error("Forbidden");
-            error.statusCode = 403;
-            error.status = 403
-            return next(error);
-        }
-        return next();
+    const booking = await Booking.findByPk(req.params.bookingId);
+    if (!booking) {
+        return next(notFound("Booking", 404))
     }
-    else if (req.params.bookingId) {
-        const booking = await Booking.findByPk(req.params.bookingId);
-        if (req.user.id !== booking.userId) {
-            const error = new Error("Forbidden");
-            error.statusCode = 403;
-            error.status = 403
-            return next(error);
-        }
-        return next();
+    if (req.user.id !== booking.userId) {
+        return next(forbidden())
     }
+    return next();
 }
 
 
 // Authorization required for Images
 const authorizationRequiredImages = async function (req, res, next) {
+    // checking if image url is being added to a spot
     if (req.params.spotId) {
         const spot = await Spot.findByPk(req.params.spotId);
         if (spot.ownerId !== req.user.id) {
-            const error = new Error('Unauthorized');
-            error.errors = ['Unauthorized'];
-            error.status = 401;
-            return next(error);
+            return next(forbidden())
         }
         return next();
     }
+    // checking if image url is being added to a review
     if (req.params.reviewId) {
         const review = await Review.findByPk(req.params.reviewId);
         if (req.user.id !== review.userId) {
-            const error = new Error("Forbidden");
-            error.statusCode = 403;
-            error.status = 403
-            return next(error);
+            console.log("before forbidden")
+            return next(forbidden())
+            console.log("after forbidden")
         }
         return next();
     }
-    if(req.params.imageId) {
+    // checking if image url is being deleted
+    if (req.params.imageId) {
         const deleteImage = await Image.findByPk(req.params.imageId)
         const reviewCheck = await Review.findOne({
             where: {
@@ -175,16 +176,10 @@ const authorizationRequiredImages = async function (req, res, next) {
             }
         })
         if (reviewCheck && reviewCheck.userId !== req.user.id) {
-            const error = new Error("Forbidden");
-            error.statusCode = 403;
-            error.status = 403
-            return next(error);
+            return next(forbidden())
         }
         if (spotCheck && spotCheck.ownerId !== req.user.id) {
-            const error = new Error("Forbidden");
-            error.statusCode = 403;
-            error.status = 403
-            return next(error);
+            return next(forbidden())
         }
         return next();
     }

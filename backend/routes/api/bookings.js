@@ -109,15 +109,8 @@ router.get("/:spotId", [restoreUser, authenticationRequired], async (req, res, n
 
 
 // Create a Booking from a Spot based on the Spot's id
-// TODO: authentication required, spot must NOT belong to the current user
-// TODO: go through and finish the validations on the models
 router.post("/:spotId", [validateBooking, restoreUser, authenticationRequired, authorizationNotRequiredBookings], async (req, res, next) => {
     const { startDate, endDate } = req.body;
-    const findSpot = await Spot.findByPk(req.params.spotId)
-    // error response: couldn't find a Spot with the specified id
-    if (!findSpot) {
-        return next(notFound("Spot", 404))
-    }
     // error response: body validation errors
     if (endDate <= startDate) {
         return next(validationError("endDate cannot be on or before startDate", 400))
@@ -156,7 +149,6 @@ router.post("/:spotId", [validateBooking, restoreUser, authenticationRequired, a
 
 
 // Edit a Booking
-// TODO: authentication required, booking must belong to current user
 router.put("/:bookingId", [restoreUser, authenticationRequired, authorizationRequiredBookings], async (req, res, next) => {
     const { startDate, endDate } = req.body;
     let compareCurrentDate = new Date();
@@ -172,7 +164,7 @@ router.put("/:bookingId", [restoreUser, authenticationRequired, authorizationReq
         }
     })
     // body validation error: endDate cannot come before startDate
-    if (endDate <= startDate) {
+    if (endDate < startDate) {
         return next(validationError("endDate cannot come before startDate", 400))
     }
     // Can't edit a booking that's past the end date

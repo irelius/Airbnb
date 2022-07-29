@@ -18,10 +18,17 @@ const notFound = (el, code) => {
 }
 
 
+
+const validateURL = [
+    check("url")
+        .isURL()
+        .withMessage("URL is not valid"),
+    handleValidationErrors
+]
 // ____________________________________________________________________________________
 
 // Add an Image to a Spot based on the Spot's id
-router.post("/spots/:spotId", [restoreUser, authenticationRequired,], async (req, res, next) => {
+router.post("/spots/:spotId", [validateURL, restoreUser, authenticationRequired,], async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId)
     // error if spot couldn't be found
     if (!spot) {
@@ -40,7 +47,7 @@ router.post("/spots/:spotId", [restoreUser, authenticationRequired,], async (req
 
 
 // Add an Image to a Review based on the Review's id
-router.post("/reviews/:reviewId", [restoreUser, authenticationRequired, authorizationRequiredImages], async (req, res, next) => {
+router.post("/reviews/:reviewId", [validateURL, restoreUser, authenticationRequired, authorizationRequiredImages], async (req, res, next) => {
     const review = await Review.findByPk(req.params.reviewId)
     // error if spot couldn't be found
     if (!review) {

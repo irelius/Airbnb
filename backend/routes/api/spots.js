@@ -9,14 +9,6 @@ const { setTokenCookie, requireAuth, restoreUser, authenticationRequired, author
 const { User, Spot, Image, Review } = require('../../db/models');
 
 
-// helper function for a particular element not found
-const notFound = (el, code) => {
-    let error = new Error(`${el} couldn't be found`);
-    error.status = code;
-    error.statusCode = code;
-    return error;
-}
-
 const validateSpot = [
     check("address")
         .notEmpty()
@@ -32,20 +24,26 @@ const validateSpot = [
         .withMessage("Country is required"),
     check("lat")
         .notEmpty()
-        .not().isString()
         .withMessage("Latitude is not valid")
         .custom(lat => {
-            if (lat < -90 || lat > 90) {
+            let notValid = true;
+            if (Number.isInteger(Math.floor(lat))) {
+                notValid = false;
+            }
+            if (lat < -90 || lat > 90 || notValid) {
                 throw new Error("Latitude is not valid")
             }
             return true;
         }),
     check("lng")
         .notEmpty()
-        .not().isString()
         .withMessage("Longitude is not valid")
         .custom(lng => {
-            if (lng < -180 || lng > 180) {
+            let notValid = true;
+            if (Number.isInteger(Math.floor(lng))) {
+                notValid = false;
+            }
+            if (lng < -180 || lng > 180 || notValid) {
                 throw new Error("Longitude is not valid")
             }
             return true;
@@ -60,8 +58,6 @@ const validateSpot = [
     check("price")
         .notEmpty()
         .withMessage("Price per day is required")
-        .not().isString()
-        .withMessage("Price is not valid")
         .custom(price => {
             if (price < 0) {
                 throw new Error("Price is not valid")
@@ -83,62 +79,77 @@ const validateFilters = [
         .withMessage("Size must be greater than or equal to 0"),
     check("minLat")
         .optional()
-        .not().isString()
-        .withMessage("Minimum latitude is invalid")
         .custom(minLat => {
-            if (minLat < -90) {
-                throw new Error("Minimum latitude is invalid")
+            let notValid = true;
+            if (Number.isInteger(Math.floor(minLat))) {
+                notValid = false;
+            }
+            if (minLat < -90 || notValid) {
+                throw new Error("Minimum latitude is not valid")
             }
             return true;
         }),
+
     check("maxLat")
         .optional()
-        .not().isString()
-        .withMessage("Maximum latitude is invalid")
         .custom(maxLat => {
-            if (maxLat > 90) {
-                throw new Error("Maximum latitude is invalid")
+            let notValid = true;
+            if (Number.isInteger(Math.floor(maxLat))) {
+                notValid = false;
+            }
+            if (maxLat > 90 || notValid) {
+                throw new Error("Maximum longitude is not valid")
             }
             return true;
         }),
     check("minLng")
         .optional()
-        .not().isString()
-        .withMessage("Minimum latitude is invalid")
         .custom(minLng => {
-            if (minLng < -180) {
-                throw new Error("Minimum latitude is invalid")
+            let notValid = true;
+            if (Number.isInteger(Math.floor(minLng))) {
+                notValid = false;
+            }
+            if (minLng < -180 || notValid) {
+                throw new Error("Minimum longitude is invalid")
             }
             return true;
         }),
     check("maxLng")
         .optional()
-        .not().isString()
-        .withMessage("Maximum latitude is invalid")
         .custom(maxLng => {
-            if (maxLng > 180) {
-                throw new Error("Maximum latitude is invalid")
+            let notValid = true;
+            if (Number.isInteger(Math.floor(maxLng))) {
+                notValid = false;
+            }
+            if (maxLng > 180 || notValid) {
+                throw new Error("Maximum longitude is invalid")
             }
             return true;
         }),
     check("minPrice")
         .optional()
-        .not().isString()
-        .withMessage("Price is not valid")
         .custom(minPrice => {
-            if (minPrice < 0) {
+            let notValid = true;
+            if (Number.isInteger(Math.floor(minPrice))) {
+                notValid = false;
+            }
+            if (minPrice < 0 || notValid) {
                 throw new Error("Minimum price must be greater than or equal to 0")
             }
+            return true;
         })
     ,
     check("maxPrice")
         .optional()
-        .not().isString()
-        .withMessage("Price is not valid")
         .custom(maxPrice => {
-            if (maxPrice < 0) {
+            let notValid = true;
+            if (Number.isInteger(Math.floor(maxPrice))) {
+                notValid = false;
+            }
+            if (maxPrice < 0 || notValid) {
                 throw new Error("Maximum price must be greater than or equal to 0")
             }
+            return true;
         })
     ,
     handleValidationErrors
@@ -218,7 +229,10 @@ router.get("/:spotId", async (req, res, next) => {
     });
     // error if spot doesn't exist
     if (!spot) {
-        return next(notFound("Spot", 404));
+        let error = new Error(`${el} couldn't be found`);
+        error.status = code;
+        error.statusCode = code;
+        return error;
     }
     // get all reviews to find out how many reviews a spot has
     let starTotal = 0;
@@ -262,14 +276,11 @@ router.post("/", [validateSpot, restoreUser, authenticationRequired], async (req
 
 // Edit a Spot
 router.put("/:spotId", [validateSpot, restoreUser, authenticationRequired, authorizationRequiredSpots], async (req, res, next) => {
+    console.log(req.params.spotId, "boooooba");
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const updateSpot = await Spot.findByPk(req.params.spotId, {
         attributes: { exclude: ["numReviews", "avgStarRating"] }
     })
-    // error if spot not found
-    if (!updateSpot) {
-        return next(notFound("Spot", 404));
-    }
     // update spot
     updateSpot.update({
         address: address,
@@ -290,11 +301,6 @@ router.put("/:spotId", [validateSpot, restoreUser, authenticationRequired, autho
 
 // Delete a Spot
 router.delete("/:spotId", [restoreUser, authenticationRequired, authorizationRequiredSpots], async (req, res, next) => {
-    const deleteSpot = await Spot.findByPk(req.params.spotId);
-    //error if spot is not found
-    if (!deleteSpot) {
-        return next(notFound("Spot", 404));
-    }
     // destroy spot
     await Spot.destroy({
         where: {
