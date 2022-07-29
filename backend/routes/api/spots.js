@@ -24,26 +24,20 @@ const validateSpot = [
         .withMessage("Country is required"),
     check("lat")
         .notEmpty()
+        .isDecimal()
         .withMessage("Latitude is not valid")
         .custom(lat => {
-            let notValid = true;
-            if (Number.isInteger(Math.floor(lat))) {
-                notValid = false;
-            }
-            if (lat < -90 || lat > 90 || notValid) {
+            if (lat < -90 || lat > 90) {
                 throw new Error("Latitude is not valid")
             }
             return true;
         }),
     check("lng")
         .notEmpty()
+        .isDecimal()
         .withMessage("Longitude is not valid")
         .custom(lng => {
-            let notValid = true;
-            if (Number.isInteger(Math.floor(lng))) {
-                notValid = false;
-            }
-            if (lng < -180 || lng > 180 || notValid) {
+            if (lng < -180 || lng > 180) {
                 throw new Error("Longitude is not valid")
             }
             return true;
@@ -57,10 +51,11 @@ const validateSpot = [
         .withMessage("Description is required"),
     check("price")
         .notEmpty()
+        .isDecimal()
         .withMessage("Price per day is required")
         .custom(price => {
             if (price < 0) {
-                throw new Error("Price is not valid")
+                throw new Error("Price per day is required")
             }
             return true;
         }),
@@ -79,61 +74,50 @@ const validateFilters = [
         .withMessage("Size must be greater than or equal to 0"),
     check("minLat")
         .optional()
+        .isDecimal()
+        .withMessage("Minimum latitude is not valid")
         .custom(minLat => {
-            let notValid = true;
-            if (Number.isInteger(Math.floor(minLat))) {
-                notValid = false;
-            }
-            if (minLat < -90 || notValid) {
+            if (minLat < -90) {
                 throw new Error("Minimum latitude is not valid")
             }
             return true;
         }),
-
     check("maxLat")
         .optional()
+        .isDecimal()
+        .withMessage("Maximum latitude is not valid")
         .custom(maxLat => {
-            let notValid = true;
-            if (Number.isInteger(Math.floor(maxLat))) {
-                notValid = false;
-            }
-            if (maxLat > 90 || notValid) {
-                throw new Error("Maximum longitude is not valid")
+            if (maxLat > 90) {
+                throw new Error("Maximum latitude is not valid")
             }
             return true;
         }),
     check("minLng")
         .optional()
+        .isDecimal()
+        .withMessage("Minimum longitude is not valid")
         .custom(minLng => {
-            let notValid = true;
-            if (Number.isInteger(Math.floor(minLng))) {
-                notValid = false;
-            }
-            if (minLng < -180 || notValid) {
+            if (minLng < -180) {
                 throw new Error("Minimum longitude is invalid")
             }
             return true;
         }),
     check("maxLng")
         .optional()
+        .isDecimal()
+        .withMessage("Maximum longitude is not valid")
         .custom(maxLng => {
-            let notValid = true;
-            if (Number.isInteger(Math.floor(maxLng))) {
-                notValid = false;
-            }
-            if (maxLng > 180 || notValid) {
+            if (maxLng > 180) {
                 throw new Error("Maximum longitude is invalid")
             }
             return true;
         }),
     check("minPrice")
         .optional()
+        .isDecimal()
+        .withMessage("Minimum price must be greater than or equal to 0")
         .custom(minPrice => {
-            let notValid = true;
-            if (Number.isInteger(Math.floor(minPrice))) {
-                notValid = false;
-            }
-            if (minPrice < 0 || notValid) {
+            if (minPrice < 0) {
                 throw new Error("Minimum price must be greater than or equal to 0")
             }
             return true;
@@ -141,12 +125,10 @@ const validateFilters = [
     ,
     check("maxPrice")
         .optional()
+        .isDecimal()
+        .withMessage("Maximum price must be greater than or equal to 0")
         .custom(maxPrice => {
-            let notValid = true;
-            if (Number.isInteger(Math.floor(maxPrice))) {
-                notValid = false;
-            }
-            if (maxPrice < 0 || notValid) {
+            if (maxPrice < 0) {
                 throw new Error("Maximum price must be greater than or equal to 0")
             }
             return true;
@@ -157,16 +139,16 @@ const validateFilters = [
 
 // ___________________________________________________________________________________________________
 
-// Get all Spots: landing spot code
+// Get all Spots
 router.get("/", validateFilters, async (req, res, next) => {
-    let page = Number(req.query.page) || 0;
-    let size = Number(req.query.size) || 20;
-    let minLat = Number(req.query.minLat) || -90;
-    let maxLat = Number(req.query.maxLat) || 90;
-    let minLng = Number(req.query.minLng) || -180;
-    let maxLng = Number(req.query.maxLng) || 180;
-    let minPrice = Number(req.query.minPrice) || 0;
-    let maxPrice = Number(req.query.maxPrice) || 999999999999999;
+    let page = parseInt(req.query.page) || 0;
+    let size = parseInt(req.query.size) || 20;
+    let minLat = parseInt(req.query.minLat) || -90;
+    let maxLat = parseInt(req.query.maxLat) || 90;
+    let minLng = parseInt(req.query.minLng) || -180;
+    let maxLng = parseInt(req.query.maxLng) || 180;
+    let minPrice = parseInt(req.query.minPrice) || 0;
+    let maxPrice = parseInt(req.query.maxPrice) || 999999999999999;
 
     if (page > 10) {
         page = 10
@@ -189,7 +171,7 @@ router.get("/", validateFilters, async (req, res, next) => {
         },
         attributes: { exclude: ["numReviews", "avgStarRating"] },
         limit: size,
-        offset: (size * (page - 1))
+        offset: size * (page - 1)
     })
 
     res.json({
