@@ -156,9 +156,7 @@ const authorizationRequiredImages = async function (req, res, next) {
     if (req.params.reviewId) {
         const review = await Review.findByPk(req.params.reviewId);
         if (req.user.id !== review.userId) {
-            console.log("before forbidden")
             return next(forbidden())
-            console.log("after forbidden")
         }
         return next();
     }
