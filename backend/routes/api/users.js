@@ -70,7 +70,7 @@ router.post('/login', [validateLogin], async (req, res, next) => {
         err.statusCode = 401;
         return next(err);
     }
-    await setTokenCookie(res, user);
+    setTokenCookie(res, user);
     user.dataValues.test = req.cookies.token
     res.json(user);
 });

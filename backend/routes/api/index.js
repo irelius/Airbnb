@@ -21,10 +21,6 @@ router.use("/reviews", reviewsRouter);
 router.use("/bookings", bookingsRouter);
 
 
-router.post('/test', (req, res) => {
-  res.json({ requestBody: req.body });
-});
-
 // Error middleware
 router.use((error, req, res, next) => {
   res.status(error.status || 500)

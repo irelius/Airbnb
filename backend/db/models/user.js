@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       const user = await User.create({
         firstName,
         lastName,
+        userName,
         email,
         hashedPassword
       });
@@ -60,6 +61,10 @@ module.exports = (sequelize, DataTypes) => {
     lastName: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    userName:  {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
