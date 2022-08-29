@@ -19,6 +19,9 @@ const validateSignup = [
     check('lastName')
         .exists({ checkFalsy: true })
         .withMessage('Last Name is required'),
+    check('userName')
+        .exists({checkFalsy: true})
+        .withMessage("Username is required"),
     check('password')
         .notEmpty()
         .withMessage('Password is required'),
@@ -26,9 +29,9 @@ const validateSignup = [
 ];
 
 const validateLogin = [
-    check('email')
+    check('credential')
         .exists({ checkFalsy: true })
-        .withMessage('Email is required'),
+        .withMessage('Email or Username is required'),
     check('password')
         .exists({ checkFalsy: true })
         .withMessage('Password is required'),
@@ -37,7 +40,26 @@ const validateLogin = [
 
 
 // helper function to see if user exists
-const checkUser = async (req, res, next) => {
+const checkUserName = async (req, res, next) => {
+    const { userName } = req.body
+    const findUserName = await User.findOne({
+        where: {
+            userName: userName
+        }
+    })
+    if(findUserName) {
+        const error = new Error("Validation Error");
+        error.status = 403;
+        error.statusCode = 403;
+        error.errors = {
+            "userName": "User with that user name already exists"
+        }
+        return next(error)
+    }
+    return next();
+}
+
+const checkEmail = async (req, res, next) => {
     const { email } = req.body
     const findEmail = await User.findOne({
         where: {
@@ -57,12 +79,13 @@ const checkUser = async (req, res, next) => {
 }
 
 
+
 // ________________________________________________________________________________________
 
 // Log in
 router.post('/login', [validateLogin], async (req, res, next) => {
-    const { email, password } = req.body;
-    const user = await User.login({ email, password });
+    const { credential, password } = req.body;
+    const user = await User.login({ credential, password });
     // errors if credentials are invalid
     if (!user) {
         const err = new Error('Invalid credentials');
@@ -95,9 +118,9 @@ router.get('/restore', restoreUser, (req, res) => {
 
 
 // Sign up
-router.post('/signup', [validateSignup, checkUser], async (req, res, next) => {
-    const { firstName, lastName, email, password } = req.body;
-    const user = await User.signup({ firstName, lastName, email, password });
+router.post('/signup', [validateSignup, checkUserName, checkEmail], async (req, res, next) => {
+    const { firstName, lastName, userName, email, password } = req.body;
+    const user = await User.signup({ firstName, lastName, userName, email, password });
     await setTokenCookie(res, user);
     user.dataValues.token = req.cookies.token;
     return res.json(user);
