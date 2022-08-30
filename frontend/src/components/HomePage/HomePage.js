@@ -1,5 +1,6 @@
 // import { useDispatch, useSelector } from "react-redux";
 // import { logoutThunk } from "../../store/session";
+import "./HomePage.css"
 
 function HomePage() {
     // const sessionUser = useSelector(state => state.session.user)
@@ -13,10 +14,10 @@ function HomePage() {
                 <span className="airbnb-logo">
                     airbnb logo
                 </span>
-                <span>
+                <span className="time-selection">
                     time selection
                 </span>
-                <span>
+                <span className="login-information">
                     login information
                 </span>
             </div>
@@ -29,12 +30,17 @@ function HomePage() {
                 </span>
             </div>
             <div className="spots">
-                <ul>
+                <ul className="spots-unordered-list">
                     {
                         testSpots.map(el => {
-                            return <span className={`spot-${el}`}>
-                                <li>
-                                    this is a test spot for {el}
+                            return <span className={`spot ${el}`}>
+                                <li className="spot-inner-text">
+                                    <div className="spot-image">
+                                        Spot Image (wow so pretty)
+                                    </div>
+                                    <div className="spot-description">
+                                        this is a test spot for {el}
+                                    </div>
                                 </li>
                             </span>
                         })
