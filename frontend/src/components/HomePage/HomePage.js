@@ -1,39 +1,55 @@
-import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutThunk } from "../../store/session";
-
+// import { useDispatch, useSelector } from "react-redux";
+// import { logoutThunk } from "../../store/session";
 
 function HomePage() {
-    const sessionUser = useSelector(state => state.session.user)
-    const dispatch = useDispatch();
-    const handleLogOut = async (e) => {
-        e.preventDefault();
-        dispatch(logoutThunk(sessionUser));
-    }
+    // const sessionUser = useSelector(state => state.session.user)
+    // const dispatch = useDispatch();
 
-    const testClicker = (e) => {
-        e.preventDefault();
-
-        console.log(sessionUser);
-    }
+    const testSpots = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
 
     return (
-        <div>
-            <ul>
-                <li>
-                    <NavLink to="/login">Log In</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/signup">Sign Up</NavLink>
-                </li>
-            </ul>
-            <button onClick={handleLogOut}>
-                Log Out
-            </button>
-            <button onClick={testClicker}>
-                test
-            </button>
-        </div>
+        <>
+            <div className="header">
+                <span className="airbnb-logo">
+                    airbnb logo
+                </span>
+                <span>
+                    time selection
+                </span>
+                <span>
+                    login information
+                </span>
+            </div>
+            <div className="categories-bar">
+                <span className="categories">
+                    categories
+                </span>
+                <span className="filter-button">
+                    filters button
+                </span>
+            </div>
+            <div className="spots">
+                <ul>
+                    {
+                        testSpots.map(el => {
+                            return <span className={`spot-${el}`}>
+                                <li>
+                                    this is a test spot for {el}
+                                </li>
+                            </span>
+                        })
+                    }
+                </ul>
+            </div>
+            <div className="footer">
+                <span>
+                    left section
+                </span>
+                <span>
+                    right section
+                </span>
+            </div>
+        </>
     )
 
 }
