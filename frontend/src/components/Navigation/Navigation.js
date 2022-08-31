@@ -7,11 +7,12 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
+    console.log(sessionUser, "test");
 
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            <ProfileButton user={sessionUser} />
+            <ProfileButton sessionUser={sessionUser} />
         );
     } else {
         sessionLinks = (
@@ -23,12 +24,13 @@ function Navigation({ isLoaded }) {
     }
 
     return (
-        <ul>
-            <li>
-                <NavLink exact to="/">Home</NavLink>
-                {isLoaded && sessionLinks}
-            </li>
-        </ul>
+        <div>
+            <NavLink exact to="/">AirBnB</NavLink>
+            {isLoaded && sessionLinks}
+            <button onClick={() => console.log(sessionUser)}>
+                Current Session User
+            </button>
+        </div>
     );
 }
 

@@ -1,0 +1,69 @@
+/* Spots Section CSS */
+.spots {
+    display: flex;
+
+    list-style: none;
+}
+
+.spots > * {
+    display: flex;
+    justify-context: space-between;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+
+    margin: 5px;
+
+    list-style: none;
+
+    border: 1px solid black;
+    background-color: red;
+}
+
+.spot {
+    display: flex;
+    justify-content: center;
+
+    width: 300px;
+    height: 400px;
+
+    list-style: none;
+
+    margin: 5px;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.spot-inner-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 1px solid black;
+    background-color: orange;
+}
+
+.spot-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 280px;
+    height: stretch;
+
+    border: 1px solid black;
+    background-color: yellow;
+}
+
+.spot-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: stretch;
+    height: 40%;
+
+    border: 1px solid black;
+    background-color: green;
+}
