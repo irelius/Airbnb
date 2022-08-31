@@ -21,7 +21,7 @@ function Header() {
                 <span>
                     <button>
                         <div className="header-icon">
-                            <i class="fa-brands fa-airbnb"></i>
+                            <i className="fa-brands fa-airbnb"></i>
                         </div>
                         <div>
                             <button>
@@ -48,8 +48,10 @@ function Header() {
                     </button>
                 </span>
                 <span>
-                    {/* <Navigation /> */}
                     <ProfileButton />
+                </span>
+                <span>
+                    <Navigation />
                 </span>
             </div>
         </div>

@@ -1,11 +1,12 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutThunk } from "../../store/session";
 
-function ProfileButton(sessionUser) {
+function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const sessionUser = useSelector(state => state.session.user);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -29,6 +30,8 @@ function ProfileButton(sessionUser) {
     dispatch(logoutThunk());
   };
 
+
+
   return (
     <>
       <button onClick={openMenu}>
@@ -36,13 +39,10 @@ function ProfileButton(sessionUser) {
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{sessionUser.username}</li>
+          <li>{sessionUser.userName}</li>
           <li>{sessionUser.email}</li>
           <li>
             <button onClick={logout}>Log Out</button>
-          </li>
-          <li>
-            <button onClick={() => console.log(sessionUser)}>session user test</button>
           </li>
         </ul>
       )}
