@@ -15,6 +15,7 @@ export const loadSpotsThunk = () => async dispatch => {
     const response = await fetch('/api/spots/')
     if(response.ok) {
         const allSpots = await response.json();
+        console.log(allSpots, "testbooba")
         dispatch(loadSpots(allSpots))
     }
 }
@@ -25,10 +26,10 @@ const spotReducer = (state = initialSpot, action) => {
     switch(action.type) {
         case LOAD_SPOTS:
             const allSpots = {};
-            action.spots.forEach((el, index) => {
-                allSpots[index] = el;
+            const spotsArray = action.payload.Spots
+            spotsArray.forEach(el => {
+                allSpots[el.id] = el
             })
-            console.log(allSpots, "booba")
             return allSpots;
         default:
             return newState;
