@@ -1,0 +1,9 @@
+.add-spot-button {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left:50vw;
+    bottom: 10vw;
+    background-color: white;
+    border: 1px black solid;
+}

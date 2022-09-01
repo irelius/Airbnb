@@ -1,20 +1,12 @@
 import "./Header.css"
-
-import Navigation from "../../Navigation";
 import ProfileButton from "../../Navigation/ProfileButton";
-import { restoreSessionThunk } from "../../../store/session";
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+// import Navigation from "../../Navigation";
+// import { restoreSessionThunk } from "../../../store/session";
+// import React, { useState, useEffect } from "react";
+// import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom"
 
 function Header() {
-    const dispatch = useDispatch();
-    const [isLoaded, setIsLoaded] = useState(false);
-    useEffect(() => {
-        dispatch(restoreSessionThunk()).then(() => setIsLoaded(true));
-    }, [dispatch]);
-
-
     return (
         <div className="header">
             <div className="header-left">
@@ -39,7 +31,7 @@ function Header() {
             <div className="header-right">
                 <span>
                     <button>
-                        Become a Host
+                        <NavLink exact to="/become-a-host/intro">Become a Host</NavLink>
                     </button>
                 </span>
                 <span>
@@ -49,9 +41,6 @@ function Header() {
                 </span>
                 <span>
                     <ProfileButton />
-                </span>
-                <span>
-                    <Navigation />
                 </span>
             </div>
         </div>
