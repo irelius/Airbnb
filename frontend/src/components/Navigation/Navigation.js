@@ -7,12 +7,11 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
-    console.log(sessionUser, "test");
 
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            <ProfileButton sessionUser={sessionUser} />
+            <ProfileButton />
         );
     } else {
         sessionLinks = (

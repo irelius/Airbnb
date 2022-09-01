@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
+import HomePage from "./components/HomePage/HomePage";
 import LoginFormPage from "./components/LoginFormPage";
 import SignUpFormPage from "./components/SignUpFormPage";
-import HomePage from "./components/HomePage/HomePage";
-// import Navigation from "./components/Navigation";
+import SpotPageIntro from "./components/SpotPage/SpotPageIntro";
+import SpotPageForm from "./components/SpotPage/SpotPageForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,17 +17,23 @@ function App() {
 
   return isLoaded && (
     <>
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route exact path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route exact path="/signup">
-            <SignUpFormPage />
-          </Route>
-        </Switch>
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/login">
+          <LoginFormPage />
+        </Route>
+        <Route exact path="/signup">
+          <SignUpFormPage />
+        </Route>
+        <Route exact path="/become-a-host/intro">
+          <SpotPageIntro />
+        </Route>
+        <Route exact path="/become-a-host/property-form">
+          <SpotPageForm />
+        </Route>
+      </Switch>
     </>
 
   );

@@ -1,17 +1,23 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from "react-router-dom";
 import { logoutThunk } from "../../store/session";
+// import { restoreSessionThunk } from "../../store/session";
 
-function ProfileButton(sessionUser) {
+
+function ProfileButton() {
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
 
+  // showing the menu
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
   };
 
+  // use effect for whenever "showMenu" changes
   useEffect(() => {
     if (!showMenu) return;
 
@@ -24,10 +30,37 @@ function ProfileButton(sessionUser) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  // log out user
   const logout = (e) => {
     e.preventDefault();
     dispatch(logoutThunk());
   };
+
+  // customizing what the user sees when they click on the profile button
+  const profileDropDown = () => {
+    if (sessionUser) {
+      return (
+        <ul className="profile-dropdown">
+          <li>{sessionUser.userName}</li>
+          <li>{sessionUser.email}</li>
+          <li>
+            <button onClick={logout}>Log Out</button>
+          </li>
+        </ul>
+      )
+    } else {
+      return (
+        <ul>
+          <li>
+            <NavLink exact to="/login">Log In</NavLink>
+          </li>
+          <li>
+            <NavLink exact to="/signup">Sign Up</NavLink>
+          </li>
+        </ul>
+      )
+    }
+  }
 
   return (
     <>
@@ -35,16 +68,10 @@ function ProfileButton(sessionUser) {
         <i className="fas fa-user-circle" />
       </button>
       {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{sessionUser.username}</li>
-          <li>{sessionUser.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-          <li>
-            <button onClick={() => console.log(sessionUser)}>session user test</button>
-          </li>
-        </ul>
+        <div>
+          {profileDropDown()}
+
+        </div>
       )}
     </>
   );

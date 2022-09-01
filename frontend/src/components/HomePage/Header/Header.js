@@ -1,27 +1,19 @@
 import "./Header.css"
-
-import Navigation from "../../Navigation";
 import ProfileButton from "../../Navigation/ProfileButton";
-import { restoreSessionThunk } from "../../../store/session";
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+// import Navigation from "../../Navigation";
+// import { restoreSessionThunk } from "../../../store/session";
+// import React, { useState, useEffect } from "react";
+// import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom"
 
 function Header() {
-    const dispatch = useDispatch();
-    const [isLoaded, setIsLoaded] = useState(false);
-    useEffect(() => {
-        dispatch(restoreSessionThunk()).then(() => setIsLoaded(true));
-    }, [dispatch]);
-
-
     return (
         <div className="header">
             <div className="header-left">
                 <span>
                     <button>
                         <div className="header-icon">
-                            <i class="fa-brands fa-airbnb"></i>
+                            <i className="fa-brands fa-airbnb"></i>
                         </div>
                         <div>
                             <button>
@@ -39,7 +31,7 @@ function Header() {
             <div className="header-right">
                 <span>
                     <button>
-                        Become a Host
+                        <NavLink exact to="/become-a-host/intro">Become a Host</NavLink>
                     </button>
                 </span>
                 <span>
@@ -48,7 +40,6 @@ function Header() {
                     </button>
                 </span>
                 <span>
-                    {/* <Navigation /> */}
                     <ProfileButton />
                 </span>
             </div>

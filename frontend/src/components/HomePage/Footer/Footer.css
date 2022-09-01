@@ -1,0 +1,33 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    background-color: white;
+}
+
+
+.footer-left-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-left-list > * {
+    display: flex;
+    list-style: none;
+    /* justify-content: start; */
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.footer-right-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-right-list > * {
+    margin-left: 5px;
+    margin-right: 5px;
+}
