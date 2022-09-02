@@ -89,7 +89,7 @@ const spots = [
     name: "Sixth Place",
     description: "Sixth place to ever exist",
     price: 666.66,
-    previewImg: "https://static.wikia.nocookie.net/spongefan/images/e/e1/SpongeBob_house.jpg/revision/latest/scale-to-width-down/640?cb=20180210163257",
+    previewImg: "https://www.christiesrealestate.com/blog/wp-content/uploads/2021/12/river-house-estate-telkwa-british-columbia-1.jpg",
     numReviews: 0,
     avgStarRating: 0
   },
@@ -104,7 +104,7 @@ const spots = [
     name: "Seventh Place",
     description: "Seventh place to ever exist",
     price: 777.77,
-    previewImg: "https://static.wikia.nocookie.net/adventuretimesuperfans/images/1/17/Ooo.jpg/revision/latest?cb=20120415202605",
+    previewImg: "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2019/9/16/0/IO_Tongue-and-Groove_Beech-Street_3.jpg.rend.hgtvcom.616.411.suffix/1568648112267.jpeg",
     numReviews: 0,
     avgStarRating: 0
   },
@@ -119,7 +119,7 @@ const spots = [
     name: "Eigth Place",
     description: "Eigth place to ever exist",
     price: 888.88,
-    previewImg: "https://static.wikia.nocookie.net/disney/images/1/14/The_Owl_House_33.png/revision/latest?cb=20190720073620",
+    previewImg: "https://www.gannett-cdn.com/presto/2020/10/27/USAT/34e32c2d-d30c-4459-b3a0-792ba7c07c4d-Sallie_House.jpg",
     numReviews: 0,
     avgStarRating: 0
   },
@@ -134,7 +134,7 @@ const spots = [
     name: "Ninth Place",
     description: "Ninth place to ever exist",
     price: 999.99,
-    previewImg: "https://static.wikia.nocookie.net/disney/images/5/50/S1e4_mystery_shack.png/revision/latest?cb=20150714211909",
+    previewImg: "https://www.mydomaine.com/thmb/7Z1D20vZj7Eex5SIr3E_nJMWw8k=/2048x1536/filters:no_upscale():max_bytes(150000):strip_icc()/SuCasaDesign-Modern-9335be77ca0446c7883c5cf8d974e47c.jpg",
     numReviews: 0,
     avgStarRating: 0
   },
@@ -149,7 +149,7 @@ const spots = [
     name: "Tenth Place",
     description: "Tenth place to ever exist",
     price: 100.10,
-    previewImg: "https://static.wikia.nocookie.net/simpsons/images/6/65/800px-742_Evergreen_Terrace.png/revision/latest?cb=20170101225756",
+    previewImg: "https://www.designcurial.com/Uploads/NewsArticle/4809815/main.jpg",
     numReviews: 0,
     avgStarRating: 0
   }

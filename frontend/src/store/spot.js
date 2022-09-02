@@ -1,4 +1,7 @@
+import { csrfFetch } from "./csrf"
+
 const LOAD_SPOTS = "/spots/load"
+const ADD_SPOT = "/spots/add"
 
 const initialSpot  = {
     spot: null
@@ -17,6 +20,30 @@ export const loadSpotsThunk = () => async dispatch => {
         const allSpots = await response.json();
         console.log(allSpots, "testbooba")
         dispatch(loadSpots(allSpots))
+    }
+}
+
+export const addSpot = (newSpot) => {
+    return {
+        type: ADD_SPOT,
+        payload: newSpot
+    }
+}
+
+export const addSpotThunk = (newSpot) => async dispatch => {
+    console.log("addSpot thunk is enter")
+    const response = await csrfFetch("/api/spots/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newSpot)
+    })
+    console.log("after reponse await")
+
+    if(response.ok) {
+        const spot = await response.json();
+        dispatch(addSpot(spot))
     }
 }
 

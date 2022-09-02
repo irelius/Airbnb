@@ -10,38 +10,32 @@ function Header() {
     return (
         <div className="header">
             <div className="header-left">
-                <span>
-                    <button>
-                        <div className="header-icon">
-                            <i className="fa-brands fa-airbnb"></i>
-                        </div>
-                        <div>
-                            <button>
-                                <NavLink exact to="/">AirBnB</NavLink>
-                            </button>
-                        </div>
+                <div>
+                    <button className="airbnb-icon">
+                        <i className="fa-brands fa-airbnb fa-3x"></i>
+                        <NavLink exact to="/" className="icon-text">airbnb</NavLink>
                     </button>
-                </span>
+                </div>
             </div>
             <div className="header-center">
-                <span>
+                <div>
 
-                </span>
+                </div>
             </div>
             <div className="header-right">
-                <span>
+                <div>
                     <button>
                         <NavLink exact to="/become-a-host/intro">Become a Host</NavLink>
                     </button>
-                </span>
-                <span>
+                </div>
+                <div>
                     <button>
                         Globe
                     </button>
-                </span>
-                <span>
+                </div>
+                <div>
                     <ProfileButton />
-                </span>
+                </div>
             </div>
         </div>
     )
