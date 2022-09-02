@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import * as sessionActions from "./store/session";
+
 import HomePage from "./components/HomePage/HomePage";
 import LoginFormPage from "./components/LoginFormPage";
 import SignUpFormPage from "./components/SignUpFormPage";
 import SpotPageIntro from "./components/SpotPage/SpotPageIntro";
 import SpotPageForm from "./components/SpotPage/SpotPageForm";
+import ListUserSpot from "./components/SpotPage/ListUserSpot";
 
+import * as sessionActions from "./store/session";
 import { loadSpotsThunk } from "./store/spot";
 
 function App() {
@@ -36,6 +38,9 @@ function App() {
         </Route>
         <Route exact path="/become-a-host/property-form">
           <SpotPageForm />
+        </Route>
+        <Route exact path="/spot-listing">
+          <ListUserSpot />
         </Route>
       </Switch>
     </>

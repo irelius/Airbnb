@@ -25,11 +25,6 @@ function LoginFormPage() {
       });
   }
 
-  const testClicker = (e) => {
-    e.preventDefault();
-    console.log(sessionUser);
-  }
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -56,9 +51,6 @@ function LoginFormPage() {
         </label>
         <button type="submit">Log In</button>
       </form>
-      <button onClick={testClicker}>
-        test
-      </button>
     </div>
   );
 }
