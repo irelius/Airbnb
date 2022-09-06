@@ -1,7 +1,7 @@
+import "./SpotPageForm.css"
 import { NavLink } from "react-router-dom"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import "./SpotPageForm.css"
 import { addSpotThunk } from "../../../store/spot";
 
 function SpotPageForm() {

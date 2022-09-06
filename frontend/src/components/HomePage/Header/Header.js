@@ -3,10 +3,23 @@ import ProfileButton from "../../Navigation/ProfileButton";
 // import Navigation from "../../Navigation";
 // import { restoreSessionThunk } from "../../../store/session";
 // import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom"
 
 function Header() {
+    const currentUser = useSelector(state => state.session);
+    let location;
+    let hostingText;
+
+    if (!currentUser.user) {
+        location = "/login"
+        hostingText = "Become a host"
+    } else {
+        location = "/become-a-host/intro"
+        hostingText = "Switch to hosting"
+    }
+
     return (
         <div className="header">
             <div className="header-left">
@@ -25,7 +38,7 @@ function Header() {
             <div className="header-right">
                 <div>
                     <button>
-                        <NavLink exact to="/become-a-host/intro">Become a Host</NavLink>
+                        <NavLink exact to={`${location}`}>{`${hostingText}`}</NavLink>
                     </button>
                 </div>
                 <div>

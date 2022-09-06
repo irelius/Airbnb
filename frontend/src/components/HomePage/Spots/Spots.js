@@ -1,8 +1,15 @@
 import "./Spots.css"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { loadSpotsThunk } from "../../../store/spot";
 
 function Spots() {
-    const allSpots = useSelector(state => Object.values(state.spot));
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(loadSpotsThunk())
+    }, [dispatch])
+
+    const allSpots = useSelector(state => Object.values(state.spot))
 
     return (
         <div className="spots">

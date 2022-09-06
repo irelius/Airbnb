@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import HomePage from "./components/HomePage/HomePage";
@@ -10,16 +10,19 @@ import SpotPageForm from "./components/SpotPage/SpotPageForm";
 import ListUserSpot from "./components/SpotPage/ListUserSpot";
 
 import * as sessionActions from "./store/session";
-import { loadSpotsThunk } from "./store/spot";
+import EditSpotForm from "./components/SpotPage/EditSpotForm/EditSpotForm";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreSessionThunk()).then(() => setIsLoaded(true));
-    dispatch(loadSpotsThunk());
   }, [dispatch]);
 
+  const currentUser = useSelector(state => state.user);
+
+  console.log(currentUser, "test")
 
   return isLoaded && (
     <>
@@ -39,8 +42,11 @@ function App() {
         <Route exact path="/become-a-host/property-form">
           <SpotPageForm />
         </Route>
-        <Route exact path="/spot-listing">
+        <Route exact path="/hosting">
           <ListUserSpot />
+        </Route>
+        <Route exact path="/edit-spot/:spotId">
+          <EditSpotForm />
         </Route>
       </Switch>
     </>

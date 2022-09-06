@@ -44,6 +44,9 @@ function ProfileButton() {
           <li>{sessionUser.userName}</li>
           <li>{sessionUser.email}</li>
           <li>
+            <NavLink exact to="/hosting">Manage listings</NavLink>
+          </li>
+          <li>
             <button onClick={logout}>Log Out</button>
           </li>
         </ul>
@@ -52,10 +55,13 @@ function ProfileButton() {
       return (
         <ul>
           <li>
+            <NavLink exact to="/signup">Sign Up</NavLink>
+          </li>
+          <li>
             <NavLink exact to="/login">Log In</NavLink>
           </li>
           <li>
-            <NavLink exact to="/signup">Sign Up</NavLink>
+            <NavLink exact to="/become-a-host/intro">Host your home</NavLink>
           </li>
         </ul>
       )
