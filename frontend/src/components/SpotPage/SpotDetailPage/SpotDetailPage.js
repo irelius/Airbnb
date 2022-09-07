@@ -13,8 +13,12 @@ function SpotDetailPage() {
         dispatch(loadReviewsThunk(spotId.spotId))
     }, [dispatch])
 
+    const spotReviews = [];
     const allReviews = useSelector(state => Object.values(state.review));
-    console.log(allReviews);
+    allReviews.forEach(el => {
+        spotReviews.push(el.review)
+    })
+    console.log(spotReviews);
 
     const handleReview = () => {
         if(reviewStatus) {

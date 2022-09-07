@@ -1,7 +1,7 @@
 import "./EditSpotForm.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { editSpotThunk } from "../../../store/spot";
 
 function EditSpotForm() {
