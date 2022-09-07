@@ -8,6 +8,7 @@ import SignUpFormPage from "./components/SignUpFormPage";
 import SpotPageIntro from "./components/SpotPage/SpotPageIntro";
 import SpotPageForm from "./components/SpotPage/SpotPageForm";
 import ListUserSpot from "./components/SpotPage/ListUserSpot";
+import SpotDetailPage from "./components/SpotPage/SpotDetailPage/SpotDetailPage";
 
 import * as sessionActions from "./store/session";
 import EditSpotForm from "./components/SpotPage/EditSpotForm/EditSpotForm";
@@ -47,6 +48,9 @@ function App() {
         </Route>
         <Route exact path="/edit-spot/:spotId">
           <EditSpotForm />
+        </Route>
+        <Route exact path="/spot-details/:spotId">
+          <SpotDetailPage />
         </Route>
       </Switch>
     </>
