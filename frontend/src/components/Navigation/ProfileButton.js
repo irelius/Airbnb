@@ -31,7 +31,7 @@ function ProfileButton() {
   }, [showMenu]);
 
   // log out user
-  const logout = (e) => {
+  const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logoutThunk());
   };
@@ -44,7 +44,11 @@ function ProfileButton() {
           <li>{sessionUser.userName}</li>
           <li>{sessionUser.email}</li>
           <li>
-            <button onClick={logout}>Log Out</button>
+            <NavLink exact to="/hosting">Manage listings</NavLink>
+          </li>
+          <li>
+            <button onClick={logoutUser}>Log Out</button>
+
           </li>
         </ul>
       )
@@ -52,10 +56,13 @@ function ProfileButton() {
       return (
         <ul>
           <li>
+            <NavLink exact to="/signup">Sign Up</NavLink>
+          </li>
+          <li>
             <NavLink exact to="/login">Log In</NavLink>
           </li>
           <li>
-            <NavLink exact to="/signup">Sign Up</NavLink>
+            <NavLink exact to="/become-a-host/intro">Host your home</NavLink>
           </li>
         </ul>
       )

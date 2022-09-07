@@ -4,6 +4,7 @@
 
     position: fixed;
     bottom: 0;
+    left: 0px;
     width:100%;
     background-color: white;
 }
@@ -11,6 +12,7 @@
 
 .footer-left-list {
     display: flex;
+    margin-left: 8vw;
     flex-direction: row;
 }
 
@@ -25,6 +27,7 @@
 .footer-right-list {
     display: flex;
     flex-direction: row;
+    margin-right: 8vw;
 }
 
 .footer-right-list > * {

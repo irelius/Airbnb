@@ -262,7 +262,6 @@ router.post("/", [validateSpot, restoreUser, authenticationRequired], async (req
 
 // Edit a Spot
 router.put("/:spotId", [validateSpot, restoreUser, authenticationRequired, authorizationRequiredSpots], async (req, res, next) => {
-    console.log(req.params.spotId, "boooooba");
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const updateSpot = await Spot.findByPk(req.params.spotId, {
         attributes: { exclude: ["numReviews", "avgStarRating"] }
