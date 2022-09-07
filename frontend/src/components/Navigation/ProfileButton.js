@@ -31,7 +31,7 @@ function ProfileButton() {
   }, [showMenu]);
 
   // log out user
-  const logout = (e) => {
+  const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logoutThunk());
   };
@@ -47,7 +47,8 @@ function ProfileButton() {
             <NavLink exact to="/hosting">Manage listings</NavLink>
           </li>
           <li>
-            <button onClick={logout}>Log Out</button>
+            <button onClick={logoutUser}>Log Out</button>
+
           </li>
         </ul>
       )

@@ -5,7 +5,7 @@ const ADD_SPOT = "/spots/add"
 const EDIT_SPOT = "/spots/edit"
 const DELETE_SPOT = "/spots/delete"
 
-const initialSpot  = {
+const initialSpot = {
     spot: []
 }
 
@@ -18,7 +18,7 @@ export const loadSpots = (allSpots) => {
 
 export const loadSpotsThunk = () => async dispatch => {
     const response = await fetch('/api/spots/')
-    if(response.ok) {
+    if (response.ok) {
         const allSpots = await response.json();
         dispatch(loadSpots(allSpots))
     }
@@ -40,7 +40,7 @@ export const addSpotThunk = (newSpot) => async dispatch => {
         body: JSON.stringify(newSpot)
     })
 
-    if(response.ok) {
+    if (response.ok) {
         const spot = await response.json();
         dispatch(addSpot(spot))
     }
@@ -62,7 +62,7 @@ export const editSpotThunk = (spotId, spotDetails) => async dispatch => {
         body: JSON.stringify(spotDetails)
     })
 
-    if(response.ok) {
+    if (response.ok) {
         const spot = await response.json();
         dispatch(editSpot(spot))
     }
@@ -76,27 +76,19 @@ export const deleteSpot = (spot) => {
 }
 
 export const deleteSpotThunk = (deleteSpot) => async dispatch => {
-    const response = await csrfFetch("/api/spots/", {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(deleteSpot)
+    const response = await csrfFetch(`/api/spots/${deleteSpot.id}`, {
+        method: "DELETE"
     })
 
-    let test = await response.json();
-    console.log(test);
-
-    if(response.ok) {
-        const spot = await response.json();
-        dispatch(deleteSpot(spot))
+    if (response.ok) {
+        console.log("Listing successfully deleted.")
     }
 }
 
 
 const spotReducer = (state = initialSpot, action) => {
     const newState = { ...state }
-    switch(action.type) {
+    switch (action.type) {
         case LOAD_SPOTS:
             const allSpots = {};
             const spotsArray = action.payload.Spots

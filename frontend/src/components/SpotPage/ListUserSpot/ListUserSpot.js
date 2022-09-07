@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom";
-import { restoreSessionThunk } from "../../../store/session";
+import { restoreUserThunk } from "../../../store/session";
 import "./ListUserSpot.css"
 
 import { deleteSpotThunk } from "../../../store/spot";
@@ -12,8 +12,9 @@ function ListUserSpot() {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(restoreSessionThunk());
+        dispatch(restoreUserThunk());
     }, [dispatch]);
+
 
     const user = useSelector(state => state.session.user)
     const allSpots = useSelector(state => Object.values(state.spot));
@@ -26,91 +27,50 @@ function ListUserSpot() {
 
     const deleteSpot = (spot) => {
         dispatch(deleteSpotThunk(spot))
-
     }
+
+
 
     const showHandleHosting = () => {
-        console.log(showListing)
         if (showListing) {
-            return (
-                <div className="all-spots">
-                    {
-                        userSpots.map(el => {
-                            return (
-                                <>
-                                    <div className="listing">
-                                        <div>
-                                            {el.previewImg}
+            if (userSpots.length === 0) {
+                return (
+                    <div>
+                        <p>You don't have any locations to host.</p>
+                    </div>
+                )
+            } else {
+                return (
+                    <div className="all-spots">
+                        {
+                            userSpots.map(el => {
+                                return (
+                                    <>
+                                        <div className="listing">
+                                            <div>
+                                                {el.previewImg}
+                                            </div>
+                                            <div>
+                                                {el.name}
+                                            </div>
                                         </div>
-                                        <div>
-                                            {el.name}
+                                        <div className="edit">
+                                            <button>
+                                                <NavLink exact to={`/edit-spot/${el.id}`}>Edit Listing</NavLink>
+                                            </button>
                                         </div>
-                                    </div>
-                                    <div className="edit">
-                                        <button>
-                                            <NavLink exact to={`/edit-spot/${el.id}`}>Edit Listing</NavLink>
-                                        </button>
-                                    </div>
-                                    <div className="delete">
-                                        <button onClick={() => { deleteSpot(el) }}>Delete Listing</button>
-                                    </div>
-                                </>
-                            )
-                        })
-                    }
-                </div>
-            )
+                                        <div className="delete">
+                                            <button onClick={() => { deleteSpot(el) }}>Delete Listing</button>
+                                        </div>
+                                    </>
+                                )
+                            })
+                        }
+                    </div>
+                )
+            }
         }
     }
-
-    // const handleChecking = () => {
-    //     return (
-    //         <>
-    //             <div>icon</div>
-    //             <div>
-    //                 <p>
-    //                     You don't have any guests checking out today or tomorrow.
-    //                 </p>
-    //             </div>
-    //         </>
-    //     )
-    // }
-    // const handleArriving = () => {
-    //     return (
-    //         <>
-    //             <div>icon</div>
-    //             <div>
-    //                 <p>
-    //                     You don't have any guests arriving today or tomorrow.
-    //                 </p>
-    //             </div>
-    //         </>
-    //     )
-    // }
-    // const handleUpcoming = () => {
-    //     return (
-    //         <>
-    //             <div>icon</div>
-    //             <div>
-    //                 <p>
-    //                     You currently don't have any upcoming guests.
-    //                 </p>
-    //             </div>
-    //         </>
-    //     )
-    // }
-    // const handlePending = () => {
-    //     return (
-    //         <>
-    //             <div>icon</div>
-    //             <div>
-    //                 <p>
-    //                     You don't have any guest reviews to write.
-    //                 </p>
-    //             </div>
-    //         </>
-    //     )
-    // }
 
 
     return (
