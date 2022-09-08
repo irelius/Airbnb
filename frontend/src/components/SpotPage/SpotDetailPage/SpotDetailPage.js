@@ -1,44 +1,49 @@
 import "./SpotDetailPage.css"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { loadReviewsThunk } from "../../../store/review";
 
 function SpotDetailPage() {
     const spotId = useParams();
-    const dispatch = useDispatch();
-    const [reviewStatus, setReviewStatus] = useState(false);
+    const currentUser = useSelector(state => state.session);
+    const allReviews = useSelector(state => Object.values(state.review));
 
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadReviewsThunk(spotId.spotId))
     }, [dispatch])
 
-    const spotReviews = [];
-    const allReviews = useSelector(state => Object.values(state.review));
+    console.log(allReviews);
+
+    let location;
+    let reviewId;
+    let reviewStatus = false;
     allReviews.forEach(el => {
-        spotReviews.push(el.review)
-    })
-    console.log(spotReviews);
-
-    const handleReview = () => {
-        if(reviewStatus) {
-
-        } else {
-
+        if(el.userId === currentUser.user.id) {
+            reviewId = el.id
+            reviewStatus = true;
         }
+    })
+
+
+    if(reviewStatus) {
+        location = `/edit-review/${reviewId}`
+    } else {
+        location = `/submit-review/${spotId.spotId}`
     }
 
     const reviewStatusFunc = () => {
         if (reviewStatus) {
             return (
-                <button onClick={handleReview}>
-                    Edit your Review
+                <button>
+                    <NavLink exact to={`${location}`}>Edit Your Review</NavLink>
                 </button>
             )
         } else {
             return (
-                <button onClick={handleReview}>
-                    Submit Review
+                <button>
+                    <NavLink exact to={`${location}`}>Submit Review</NavLink>
                 </button>
             )
         }
@@ -58,6 +63,27 @@ function SpotDetailPage() {
             </div>
             <div>
                 review section
+            </div>
+            <div>
+                <div>
+                {/* console.log(allReviews[0].User.firstName); */}
+                </div>
+                {allReviews.map(el => {
+                    return (
+                        <div>
+                            <div>
+                                {el.User.firstName} {el.User.lastName}
+                            </div>
+                            <div>
+                                {el.createdAt.slice(0,10)}
+                            </div>
+                            <div>
+                                {el.review}
+                            </div>
+                        </div>
+
+                    )
+                })}
             </div>
             <div>
                 {reviewStatusFunc()}

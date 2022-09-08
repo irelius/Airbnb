@@ -12,13 +12,11 @@ import SpotDetailPage from "./components/SpotPage/SpotDetailPage/SpotDetailPage"
 
 import * as sessionActions from "./store/session";
 import EditSpotForm from "./components/SpotPage/EditSpotForm/EditSpotForm";
+import ReviewFormPage from "./components/ReviewFormPage/ReviewFormPage";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const currentUser = useSelector(state => state.session.user)
-  console.log(currentUser, "current user test")
 
   useEffect(() => {
     dispatch(sessionActions.restoreUserThunk()).then(() => setIsLoaded(true));
@@ -51,6 +49,9 @@ function App() {
         </Route>
         <Route exact path="/spot-details/:spotId">
           <SpotDetailPage />
+        </Route>
+        <Route exact path="/submit-review/:spotId">
+          <ReviewFormPage />
         </Route>
       </Switch>
     </>
