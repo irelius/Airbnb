@@ -12,10 +12,6 @@
     width: 20vw;
 }
 
-button {
-    display: flex;
-    align-items: center;
-}
 
 .submit-review-button {
     display: flex;
