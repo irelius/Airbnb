@@ -1,11 +1,18 @@
 import "./SpotPageForm.css"
-import { NavLink } from "react-router-dom"
+import { NavLink, useHistory } from "react-router-dom"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addSpotThunk } from "../../../store/spot";
 
 function SpotPageForm() {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const currentUser = useSelector(state => state.session.user)
+    console.log(currentUser);
+
+    if(!currentUser) {
+        history.push('/')
+    }
 
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -19,7 +26,6 @@ function SpotPageForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const newSpot = {
             address,
             city,
@@ -31,7 +37,6 @@ function SpotPageForm() {
             description,
             price
         }
-
         dispatch(addSpotThunk(newSpot))
     }
 

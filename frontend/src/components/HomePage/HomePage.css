@@ -1,9 +1,5 @@
-.add-spot-button {
+.homepage-main{
     display: flex;
-    justify-content: center;
-    position: fixed;
-    left:50vw;
-    bottom: 10vw;
-    background-color: white;
-    border: 1px black solid;
+    padding-top: 65px;
+    background-color: blue;;
 }

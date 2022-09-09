@@ -1,56 +1,123 @@
 import "./SpotDetailPage.css"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, NavLink } from "react-router-dom";
-import { loadReviewsThunk } from "../../../store/review";
+import { useParams, NavLink, useHistory } from "react-router-dom";
+import { deleteReviewThunk, loadReviewsThunk } from "../../../store/review";
+import LoginFormModal from "../../LoginFormModal";
 
 function SpotDetailPage() {
-    const spotId = useParams();
-    const currentUser = useSelector(state => state.session);
-    const allReviews = useSelector(state => Object.values(state.review));
-
+    const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadReviewsThunk(spotId.spotId))
     }, [dispatch])
 
-    console.log(allReviews);
+    let userReview;
+    const spotId = useParams();
+    const spotReviews = useSelector(state => Object.values(state.review));
+    const currentUser = useSelector(state => state.session.user);
+    if(currentUser) {
+        userReview = spotReviews.filter(el => el.userId === currentUser.id)[0]
+    }
+    console.log(userReview, "booba");
+
+
+
+    // this code is so bad.
+    let userReviewId;
+    let userReviewStatus = false;
+    let aReviewExists = false;
+    if (spotReviews.length === 0) {
+    } else if (spotReviews[0].id) {
+        if (currentUser) {
+            spotReviews.forEach(el => {
+                if (el.userId === currentUser.id) {
+                    userReviewId = el.id
+                    userReviewStatus = true;
+                }
+            })
+        }
+        aReviewExists = true;
+    }
+
 
     let location;
-    let reviewId;
-    let reviewStatus = false;
-    allReviews.forEach(el => {
-        if(el.userId === currentUser.user.id) {
-            reviewId = el.id
-            reviewStatus = true;
-        }
-    })
-
-
-    if(reviewStatus) {
-        location = `/edit-review/${reviewId}`
-    } else {
+    if (!userReviewStatus) {
         location = `/submit-review/${spotId.spotId}`
     }
 
+    const loadUserReview = () => {
+        if (currentUser && userReviewStatus) {
+            return (
+                <div>
+                    <div>
+                        {userReview.User.firstName} {userReview.User.lastName}
+                    </div>
+                    <div>
+                        {userReview.createdAt.slice(0, 10)}
+                    </div>
+                    <div>
+                        {userReview.review}
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    const loadReviews = () => {
+        if (aReviewExists) {
+            return (
+                spotReviews.map(el => {
+                    return (
+                        <div>
+                            <div>
+                                {el.User.firstName} {el.User.lastName}
+                            </div>
+                            <div>
+                                {el.createdAt.slice(0, 10)}
+                            </div>
+                            <div>
+                                {el.review}
+                            </div>
+                        </div>
+                    )
+                })
+            )
+        }
+    }
+
+    const deleteReview = () => {
+        if (userReviewStatus) {
+            return (
+                <button onClick={handleDelete}>Delete your Review</button>
+            )
+        }
+
+    }
+
+    const handleDelete = () => {
+        dispatch(deleteReviewThunk(userReview.id))
+        history.go(0);
+    }
+
     const reviewStatusFunc = () => {
-        if (reviewStatus) {
+
+        if (currentUser) {
             return (
                 <button>
-                    <NavLink exact to={`${location}`}>Edit Your Review</NavLink>
+                    <NavLink exact to={`${location}`}>Submit a Review</NavLink>
                 </button>
             )
         } else {
             return (
-                <button>
-                    <NavLink exact to={`${location}`}>Submit Review</NavLink>
-                </button>
+                <LoginFormModal />
             )
         }
     }
 
     return (
-        <>
+        <div className="spot-detail-main">
+
             <div>
                 header sections
             </div>
@@ -65,30 +132,20 @@ function SpotDetailPage() {
                 review section
             </div>
             <div>
-                <div>
-                {/* console.log(allReviews[0].User.firstName); */}
+                <div className="user-review">
+                    {loadUserReview()}
                 </div>
-                {allReviews.map(el => {
-                    return (
-                        <div>
-                            <div>
-                                {el.User.firstName} {el.User.lastName}
-                            </div>
-                            <div>
-                                {el.createdAt.slice(0,10)}
-                            </div>
-                            <div>
-                                {el.review}
-                            </div>
-                        </div>
-
-                    )
-                })}
+                <div>
+                    {deleteReview()}
+                </div>
+            </div>
+            <div>
+                {loadReviews()}
             </div>
             <div>
                 {reviewStatusFunc()}
             </div>
-        </>
+        </div>
     )
 }
 

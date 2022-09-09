@@ -1,3 +1,4 @@
+import "./SignUpPage.css"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { signupThunk } from "../../store/session";
@@ -43,14 +44,9 @@ function SignUpFormPage() {
         return setErrors(['Confirm Password field must be the same as the Password field']);
     }
 
-    const testClicker = (e) => {
-        e.preventDefault();
-        console.log(sessionUser)
-    }
-
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="signup-main">
+            <form onSubmit={handleSubmit} className="signup-form">
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
@@ -101,9 +97,6 @@ function SignUpFormPage() {
                     Sign Up
                 </button>
             </form>
-            <button onClick={testClicker}>
-                Test
-            </button>
         </div>
     )
 }

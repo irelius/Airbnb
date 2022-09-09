@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import HomePage from "./components/HomePage/HomePage";
-import LoginFormPage from "./components/LoginFormPage";
+import Navigation from "./components/Navigation";
+import LoginFormModal from "./components/LoginFormModal";
 import SignUpFormPage from "./components/SignUpFormPage";
-import SpotPageIntro from "./components/SpotPage/SpotPageIntro";
 import SpotPageForm from "./components/SpotPage/SpotPageForm";
 import ListUserSpot from "./components/SpotPage/ListUserSpot";
 import SpotDetailPage from "./components/SpotPage/SpotDetailPage/SpotDetailPage";
+import EditSpotForm from "./components/SpotPage/EditSpotForm/EditSpotForm";
+import SubmitReview from "./components/ReviewFormPage/SubmitReview";
+import EditReview from "./components/ReviewFormPage/EditReview/EditReview";
 
 import * as sessionActions from "./store/session";
-import EditSpotForm from "./components/SpotPage/EditSpotForm/EditSpotForm";
-import ReviewFormPage from "./components/ReviewFormPage/ReviewFormPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,35 +26,32 @@ function App() {
 
   return isLoaded && (
     <>
-      <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route exact path="/login">
-          <LoginFormPage />
-        </Route>
-        <Route exact path="/signup">
-          <SignUpFormPage />
-        </Route>
-        <Route exact path="/become-a-host/intro">
-          <SpotPageIntro />
-        </Route>
-        <Route exact path="/become-a-host/property-form">
-          <SpotPageForm />
-        </Route>
-        <Route exact path="/hosting">
-          <ListUserSpot />
-        </Route>
-        <Route exact path="/edit-spot/:spotId">
-          <EditSpotForm />
-        </Route>
-        <Route exact path="/spot-details/:spotId">
-          <SpotDetailPage />
-        </Route>
-        <Route exact path="/submit-review/:spotId">
-          <ReviewFormPage />
-        </Route>
-      </Switch>
+      <Navigation isLoaded={isLoaded} />
+      {isLoaded && (
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route exact path="/signup">
+            <SignUpFormPage />
+          </Route>
+          <Route exact path="/become-a-host/property-form">
+            <SpotPageForm />
+          </Route>
+          <Route exact path="/hosting">
+            <ListUserSpot />
+          </Route>
+          <Route exact path="/edit-spot/:spotId">
+            <EditSpotForm />
+          </Route>
+          <Route exact path="/spot-details/:spotId">
+            <SpotDetailPage />
+          </Route>
+          <Route exact path="/submit-review/:spotId">
+            <SubmitReview />
+          </Route>
+        </Switch>
+      )}
     </>
 
   );
