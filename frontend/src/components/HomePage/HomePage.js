@@ -1,30 +1,15 @@
-import { NavLink, Route, Switch } from "react-router-dom";
-
-
+import "./HomePage.css"
+import Spots from "./Spots/Spots"
+import Footer from "./Footer";
 
 function HomePage() {
-    const handleLogOut = async (e) => {
-        e.preventDefault();
-
-
-    }
-
     return (
-        <div>
-            {/* <NavLink to="/login">Log In</NavLink>
-            <NavLink to="/signup">Sign Up</NavLink> */}
-            <ul>
-                <li>
-                    <NavLink to="/login">Log In</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/signup">Sign Up</NavLink>
-                </li>
-            </ul>
-            <button onClick={handleLogOut}>
-                Log Out
-            </button>
-        </div>
+        <>
+            <div className="homepage-main">
+                <Spots />
+                <Footer />
+            </div>
+        </>
     )
 
 }

@@ -1,3 +1,8 @@
+var awsFunc = require("../../awsS3")
+const singlePublicFileUpload = awsFunc.singlePublicFileUpload
+const singleMulterUpload = awsFunc.singleMulterUpload
+
+
 const express = require('express')
 const router = express.Router();
 const { Op } = require("sequelize")
@@ -144,8 +149,8 @@ router.get("/", validateFilters, async (req, res, next) => {
     let page = parseInt(req.query.page);
     let size = parseInt(req.query.size);
 
-    if(isNaN(page) || page === 0) page = 1;
-    if(isNaN(size)) size = 20
+    if (isNaN(page) || page === 0) page = 1;
+    if (isNaN(size)) size = 20
 
     let minLat = parseInt(req.query.minLat) || -90;
     let maxLat = parseInt(req.query.maxLat) || 90;
@@ -173,7 +178,6 @@ router.get("/", validateFilters, async (req, res, next) => {
                 [Op.between]: [minPrice, maxPrice]
             }
         },
-        attributes: { exclude: ["numReviews", "avgStarRating"] },
         limit: size,
         offset: (size * (page - 1))
     })
@@ -194,7 +198,7 @@ router.get("/current", [restoreUser, authenticationRequired], async (req, res) =
         where: {
             ownerId: req.user.id
         },
-        attributes: { exclude: ["numReviews", "avgStarRating"] }
+        attributes: { exclude: ["numReviews"] }
     })
     res.json(allSpots);
 })
@@ -241,32 +245,33 @@ router.get("/:spotId", async (req, res, next) => {
 
 
 // Create a Spot
-router.post("/", [validateSpot, restoreUser, authenticationRequired], async (req, res, next) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
-    // create spot
-    const newSpot = await Spot.create({
-        ownerId: req.user.id,
-        address: address,
-        city: city,
-        state: state,
-        country: country,
-        lat: lat,
-        lng: lng,
-        name: name,
-        description: description,
-        price: price
+router.post("/",
+    // singleMulterUpload("image"),
+    [validateSpot, restoreUser, authenticationRequired], async (req, res, next) => {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        // const previewImg = await singlePublicFileUpload(req.file);
+        // create spot
+        const newSpot = await Spot.create({
+            ownerId: req.user.id,
+            address: address,
+            city: city,
+            state: state,
+            country: country,
+            lat: lat,
+            lng: lng,
+            name: name,
+            description: description,
+            price: price,
+            // previewImg: previewImg
+        })
+        res.status(201).json(newSpot);
     })
-    res.status(201).json(newSpot);
-})
 
 
 // Edit a Spot
-router.put("/:spotId", [validateSpot, restoreUser, authenticationRequired, authorizationRequiredSpots], async (req, res, next) => {
-    console.log(req.params.spotId, "boooooba");
+router.put("/:spotId", [validateSpot, restoreUser, authenticationRequired, authorizationRequiredSpots], (async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
-    const updateSpot = await Spot.findByPk(req.params.spotId, {
-        attributes: { exclude: ["numReviews", "avgStarRating"] }
-    })
+    const updateSpot = await Spot.findByPk(req.params.spotId)
     // update spot
     updateSpot.update({
         address: address,
@@ -283,6 +288,7 @@ router.put("/:spotId", [validateSpot, restoreUser, authenticationRequired, autho
     updateSpot.updatedAt = new Date()
     res.json(updateSpot)
 })
+)
 
 
 // Delete a Spot

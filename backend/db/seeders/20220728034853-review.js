@@ -10,6 +10,12 @@ const reviews = [
     stars: 4,
   },
   {
+    userId: 2,
+    spotId: 1,
+    review: "Test multiple reviews for one spot",
+    stars: 5,
+  },
+  {
     userId: 1,
     spotId: 2,
     review: "crappy location. rude hosts.",

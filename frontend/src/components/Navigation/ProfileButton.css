@@ -1,0 +1,38 @@
+.header-right > * {
+    list-style: none;
+}
+
+.fa-user-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 18px;
+}
+
+.profile-dropdown {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    background-color: white;
+
+    padding: 10px;
+    border: 1px solid gray;
+
+    top: 50px;
+    right: 8vw;
+    width: 150px;
+}
+
+.profile-dropdown > * {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.manage-listings {
+    margin-bottom: 6px;
+}
+
+.manage-listings > * {
+    text-decoration: none;
+    color: black;
+}

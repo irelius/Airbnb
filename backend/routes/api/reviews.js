@@ -43,7 +43,7 @@ router.get("/current", [restoreUser, authenticationRequired], async (req, res, n
             },
             {
                 model: Spot,
-                attributes: { exclude: ["previewImg", "description", "numReviews", "avgStarRating", "createdAt", "updatedAt", "OwnerId"] }
+                attributes: { exclude: ["description", "numReviews", "avgStarRating", "createdAt", "updatedAt", "OwnerId"] }
             },
             {
                 model: Image,

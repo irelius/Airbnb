@@ -5,6 +5,7 @@ const spotsRouter = require('./spots')
 const imagesRouter = require('./images')
 const reviewsRouter = require('./reviews')
 const bookingsRouter = require("./bookings")
+const mapsRouter = require("./maps")
 
 const { restoreUser } = require("../../utils/auth.js");
 
@@ -20,6 +21,7 @@ router.use("/reviews", reviewsRouter);
 
 router.use("/bookings", bookingsRouter);
 
+router.use("/maps", mapsRouter)
 
 // Error middleware
 router.use((error, req, res, next) => {
