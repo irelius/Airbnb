@@ -39,8 +39,9 @@ function EditSpotForm() {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="edit-spot-main">
+            <form onSubmit={handleSubmit} className="edit-spot-form">
+                Address
                 <input
                     type="text"
                     placeholder={currentSpot.address}
@@ -48,6 +49,7 @@ function EditSpotForm() {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                 />
+                City
                 <input
                     type="text"
                     placeholder={currentSpot.city}
@@ -55,6 +57,7 @@ function EditSpotForm() {
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                 />
+                State
                 <input
                     type="text"
                     placeholder={currentSpot.state}
@@ -62,6 +65,7 @@ function EditSpotForm() {
                     value={state}
                     onChange={(e) => setState(e.target.value)}
                 />
+                Country
                 <input
                     type="text"
                     placeholder={currentSpot.country}
@@ -69,6 +73,7 @@ function EditSpotForm() {
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
                 />
+                Latitude
                 <input
                     type="number"
                     placeholder={currentSpot.lat}
@@ -76,6 +81,7 @@ function EditSpotForm() {
                     value={lat}
                     onChange={(e) => setLat(e.target.value)}
                 />
+                Longitude
                 <input
                     type="number"
                     placeholder={currentSpot.lng}
@@ -83,6 +89,7 @@ function EditSpotForm() {
                     value={lng}
                     onChange={(e) => setLng(e.target.value)}
                 />
+                Name
                 <input
                     type="text"
                     placeholder={currentSpot.name}
@@ -90,6 +97,7 @@ function EditSpotForm() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
+                Description
                 <input
                     type="text"
                     placeholder={currentSpot.description}
@@ -97,6 +105,7 @@ function EditSpotForm() {
                     value={description}
                     onChange={(e) => setDesription(e.target.value)}
                 />
+                Price
                 <input
                     type="number"
                     placeholder={currentSpot.price}
@@ -104,7 +113,7 @@ function EditSpotForm() {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                 />
-                <button type="submit" className="continue-button">
+                <button type="submit" className="save-button">
                     Save Edits
                 </button>
             </form>

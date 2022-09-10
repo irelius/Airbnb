@@ -37,7 +37,6 @@ const bookings = [
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // console.log("booking seeder placeholder")
     try {
       for(let booking of bookings) {
         const { spotId, userId, startDate, endDate} = booking;

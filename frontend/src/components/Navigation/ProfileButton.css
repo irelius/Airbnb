@@ -27,3 +27,12 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
+.manage-listings {
+    margin-bottom: 6px;
+}
+
+.manage-listings > * {
+    text-decoration: none;
+    color: black;
+}

@@ -4,16 +4,14 @@ import { Route, Switch } from "react-router-dom";
 
 import HomePage from "./components/HomePage/HomePage";
 import Navigation from "./components/Navigation";
-import LoginFormModal from "./components/LoginFormModal";
 import SignUpFormPage from "./components/SignUpFormPage";
 import SpotPageForm from "./components/SpotPage/SpotPageForm";
-import ListUserSpot from "./components/SpotPage/ListUserSpot";
 import SpotDetailPage from "./components/SpotPage/SpotDetailPage/SpotDetailPage";
 import EditSpotForm from "./components/SpotPage/EditSpotForm/EditSpotForm";
 import SubmitReview from "./components/ReviewFormPage/SubmitReview";
-import EditReview from "./components/ReviewFormPage/EditReview/EditReview";
 
 import * as sessionActions from "./store/session";
+import UserSpots from "./components/SpotPage/UserSpots";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,8 +36,8 @@ function App() {
           <Route exact path="/become-a-host/property-form">
             <SpotPageForm />
           </Route>
-          <Route exact path="/hosting">
-            <ListUserSpot />
+          <Route exact path="/manage-listings">
+            <UserSpots />
           </Route>
           <Route exact path="/edit-spot/:spotId">
             <EditSpotForm />

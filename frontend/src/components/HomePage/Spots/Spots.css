@@ -1,73 +1,62 @@
 /* Spots Section CSS */
+
 img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
-.spots {
+.all-spots {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 5px;
+
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+.navlink {
+    margin-top: 50px;
+    width: 300px;
+    height: 300px;
+    padding: 12px;
+    padding-bottom: 20px;
 
 }
 
-.spots > * {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
-
-    margin: 5px;
-
-    border: 1px solid black;
-    background-color: red;
+.all-spots>* {
+    /* text */
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
 }
 
 .spot {
     display: flex;
-    justify-content: center;
-
+    flex-direction: column;
     width: 300px;
     height: 400px;
-
-    list-style: none;
-
-    margin: 5px;
-    padding: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    background-color: white;
 }
 
-.spot-inner-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    border: 1px solid black;
-    background-color: orange;
+.spot-image {
+    max-height: 300px;
+    height: stretch;
 }
 
-.spot-image{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 280px;
-    height: fit;
-
-    border: 1px solid black;
-    background-color: yellow;
+.spot-image>* {
+    border-radius: 10px;
+    object-fit: cover;
 }
 
 .spot-description {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-height: 100px;
+    padding: 10px;
+}
 
-    width: stretch;
-    /* height: 40%; */
+.spot-price {
+    padding-top: 5px;
+}
 
-    border: 1px solid black;
-    background-color: green;
+.spot-price>* {
+    font-family: 'Courier New', Courier, monospace;
 }

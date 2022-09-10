@@ -2,6 +2,7 @@
 import "./ProfileButton.css"
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { NavLink } from "react-router-dom";
 import { logoutThunk } from "../../store/session";
 
 function ProfileButton({ user }) {
@@ -40,9 +41,10 @@ function ProfileButton({ user }) {
           <div>
             {user.email}
           </div>
-
+          <button className="manage-listings">
+            <NavLink exact to="/manage-listings">Manage Your Listings</NavLink>
+          </button>
           <button onClick={logout}>Log Out</button>
-
         </div>
 
       )}

@@ -1,16 +1,19 @@
 import "./SpotPageForm.css"
 import { NavLink, useHistory } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addSpotThunk } from "../../../store/spot";
+import Maps from "../../Maps/Maps";
+
 
 function SpotPageForm() {
     const dispatch = useDispatch();
+
     const history = useHistory();
     const currentUser = useSelector(state => state.session.user)
     console.log(currentUser);
 
-    if(!currentUser) {
+    if (!currentUser) {
         history.push('/')
     }
 
@@ -21,8 +24,9 @@ function SpotPageForm() {
     const [lat, setLat] = useState("");
     const [lng, setLng] = useState("");
     const [name, setName] = useState("");
-    const [description, setDesription] = useState("");
+    const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
+    const [image, setImage] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,40 +39,39 @@ function SpotPageForm() {
             lng,
             name,
             description,
-            price
+            price,
+            image
         }
         dispatch(addSpotThunk(newSpot))
+        history.push("/")
+    }
+
+    const uploadImage = (e) => {
+        const file = e.target.files[0];
+        if(file) setImage(file);
+        // setImage(URL.createObjectURL(file))
     }
 
     return (
-        <>
+        <div className="create-spot-main">
+
             <div className="left">
-                <button className="home-button">
-                    <NavLink exact to="/">Home</NavLink>
-                </button>
-                <h1>
+                <h1 className="left-header">
                     What kind of place will you host?
                 </h1>
             </div>
 
             <div className="right">
-                <div className="right-header">
-                    <button>
-                        Ask a Superhost
-                    </button>
-                    <button>
-                        Help
-                    </button>
-                    <button>
-                        Save and exit
-                    </button>
+                <div className="back-button-div">
+                    <NavLink exact to="/">
+                        <div className="back-button" >
+                            Exit
+                        </div>
+                    </NavLink>
                 </div>
+                <div className="right-section">
 
-                <div className="right-footer">
-                    <button className="back-button">
-                        <NavLink exact to="/become-a-host/intro">Back</NavLink>
-                    </button>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="create-spot-form">
                         <input
                             type="text"
                             placeholder="Address"
@@ -123,7 +126,7 @@ function SpotPageForm() {
                             placeholder="Description"
                             required
                             value={description}
-                            onChange={(e) => setDesription(e.target.value)}
+                            onChange={(e) => setDescription(e.target.value)}
                         />
                         <input
                             type="number"
@@ -132,13 +135,25 @@ function SpotPageForm() {
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                         />
-                        <button type="submit" className="continue-button">
-                            Next
-                        </button>
+                        <input
+                            type="file" accept="image/*"
+                            placeholder="Upload Photos"
+                            required
+                            // value={image}
+                            onChange={uploadImage}
+                        />
+                        <div className="submit-button-div">
+                            <button type="submit" className="submit-button">
+                                Host Your Spot
+                            </button>
+                        </div>
+                        {/* <div className="map-container">
+                            <Maps />
+                        </div> */}
                     </form>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

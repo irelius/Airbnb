@@ -32,6 +32,25 @@ export const addSpot = (newSpot) => {
 }
 
 export const addSpotThunk = (newSpot) => async dispatch => {
+    // const { address, city, state, country, lat, lng, name, description, price, image } = newSpot
+    const {image} = newSpot;
+    console.log(image, "test");
+    // const formData = new FormData();
+    // formData.append("address", address);
+    // formData.append("city", city);
+    // formData.append("state", state);
+    // formData.append("country", country);
+    // formData.append("lat", lat);
+    // formData.append("lng", lng);
+    // formData.append("name", name);
+    // formData.append("description", description);
+    // formData.append("price", price);
+
+
+    // if (image) formData.append("previewImg", image);
+
+    // console.log(formData, "hello")
+
     const response = await csrfFetch("/api/spots/", {
         method: "POST",
         headers: {

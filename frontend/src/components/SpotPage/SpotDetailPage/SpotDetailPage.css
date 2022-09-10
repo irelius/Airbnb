@@ -1,4 +1,75 @@
 .spot-detail-main {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     margin-top: 100px;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.spot-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1000px
+}
+
+.spot-section>* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.spot-name {
+    display: flex;
+    justify-self: start;
+}
+
+.spot-description {
+    margin-bottom: 20px;
+}
+
+.spot-image {
+    width: 1000px;
+    height: 800px;
+    object-fit: cover;
+}
+
+
+.review-section {
+    width: 1000px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: start;
+}
+
+.user-review {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+}
+
+.delete-user-review {
+    display: flex;
+    justify-content: center;
+}
+
+.other-reviews {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-date {
+    font-size: small;
+    color: gray;
+    margin-top: 5px;
+}
+
+.review-review {
+    margin: 20px;
 }

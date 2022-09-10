@@ -10,23 +10,49 @@ function Spots() {
         dispatch(loadSpotsThunk())
     }, [dispatch])
 
+
+
     const allSpots = useSelector(state => Object.values(state.spot))
+    console.log(allSpots, "allSpots")
+
+    const loadImage = (el) => {
+        if (el.previewImg) {
+            return (
+                <img src={`${el.previewImg}`} alt={`${el.name}`} />
+            )
+        } else {
+            return (
+                <div>
+                    booba
+                </div>
+            )
+        }
+    }
 
     return (
-        <div className="spots">
+        <div className="all-spots">
             {allSpots.map(el => {
                 return (
-                    <div className={`spot ${el}`}>
-                        <NavLink exact to={`/spot-details/${el.id}`}>
+                    <NavLink exact to={`/spot-details/${el.id}`} className="navlink">
+                        <div className="spot">
                             <div className="spot-image">
-                                <img src={`${el.previewImg}`} alt={`${el.name}`} />
-
+                                {loadImage(el)}
                             </div>
                             <div className="spot-description">
-                                {`${el.description}`}
+                                <div className="spot-name">
+                                    {`${el.name}`}, {`${el.state}`}
+                                </div>
+                                <div className="spot-price">
+                                    ${`${el.price}`} night
+                                </div>
                             </div>
-                        </NavLink>
-                    </div>
+                        </div>
+                        <div>
+                            {el.numReviews}
+                            {el.avgStarRating}
+                        </div>
+                    </NavLink>
+
                 )
             })}
         </div>

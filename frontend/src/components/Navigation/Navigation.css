@@ -6,7 +6,6 @@
     top: 0;
     left: 0;
     flex-direction: column;
-    background-color: yellow;
 }
 
 .header {
@@ -20,6 +19,7 @@
 
     padding: 10px;
 
+    background-color: white;
     border-bottom: 1px gray solid;
 }
 
@@ -49,11 +49,15 @@
     display: flex;
     position: fixed;
     margin-right: 40px;
-    padding: 2px;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding: 3px;
 
     border: 1px solid gray;
+}
+
+.host-button > * {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    text-decoration: none;
 }
 
 .profile-button {
@@ -80,6 +84,7 @@
     border:none;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 .icon-text{
