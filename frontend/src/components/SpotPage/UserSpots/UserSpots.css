@@ -8,5 +8,53 @@
 }
 
 .listings {
-    margin-left: 2vw;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.listing {
+    margin: 15px;
+}
+
+.listing-name {
+    margin-left: 10px;
+}
+
+.listing-address {
+    margin-left: 10px;
+    color: gray;
+    font-weight: normal;
+    font-size: small;
+}
+
+.listing-image {
+    max-width: 300px;
+}
+
+.listing-image>* {
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.edit {
+    margin-left: 5px;
+}
+
+.edit-button {
+    margin: 3px;
+
+}
+
+.edit-button>* {
+    color: black;
+    text-decoration: none;
+}
+
+.delete {
+    margin-left: 5px;
+}
+
+.delete-button {
+    margin: 3px;
 }

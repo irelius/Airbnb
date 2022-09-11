@@ -83,9 +83,13 @@ function SpotDetailPage() {
     const loadUserReview = () => {
         if (!currentUser) {
             return (
-                <div>
-                    Please log in to submit a review.
-                    <LoginFormModal />
+                <div className="login-container">
+                    <div>
+                        Please log in to submit a review.
+                    </div>
+                    <div className="login-button">
+                        <LoginFormModal />
+                    </div>
                 </div>
             )
         }

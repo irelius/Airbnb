@@ -68,10 +68,11 @@
 
 .session-section {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
     position: fixed;
-    top: 13px;
+    top: 23px;
     right: 8vw;
 }
 

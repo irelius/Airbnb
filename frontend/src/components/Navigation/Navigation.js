@@ -1,14 +1,29 @@
 // frontend/src/components/Navigation/index.js
-import React from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
+import { loginThunk, restoreUserThunk } from '../../store/session';
 
 function Navigation({ isLoaded }) {
-    const url = window.location.pathname
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(restoreUserThunk());
+    }, [dispatch]);
+
+
     const sessionUser = useSelector(state => state.session.user);
+
+    const signInDemo = () => {
+        console.log("func entered")
+        const demoUser = {
+            credential: "Demo-User",
+            password: "demopassword"
+        }
+        dispatch(loginThunk(demoUser));
+    }
 
     let sessionLinks;
     if (sessionUser) {
@@ -18,7 +33,6 @@ function Navigation({ isLoaded }) {
                     <NavLink exact to="/become-a-host/property-form">Become a host</NavLink>
                 </div>
                 <div className="profile-button">
-
                     <ProfileButton user={sessionUser} />
                 </div>
             </div>
@@ -26,6 +40,7 @@ function Navigation({ isLoaded }) {
     } else {
         sessionLinks = (
             <div className="session-section">
+                <button onClick={signInDemo}>Demo User</button>
                 <LoginFormModal />
                 <button>
                     <NavLink to="/signup">Sign Up</NavLink>
@@ -65,7 +80,6 @@ function Navigation({ isLoaded }) {
                     {isLoaded && sessionLinks}
                 </div>
             </div>
-            {/* {categoriesBar()} */}
         </div>
 
     );

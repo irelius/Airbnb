@@ -32,6 +32,9 @@ export const signupThunk = (user) => async (dispatch) => {
     const { firstName, lastName, userName, email, password } = user
     const response = await csrfFetch("/api/users/signup", {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
             firstName,
             lastName,
@@ -52,6 +55,9 @@ export const loginThunk = (user) => async (dispatch) => {
     const { credential, password } = user;
     const response = await csrfFetch('/api/users/login', {
         method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
             credential,
             password,
@@ -60,7 +66,6 @@ export const loginThunk = (user) => async (dispatch) => {
     if (response.ok) {
         const user = await response.json();
         dispatch(setUser(user));
-        return response;
     }
 };
 

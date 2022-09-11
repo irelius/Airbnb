@@ -17,7 +17,7 @@ export const loadSpots = (allSpots) => {
 }
 
 export const loadSpotsThunk = () => async dispatch => {
-    const response = await fetch('/api/spots/')
+    const response = await csrfFetch('/api/spots/')
     if (response.ok) {
         const allSpots = await response.json();
         dispatch(loadSpots(allSpots))

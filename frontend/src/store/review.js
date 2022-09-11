@@ -32,21 +32,6 @@ export const addReview = (review) => {
     }
 }
 
-// export const addReviewThunk = (review) => async dispatch => {
-//     const response = await csrfFetch(`/api/reviews/${review.spotId}`, {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(review)
-//     })
-
-//     if(response.ok) {
-//         const review = await response.json();
-//         dispatch(addReview(review))
-//     }
-// }
-
 export const addReviewThunk = (review) => async dispatch => {
     const response = await csrfFetch(`/api/reviews/${review.spotId.spotId}`, {
         method: "POST",

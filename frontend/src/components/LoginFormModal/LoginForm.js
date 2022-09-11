@@ -12,15 +12,15 @@ function LoginForm() {
 
 
     const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors([]);
-    return dispatch(loginThunk({ credential, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
-  };
+        e.preventDefault();
+        setErrors([]);
+        return dispatch(loginThunk({ credential, password })).catch(
+            async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            }
+        );
+    };
 
 
     return (

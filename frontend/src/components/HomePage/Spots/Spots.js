@@ -18,7 +18,7 @@ function Spots() {
         if (el.previewImg) {
             return (
                 <img src={`${el.previewImg}`} alt={`${el.name}`} />
-                )
+            )
         } else {
             return (
                 <div>
@@ -42,7 +42,7 @@ function Spots() {
                                     {`${el.name}`}, {`${el.state}`}
                                 </div>
                                 <div className="spot-price">
-                                    ${`${el.price}`} night
+                                    ${(`${el.price}`)} night
                                 </div>
                                 <div>
                                 </div>

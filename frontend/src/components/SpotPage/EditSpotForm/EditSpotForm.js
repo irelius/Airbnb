@@ -1,11 +1,12 @@
 import "./EditSpotForm.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { editSpotThunk } from "../../../store/spot";
 
 function EditSpotForm() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const spotId = useParams().spotId;
     const currentSpot = useSelector(state => state.spot[spotId])
 
@@ -35,7 +36,7 @@ function EditSpotForm() {
         }
 
         dispatch(editSpotThunk(spotId, edits))
-
+        history.push("/manage-listings")
     }
 
     return (

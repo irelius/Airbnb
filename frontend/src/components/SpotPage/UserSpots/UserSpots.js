@@ -12,6 +12,7 @@ function UserSpots() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(restoreUserThunk());
+        dispatch(loadSpotsThunk());
     }, [dispatch]);
 
 
@@ -26,7 +27,6 @@ function UserSpots() {
 
     const deleteSpot = (spot) => {
         dispatch(deleteSpotThunk(spot))
-
         dispatch(loadSpotsThunk());
     }
 
@@ -45,24 +45,29 @@ function UserSpots() {
                     {
                         userSpots.map(el => {
                             return (
-                                <>
-                                    <div className="listing">
-                                        <div>
-                                            {el.previewImg}
+                                <div className="listing">
+                                    <div className="listing-details">
+                                        <div className="listing-image">
+                                            <img src={`${el.previewImg}`} alt={`${el.name}`} />
                                         </div>
-                                        <div>
+                                        <div className="listing-name">
                                             {el.name}
+                                        </div>
+                                        <div className="listing-address">
+                                            {el.city}, {el.state}, {el.country}
                                         </div>
                                     </div>
                                     <div className="edit">
-                                        <button>
+                                        <button className="edit-button">
                                             <NavLink exact to={`/edit-spot/${el.id}`}>Edit Listing</NavLink>
                                         </button>
                                     </div>
                                     <div className="delete">
-                                        <button onClick={() => { deleteSpot(el) }}>Delete Listing</button>
+                                        <button onClick={() => { deleteSpot(el) }} className="delete-button">
+                                            Delete Listing
+                                        </button>
                                     </div>
-                                </>
+                                </div>
                             )
                         })
                     }
@@ -75,9 +80,11 @@ function UserSpots() {
 
     return (
         <div className="user-spots-main">
-            <h1 className="h1">
-                Your Listings
-            </h1>
+            <div>
+                <h1 className="h1">
+                    Your Listings
+                </h1>
+            </div>
             <div className="listings">
                 {showHandleHosting()}
             </div>
