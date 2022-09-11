@@ -37,11 +37,17 @@ function SignUpFormPage() {
             return dispatch(signupThunk(newUser))
                 .catch(async (res) => {
                     const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
+                    if (data && data.errors) {
+                        setErrors(data.errors);
+                    }
+                    if (data.statusCode === 403) {
+                        setErrors([data.message])
+                    };
                 });
+        } else {
+            return setErrors(['Confirm Password field must be the same as the Password field']);
         }
 
-        return setErrors(['Confirm Password field must be the same as the Password field']);
     }
 
     return (
@@ -92,7 +98,6 @@ function SignUpFormPage() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-
                 <button type="submit">
                     Sign Up
                 </button>

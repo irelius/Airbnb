@@ -29,25 +29,18 @@ export const newUser = (user) => {
 }
 
 export const signupThunk = (user) => async (dispatch) => {
-    const { firstName, lastName, userName, email, password } = user
+
     const response = await csrfFetch("/api/users/signup", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-            firstName,
-            lastName,
-            userName,
-            email,
-            password
-        })
+        body: JSON.stringify(user)
     })
 
     if (response.ok) {
         const user = await response.json();
         dispatch(newUser(user));
-        return response
     }
 }
 

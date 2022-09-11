@@ -1,12 +1,13 @@
 import "./SpotDetailPage.css"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useHistory } from "react-router-dom";
 import { deleteReviewThunk, loadReviewsThunk } from "../../../store/review";
 import LoginFormModal from "../../LoginFormModal";
 import { loadSpotsThunk } from "../../../store/spot";
 
 function SpotDetailPage() {
+    const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadReviewsThunk(spotId.spotId))
@@ -181,6 +182,7 @@ function SpotDetailPage() {
     const handleDelete = () => {
         dispatch(deleteReviewThunk(userReview.id))
         dispatch(loadReviewsThunk(spotId.spotId))
+        history.go(0);
     }
 
     return (

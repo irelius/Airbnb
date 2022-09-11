@@ -20,9 +20,9 @@ function Spots() {
                 <img src={`${el.previewImg}`} alt={`${el.name}`} />
             )
         } else {
-            return (
+            return(
                 <div>
-                    booba
+                    Loading
                 </div>
             )
         }

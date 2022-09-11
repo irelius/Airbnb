@@ -10,6 +10,9 @@ function LoginForm() {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
+    const allUsers = {
+
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,7 +20,12 @@ function LoginForm() {
         return dispatch(loginThunk({ credential, password })).catch(
             async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors) {
+                    setErrors(data.errors);
+                }
+                if (data.statusCode === 401) {
+                    setErrors([data.message])
+                };
             }
         );
     };
@@ -26,9 +34,11 @@ function LoginForm() {
     return (
         <div>
             <form onSubmit={handleSubmit} className="login-form">
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
+                <div>
+                    <ul>
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
+                </div>
                 <label>
                     Username or Email
                     <input

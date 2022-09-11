@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { restoreUserThunk } from "../../../store/session";
 import { loadSpotsThunk } from "../../../store/spot";
 
@@ -9,14 +9,17 @@ import { deleteSpotThunk } from "../../../store/spot";
 import "./UserSpots.css"
 
 function UserSpots() {
+    const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(restoreUserThunk());
         dispatch(loadSpotsThunk());
     }, [dispatch]);
 
-
     const user = useSelector(state => state.session.user)
+    if(user === undefined) {
+        window.location.href = "/"
+    }
     const allSpots = useSelector(state => Object.values(state.spot));
     const userSpots = [];
     allSpots.forEach(el => {
