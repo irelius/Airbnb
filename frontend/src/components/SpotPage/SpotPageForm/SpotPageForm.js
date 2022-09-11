@@ -1,9 +1,8 @@
 import "./SpotPageForm.css"
 import { NavLink, useHistory } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addSpotThunk } from "../../../store/spot";
-import Maps from "../../Maps/Maps";
 
 
 function SpotPageForm() {
@@ -26,7 +25,7 @@ function SpotPageForm() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,12 +43,6 @@ function SpotPageForm() {
         }
         dispatch(addSpotThunk(newSpot))
         history.push("/")
-    }
-
-    const uploadImage = (e) => {
-        const file = e.target.files[0];
-        if(file) setImage(file);
-        // setImage(URL.createObjectURL(file))
     }
 
     return (
@@ -136,11 +129,11 @@ function SpotPageForm() {
                             onChange={(e) => setPrice(e.target.value)}
                         />
                         <input
-                            type="file" accept="image/*"
-                            placeholder="Upload Photos"
+                            type="text"
+                            placeholder="Spot Image URL"
                             required
-                            // value={image}
-                            onChange={uploadImage}
+                            value={image}
+                            onChange={(e) => setImage(e.target.value)}
                         />
                         <div className="submit-button-div">
                             <button type="submit" className="submit-button">

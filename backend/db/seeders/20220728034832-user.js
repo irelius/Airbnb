@@ -25,11 +25,11 @@ const user = [
     hashedPassword: bcrypt.hashSync("youdon'tknowwhoIam")
   },
   {
-    firstName: "Test",
-    lastName: "Tester",
-    userName: "TestTester",
-    email: "testemail@gmail.com",
-    hashedPassword: bcrypt.hashSync("testpassword")
+    firstName: "Demo",
+    lastName: "User",
+    userName: "Demo-User",
+    email: "demo-user@gmail.com",
+    hashedPassword: bcrypt.hashSync("demopassword")
   }
 ]
 

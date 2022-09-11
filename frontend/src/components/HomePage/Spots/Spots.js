@@ -4,13 +4,12 @@ import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { loadSpotsThunk } from "../../../store/spot";
 
+
 function Spots() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadSpotsThunk())
     }, [dispatch])
-
-
 
     const allSpots = useSelector(state => Object.values(state.spot))
     console.log(allSpots, "allSpots")
@@ -19,7 +18,7 @@ function Spots() {
         if (el.previewImg) {
             return (
                 <img src={`${el.previewImg}`} alt={`${el.name}`} />
-            )
+                )
         } else {
             return (
                 <div>
@@ -45,11 +44,9 @@ function Spots() {
                                 <div className="spot-price">
                                     ${`${el.price}`} night
                                 </div>
+                                <div>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            {el.numReviews}
-                            {el.avgStarRating}
                         </div>
                     </NavLink>
 

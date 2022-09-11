@@ -9,6 +9,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* top section */
 .spot-section {
     display: flex;
     flex-direction: column;
@@ -30,46 +31,52 @@
     margin-bottom: 20px;
 }
 
-.spot-image {
+/* causes issue on front page of spots */
+.spot-header-image > * {
     width: 1000px;
-    height: 800px;
+    height: 500px;
     object-fit: cover;
+
+    border-radius: 10px;
 }
 
+/* ________________________________________________________________________ */
 
+/* review section */
 .review-section {
     width: 1000px;
 }
 
-.review-header {
-    display: flex;
-    justify-content: start;
-}
 
 .user-review {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50vw;
+    margin: 10px;
+
+}
+
+.review-date {
+    color: gray;
+    font-size: small;
+    margin-top: 3px;
+}
+
+.review-review {
+    margin: 5px;
 }
 
 .delete-user-review {
     display: flex;
-    justify-content: center;
+    margin: 10px;
+    margin-left: 30px;
+}
+
+.other-reviews-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
 }
 
 .other-reviews {
-    display: flex;
-    justify-content: space-between;
-}
-
-.review-date {
-    font-size: small;
-    color: gray;
-    margin-top: 5px;
-}
-
-.review-review {
-    margin: 20px;
+    margin-bottom: 50px;
 }

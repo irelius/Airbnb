@@ -32,6 +32,21 @@ export const addReview = (review) => {
     }
 }
 
+// export const addReviewThunk = (review) => async dispatch => {
+//     const response = await csrfFetch(`/api/reviews/${review.spotId}`, {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(review)
+//     })
+
+//     if(response.ok) {
+//         const review = await response.json();
+//         dispatch(addReview(review))
+//     }
+// }
+
 export const addReviewThunk = (review) => async dispatch => {
     const response = await csrfFetch(`/api/reviews/${review.spotId.spotId}`, {
         method: "POST",
@@ -105,7 +120,7 @@ const reviewReducer = (state = initialReviews, action) => {
             newState[action.payload.id] = action.payload;
             return newState;
         case EDIT_REVIEW:
-            newState[action.payload.id] = action.payload;
+            newState[action.payload.spotId] = action.payload;
             return newState;
         default:
             return newState;

@@ -1,8 +1,3 @@
-var awsFunc = require("../../awsS3")
-const singlePublicFileUpload = awsFunc.singlePublicFileUpload
-const singleMulterUpload = awsFunc.singleMulterUpload
-
-
 const express = require('express')
 const router = express.Router();
 const { Op } = require("sequelize")
@@ -246,11 +241,8 @@ router.get("/:spotId", async (req, res, next) => {
 
 // Create a Spot
 router.post("/",
-    // singleMulterUpload("image"),
     [validateSpot, restoreUser, authenticationRequired], async (req, res, next) => {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
-        // const previewImg = await singlePublicFileUpload(req.file);
-        // create spot
+        const { address, city, state, country, lat, lng, name, description, price, image } = req.body;
         const newSpot = await Spot.create({
             ownerId: req.user.id,
             address: address,
@@ -262,7 +254,7 @@ router.post("/",
             name: name,
             description: description,
             price: price,
-            // previewImg: previewImg
+            previewImg: image
         })
         res.status(201).json(newSpot);
     })
