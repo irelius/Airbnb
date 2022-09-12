@@ -145,6 +145,7 @@ In the future I would like to add:
   * Search -->
 
 Heroku Link: http://kb-airbnb.herokuapp.com/
+
 GitHub Link: https://github.com/irelius/AirBnB
 
 Setup Directions:
@@ -159,8 +160,9 @@ Setup Directions:
 Airbnb Clone:
 This repo is an Airbnb clone implementing two CRUD features of Airbnb, Spots and Reviews. It also implements features to allow users to sign up and account or log into their account.
 
-![AirBnB Image](http://github.com/irelius/AirBnB/blob/main/assets/airbnblandingpage.png)
+![Schema Image](http://github.com/irelius/AirBnB/blob/main/assets/airbnblandingpage.png)
 
+![Schema Image](https://github.com/irelius/AirBnB/blob/main/assets/schema/airbnbSchema.png)
 
 
 Future Features:
