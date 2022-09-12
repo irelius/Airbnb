@@ -30,7 +30,7 @@ function UserSpots() {
 
     const deleteSpot = (spot) => {
         dispatch(deleteSpotThunk(spot))
-        dispatch(loadSpotsThunk());
+        history.go(0);
     }
 
 
