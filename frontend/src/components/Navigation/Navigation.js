@@ -40,10 +40,10 @@ function Navigation({ isLoaded }) {
     } else {
         sessionLinks = (
             <div className="session-section">
-                <button onClick={signInDemo}>Demo User</button>
+                <button onClick={signInDemo} className="demo-user">Demo User</button>
                 <LoginFormModal />
-                <button>
-                    <NavLink to="/signup">Sign Up</NavLink>
+                <button className="sign-up-container">
+                    <NavLink to="/signup" className="sign-up">Sign Up</NavLink>
                 </button>
             </div>
         );

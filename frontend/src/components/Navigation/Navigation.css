@@ -104,6 +104,42 @@
     margin: 1px;
 }
 
+.demo-user {
+    border: none;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+
+    background-color: white;
+}
+
+.demo-user:hover {
+    background-color: lightgray;
+}
+
+.sign-up-container {
+    border: none;
+    background-color: white;
+}
+
+.sign-up {
+    text-decoration: none;
+    color: black;
+
+    border: none;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+
+    background-color: white;
+}
+
+.sign-up:hover {
+    background-color: lightgray;
+}
+
 .airbnb-icon {
     display: flex;
     border:none;

@@ -10,10 +10,6 @@ function LoginForm() {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    const allUsers = {
-
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
