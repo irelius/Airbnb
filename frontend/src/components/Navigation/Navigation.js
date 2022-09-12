@@ -33,7 +33,7 @@ function Navigation({ isLoaded }) {
                     <NavLink exact to="/become-a-host/property-form">Become a host</NavLink>
                 </div>
                 <div className="profile-button">
-                    <ProfileButton user={sessionUser} />
+                    <ProfileButton user={sessionUser} className="profile-button-test" />
                 </div>
             </div>
         );
@@ -71,7 +71,10 @@ function Navigation({ isLoaded }) {
                 <div className="header-left">
                     <div>
                         <button className="airbnb-icon">
-                            <i className="fa-brands fa-airbnb fa-3x"></i>
+                            <NavLink exact to="/" className="icon">
+
+                                <i className="fa-brands fa-airbnb fa-3x"></i>
+                            </NavLink>
                             <NavLink exact to="/" className="icon-text">airbnb</NavLink>
                         </button>
                     </div>

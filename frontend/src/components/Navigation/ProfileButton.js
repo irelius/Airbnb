@@ -35,16 +35,16 @@ function ProfileButton({ user }) {
       </button>
       {showMenu && (
         <div className="profile-dropdown">
-          <div>
+          <div className="profile-dropdown-username">
             {user.userName}
           </div>
-          <div>
+          <div className="profile-dropdown-email">
             {user.email}
           </div>
           <button className="manage-listings">
             <NavLink exact to="/manage-listings">Manage Your Listings</NavLink>
           </button>
-          <button onClick={logout}>Log Out</button>
+          <button className="logout-button" onClick={logout}>Log Out</button>
         </div>
 
       )}

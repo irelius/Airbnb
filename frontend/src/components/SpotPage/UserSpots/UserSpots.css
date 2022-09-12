@@ -43,12 +43,15 @@
 
 .edit-button {
     margin: 3px;
-
+    padding: 5px;
+    border: 1px black solid;
+    border-radius: 5px;
 }
 
 .edit-button>* {
     color: black;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .delete {
@@ -57,4 +60,11 @@
 
 .delete-button {
     margin: 3px;
+    padding: 5px;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+.delete-button {
+    font-weight: bold;
 }

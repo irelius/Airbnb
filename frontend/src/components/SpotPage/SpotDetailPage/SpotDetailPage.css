@@ -47,6 +47,10 @@
     width: 1000px;
 }
 
+.submit-review-button> * {
+    padding: 5px;
+    margin: 0px;
+}
 
 .user-review {
     display: flex;

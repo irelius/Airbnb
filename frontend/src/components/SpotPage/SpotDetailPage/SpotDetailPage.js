@@ -96,7 +96,7 @@ function SpotDetailPage() {
         }
         if (currentUser && !userReviewStatus) {
             return (
-                <button>
+                <button className="submit-review-button">
                     <NavLink exact to={`${location}`}>Submit a Review</NavLink>
                 </button>
             )
@@ -176,6 +176,7 @@ function SpotDetailPage() {
             return (
                 <button onClick={handleDelete}>Delete your Review</button>
             )
+        } else {
         }
     }
 
