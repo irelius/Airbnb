@@ -2,6 +2,11 @@
 
 const { User, Spot, Booking } = require("../models")
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 const bookings = [
   {
     spotId: 1,
@@ -35,27 +40,42 @@ const bookings = [
   }
 ]
 
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    try {
-      for(let booking of bookings) {
-        const { spotId, userId, startDate, endDate} = booking;
-        const foundSpotId = await Spot.findByPk(booking.spotId);
-        const foundUserId = await User.findByPk(booking.userId);
-        await Booking.create({
-          userId: foundUserId.id,
-          spotId: foundSpotId.id,
-          startDate,
-          endDate
-        })
-      }
-    }
-    catch(e) {
-      console.log(e);
-    }
-  },
+// module.exports = {
+//   async up(queryInterface, Sequelize) {
+//     try {
+//       for(let booking of bookings) {
+//         const { spotId, userId, startDate, endDate} = booking;
+//         const foundSpotId = await Spot.findByPk(booking.spotId);
+//         const foundUserId = await User.findByPk(booking.userId);
+//         await Booking.create({
+//           userId: foundUserId.id,
+//           spotId: foundSpotId.id,
+//           startDate,
+//           endDate
+//         }, options)
+//       }
+//       // await Booking.bulkCreate(bookings)
+//     }
+//     catch(e) {
+//       console.log(e);
+//     }
+//   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("Bookings", null, {});
+//   async down(queryInterface, Sequelize) {
+//     // options.tableName = "Bookings";
+//     // await queryInterface.bulkDelete(options, "Bookings", null, {});
+//     await queryInterface.bulkDelete("Bookings", null, {});
+//   }
+// };
+
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    options.tableName = "Bookings"
+    return queryInterface.bulkInsert(options, bookings)
+  },
+  down: (queryInterface, Sequelize) => {
+    options.tableName = "Bookings";
+    return queryInterface.bulkDelete(options)
   }
-};
+}

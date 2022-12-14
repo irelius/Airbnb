@@ -2,6 +2,11 @@
 
 const { User, Spot, Review } = require("../models")
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 const reviews = [
   {
     userId: 1,
@@ -41,35 +46,50 @@ const reviews = [
   }
 ]
 
-module.exports = {
-  async up (queryInterface, Sequelize) {
-     try {
-      for(let reviewEl of reviews) {
-        const {review, stars, userId, spotId} = reviewEl
-        const foundSpotId = await Spot.findOne({
-          where: {
-            id: reviewEl.spotId
-          }
-        });
-        const foundUserId = await User.findOne({
-          where: {
-            id: reviewEl.userId
-          }
-        });
-        await Review.create({
-          review,
-          stars,
-          userId: foundUserId.id,
-          spotId: foundSpotId.id,
-        })
-      }
-    }
-    catch (e) {
-      console.log(e)
-    }
-  },
+// module.exports = {
+//   async up (queryInterface, Sequelize) {
+//      try {
+//       // for(let reviewEl of reviews) {
+//       //   const {review, stars, userId, spotId} = reviewEl
+//       //   const foundSpotId = await Spot.findOne({
+//       //     where: {
+//       //       id: reviewEl.spotId
+//       //     }
+//       //   });
+//       //   const foundUserId = await User.findOne({
+//       //     where: {
+//       //       id: reviewEl.userId
+//       //     }
+//       //   });
+//       //   await Review.create({
+//       //     review,
+//       //     stars,
+//       //     userId: foundUserId.id,
+//       //     spotId: foundSpotId.id,
+//       //   }, options)
+//       // }
+//       // options.tableName="Reviews"
+//       await Review.bulkCreate(reviews)
+//     }
+//     catch (e) {
+//       console.log(e)
+//     }
+//   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("Reviews", null, {});
+//   async down (queryInterface, Sequelize) {
+//     options.tableName = "Reviews"
+//     await queryInterface.bulkDelete(options, "Reviews", null, {});
+//     // await queryInterface.bulkDelete("Reviews", null, {});
+//   }
+// };
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    options.tableName = "Reviews"
+    return queryInterface.bulkInsert(options, reviews)
+  },
+  down: (queryInterface, Sequelize) => {
+    options.tableName = "Reviews";
+    return queryInterface.bulkDelete(options)
   }
-};
+}

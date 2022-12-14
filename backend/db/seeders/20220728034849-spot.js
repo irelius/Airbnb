@@ -1,6 +1,12 @@
 'use strict';
 
-const { User, Spot } = require("../models")
+const { User, Spot } = require("../models");
+const spot = require("../models/spot");
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 
 const spots = [
   {
@@ -156,39 +162,55 @@ const spots = [
 ]
 
 
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    try {
-      for (let spot of spots) {
-        const { address, city, state, country, lat, lng, name, description, price, previewImg, numReviews, avgStarRating, ownerId } = spot
-        const foundOwner = await User.findOne({
-          where: {
-            id: spot.ownerId
-          }
-        });
-        await Spot.create({
-          ownerId: foundOwner.id,
-          address,
-          city,
-          state,
-          country,
-          lat,
-          lng,
-          name,
-          description,
-          price,
-          previewImg,
-          numReviews,
-          avgStarRating
-        })
-      }
-    }
-    catch (e) {
-      console.log(e)
-    }
-  },
+// module.exports = {
+//   async up(queryInterface, Sequelize) {
+//     try {
+//       for (let spot of spots) {
+//         const { address, city, state, country, lat, lng, name, description, price, previewImg, numReviews, avgStarRating, ownerId } = spot
+//         const foundOwner = await User.findOne({
+//           where: {
+//             id: spot.ownerId
+//           }
+//         });
+//         // console.log("booba", foundOwner)
+//         spot.ownerId = foundOwner.id
+//         // await Spot.create({
+//         //   ownerId: foundOwner.id,
+//         //   address,
+//         //   city,
+//         //   state,
+//         //   country,
+//         //   lat,
+//         //   lng,
+//         //   name,
+//         //   description,
+//         //   price,
+//         //   previewImg,
+//         //   numReviews,
+//         //   avgStarRating
+//         // }, options)
+//       }
+//       await Spot.bulkCreate(spots)
+//     }
+//     catch (e) {
+//       console.log(e)
+//     }
+//   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("Spots", null, {});
+//   async down(queryInterface, Sequelize) {
+//     options.tableName = "Spots";
+//     await queryInterface.bulkDelete(options);
+//     // await queryInterface.bulkDelete("Spots", null, {});
+//   }
+// };
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    options.tableName = "Spots"
+    return queryInterface.bulkInsert(options, spots)
+  },
+  down: (queryInterface, Sequelize) => {
+    options.tableName = "Spots";
+    return queryInterface.bulkDelete(options)
   }
-};
+}

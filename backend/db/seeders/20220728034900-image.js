@@ -2,6 +2,11 @@
 
 const { Review, Image, Spot } = require("../models")
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 const images = [
   {
     reviewId: 1,
@@ -29,31 +34,49 @@ const images = [
   }
 ]
 
+// module.exports = {
+//   async up(queryInterface, Sequelize) {
+//     try {
+//       for (let image of images) {
+//         const { url, reviewId, spotId } = image
+//         let foundId;
+
+//         if (image.reviewId) {
+//           foundId = await Review.findByPk(image.reviewId)
+//           await Image.create({
+//             reviewId: foundId.id,
+//             url
+//           }, options)
+
+//         }
+//         if (image.spotId) {
+//           foundId = await Spot.findByPk(image.spotId)
+//           await Image.create({
+//             spotId: foundId.id,
+//             url
+//           }, options)
+//         }
+//       }
+//       // await Image.bulkCreate(images)
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   },
+
+//   async down(queryInterface, Sequelize) {
+//     // options.tableName = "Images"
+//     // await queryInterface.bulkDelete(options, "Images", null, {});
+//     await queryInterface.bulkDelete("Images", null, {});
+//   }
+// };
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    for (let image of images) {
-      const { url, reviewId, spotId } = image
-      let foundId;
-
-      if (image.reviewId) {
-        foundId = await Review.findByPk(image.reviewId)
-        await Image.create({
-          reviewId: foundId.id,
-          url
-        })
-
-      }
-      if (image.spotId) {
-        foundId = await Spot.findByPk(image.spotId)
-        await Image.create({
-          spotId: foundId.id,
-          url
-        })
-      }
-    }
+  up: (queryInterface, Sequelize) => {
+    options.tableName = "Images"
+    return queryInterface.bulkInsert(options, images)
   },
-
-  async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("Images", null, {});
+  down: (queryInterface, Sequelize) => {
+    options.tableName = "Images";
+    return queryInterface.bulkDelete(options)
   }
-};
+}

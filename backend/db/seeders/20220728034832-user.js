@@ -1,6 +1,11 @@
 'use strict';
-const { User } = require("../models")
+const { User, Sequelize } = require("../models")
 const bcrypt = require("bcryptjs");
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 
 const user = [
   {
@@ -33,16 +38,29 @@ const user = [
   }
 ]
 
+// module.exports = {
+//   async up(queryInterface, Sequelize) {
+//     try {
+//       await User.bulkCreate(user);
+//     }
+//     catch (e) {
+//       console.log(e)
+//     }
+//   },
+//   async down(queryInterface, Sequelize) {
+//     // options.tableName = "Users";
+//     // await queryInterface.bulkDelete(options, 'Users', null, {});
+//     await queryInterface.bulkDelete('Users', null, {});
+//   }
+// };
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    try {
-      await User.bulkCreate(user);
-    }
-    catch (e) {
-      console.log(e)
-    }
+  up: (queryInterface, Sequelize) => {
+    options.tableName = "Users"
+    return queryInterface.bulkInsert(options, user)
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Users', null, {});
+  down: (queryInterface, Sequelize) => {
+    options.tableName = "Users";
+    return queryInterface.bulkDelete(options)
   }
-};
+}
