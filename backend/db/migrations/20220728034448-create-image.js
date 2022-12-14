@@ -50,3 +50,50 @@ module.exports = {
     await queryInterface.dropTable('Images', options);
   }
 };
+
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('Images', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      reviewId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Reviews'
+        },
+        onDelete: 'CASCADE'
+      },
+      spotId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Spots'
+        },
+        onDelete: 'CASCADE'
+      },
+      url: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      }
+    }, options);    // add options object here
+  },
+  down: async (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('Images', options); // and here
+  }
+};
