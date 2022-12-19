@@ -4,8 +4,11 @@ Render Link: https://irelius-airbnb-clone.onrender.com
 
 GitHub Link: https://github.com/irelius/AirBnB
 
-## Technologies Used:
-This AirBnB clone utilizes React and Redux to manage reducers, actions, and the store to reduce the amount of times the webpage must be refreshed, reducing the amount of time the website may take to load information.
+## Technologies/Languages Used:
+- JavaScript
+- Express
+- Sequelize
+- React / Redux
 
 
 ## Setup Directions:
