@@ -13,8 +13,6 @@ import * as sessionActions from "./store/session";
 
 const store = configureStore();
 
-// test
-
 if (process.env.NODE_ENV !== "production") {
   restoreCSRF();
 
