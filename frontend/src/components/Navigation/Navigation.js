@@ -72,8 +72,8 @@ function Navigation({ isLoaded }) {
                     <div>
                         <button className="lairbnb-icon">
                             <NavLink exact to="/" className="icon">
-
-                                <i className="fa-brands fa-airbnb fa-3x"></i>
+                                <img src="https://raw.githubusercontent.com/irelius/Airbnb/main/frontend/public/assets/favicon-32x32.png"
+                                />
                             </NavLink>
                             <NavLink exact to="/" className="icon-text">Lairbnb</NavLink>
                         </button>
