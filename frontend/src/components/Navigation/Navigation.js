@@ -70,12 +70,12 @@ function Navigation({ isLoaded }) {
             <div className="header">
                 <div className="header-left">
                     <div>
-                        <button className="airbnb-icon">
+                        <button className="lairbnb-icon">
                             <NavLink exact to="/" className="icon">
 
                                 <i className="fa-brands fa-airbnb fa-3x"></i>
                             </NavLink>
-                            <NavLink exact to="/" className="icon-text">airbnb</NavLink>
+                            <NavLink exact to="/" className="icon-text">Lairbnb</NavLink>
                         </button>
                     </div>
                 </div>

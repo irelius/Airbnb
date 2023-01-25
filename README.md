@@ -1,4 +1,4 @@
-# AirBnB Clone
+# Lairbnb Clone
 
 Render Link: https://irelius-airbnb-clone.onrender.com
 
@@ -22,13 +22,13 @@ GitHub Link: https://github.com/irelius/AirBnB
 ___
 
 ## Description:
-This repo is an Airbnb clone implementing two CRUD features of Airbnb, Spots and Reviews. It also implements features to allow users to sign up and account or log into their account.
+This repo is an Lairbnb clone implementing two CRUD features of Lairbnb, Spots and Reviews. It also implements features to allow users to sign up and account or log into their account.
 
 
 ___
 
 ## Landing Page:
-The landing page is the AirBnB front page that lists existing spots from the existing seeder file. After a user logs in and creates a spot, the newly created spot will be generated on the landing page at the end.
+The landing page is the Lairbnb front page that lists existing spots from the existing seeder file. After a user logs in and creates a spot, the newly created spot will be generated on the landing page at the end.
 
 ![Landing Page](https://github.com/irelius/AirBnB/blob/main/assets/schema/airbnblandingpage.png)
 

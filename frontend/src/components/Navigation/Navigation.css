@@ -140,7 +140,7 @@
     background-color: lightgray;
 }
 
-.airbnb-icon {
+.lairbnb-icon {
     display: flex;
     border:none;
     justify-content: center;
@@ -156,7 +156,7 @@
     color: #FF5A5F;
 }
 
-.fa-airbnb {
+.fa-lairbnb {
     padding-right: 5px;
     color: #FF5A5F
 }

@@ -6,7 +6,7 @@ function Footer() {
         <div className="footer">
             <div className="footer-left">
                 <div className="footer-left-list">
-                    <p>2022 Airbnb Clone</p>
+                    <p>2022 Lairbnb</p>
                 </div>
             </div>
             <div className="footer-right">
