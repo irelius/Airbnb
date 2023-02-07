@@ -1,20 +1,6 @@
 /* Spots Section CSS */
 
-img {
-    width: 100%;
-    height: 100%;
-}
-
-.navlink {
-    margin-top: 50px;
-    width: 300px;
-    height: 300px;
-    padding: 12px;
-    padding-bottom: 20px;
-
-}
-
-.all-spots {
+.all-spots-main-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -23,10 +9,25 @@ img {
     margin-right: 5vw;
 }
 
-.all-spots>* {
+.all-spots-main-container>* {
     text-decoration: none;
     color: black;
     font-weight: bolder;
+}
+
+.all-spots-container {
+    margin-top: 50px;
+    width: 300px;
+    height: 300px;
+    padding: 12px;
+    padding-bottom: 20px;
+
+}
+
+.all-spots-images {
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
 }
 
 .spot {
@@ -38,8 +39,9 @@ img {
 }
 
 .spot-image {
-    max-height: 300px;
-    height: stretch;
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
 }
 
 .spot-image>* {
