@@ -1,14 +1,16 @@
 // frontend/src/components/Navigation/index.js
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import LoginFormModal from '../LoginFormModal';
+import LoginFormModal from "../Modals/LoginModal"
 import './Navigation.css';
 import { loginThunk, restoreUserThunk } from '../../store/session';
 
+import ProfileDropdownMenu from '../ProfileDropdownMenu';
+
 function Navigation({ isLoaded }) {
     const dispatch = useDispatch();
+    const history = useHistory()
     useEffect(() => {
         dispatch(restoreUserThunk());
     }, [dispatch]);
@@ -17,7 +19,6 @@ function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
 
     const signInDemo = () => {
-        console.log("func entered")
         const demoUser = {
             credential: "Demo-User",
             password: "demopassword"
@@ -28,64 +29,49 @@ function Navigation({ isLoaded }) {
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            <div className="header-right">
-                <div className="host-button">
-                    <NavLink exact to="/become-a-host/property-form">Become a host</NavLink>
+            <div className="header-right-container">
+                <div id="header-host-button-container">
+                    <button id="header-host-button" onClick={() => history.push("/become-a-host/property-form")}>Become a host</button>
                 </div>
-                <div className="profile-button">
-                    <ProfileButton user={sessionUser} className="profile-button-test" />
+                <div className="header-profile-button-container">
+                    <ProfileDropdownMenu user={sessionUser} />
                 </div>
             </div>
         );
     } else {
         sessionLinks = (
-            <div className="session-section">
-                <button onClick={signInDemo} className="demo-user">Demo User</button>
-                <LoginFormModal />
-                <button className="sign-up-container">
-                    <NavLink to="/signup" className="sign-up">Sign Up</NavLink>
-                </button>
+            <div className="header-right-container">
+                <aside className="demo-user-sign-in-container">
+                    <button onClick={signInDemo} className="demo-user-sign-in-button">Demo User</button>
+                </aside>
+                <aside id="header-right-login-modal" className="modal">
+                    <LoginFormModal />
+                </aside>
+                <aside className="header-right-sign-up-container">
+                    <button className="header-right-sign-up-button" onClick={() => {
+                        history.push("/signup")
+                    }}>Sign Up</button>
+                </aside>
             </div>
         );
     }
 
-    // const categoriesBar = () => {
-    //     if (url !== "/") {
-    //     } else {
-    //         return (
-    //             <div className="categories-bar">
-    //                 <span className="categories">
-    //                     categories
-    //                 </span>
-    //                 <span className="filter-button">
-    //                     filters button
-    //                 </span>
-    //             </div>
-    //         )
-    //     }
-    // }
-
     return (
-        <div className="main">
-            <div className="header">
-                <div className="header-left">
-                    <div>
-                        <button className="lairbnb-icon">
-                            <NavLink exact to="/" className="icon">
-                                <img src="https://raw.githubusercontent.com/irelius/Airbnb/main/frontend/public/assets/favicon-32x32.png"
-                                />
-                            </NavLink>
-                            <NavLink exact to="/" className="icon-text">Lairbnb</NavLink>
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    {isLoaded && sessionLinks}
-                </div>
-            </div>
+        <div className="header-main-container">
+            <aside className="header-left-container">
+                <section className="header-lairbnb-icon-container">
+                    <img id="lairbnb-icon" src="https://raw.githubusercontent.com/irelius/Airbnb/main/frontend/public/assets/favicon-32x32.png"
+                        alt="lairbnb-icon"
+                    />
+                    <p className="lairbnb-header-text">
+                        Lairbnb
+                    </p>
+                </section>
+            </aside>
+            {isLoaded && sessionLinks}
         </div>
+    )
 
-    );
 }
 
 export default Navigation;

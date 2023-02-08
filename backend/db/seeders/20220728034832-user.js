@@ -33,7 +33,7 @@ const user = [
     firstName: "Demo",
     lastName: "User",
     userName: "Demo-User",
-    email: "demo-user@gmail.com",
+    email: "demo@aa.io",
     hashedPassword: bcrypt.hashSync("demopassword")
   }
 ]

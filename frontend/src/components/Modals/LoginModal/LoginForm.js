@@ -1,8 +1,8 @@
 // frontend/src/components/LoginFormModal/LoginForm.js
 import "./LoginForm.css"
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginThunk } from '../../store/session';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from "../../../store/session";
 
 function LoginForm() {
     const dispatch = useDispatch();

@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink, useHistory } from "react-router-dom";
 import { deleteReviewThunk, loadReviewsThunk } from "../../../store/review";
-import LoginFormModal from "../../LoginFormModal";
+// import LoginFormModal from "../../Modals/LoginFormModal";
+import LoginForm from "../../Modals/LoginModal/LoginForm";
 import { loadSpotsThunk } from "../../../store/spot";
 
 function SpotDetailPage() {
@@ -89,7 +90,7 @@ function SpotDetailPage() {
                         Please log in to submit a review.
                     </div>
                     <div className="login-button">
-                        <LoginFormModal />
+                        <LoginForm />
                     </div>
                 </div>
             )
