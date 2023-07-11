@@ -9,9 +9,9 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Spots', {
       id: {
+        primaryKey: true,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER
       },
       ownerId: {
@@ -19,7 +19,7 @@ module.exports = {
         references: {
           model: 'Users',
         },
-        allowNull: true,
+        allowNull: false,
         onDelete: 'CASCADE'
       },
       address: {

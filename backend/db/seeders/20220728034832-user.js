@@ -12,29 +12,29 @@ const user = [
     firstName: "John",
     lastName: "Doe",
     userName: "JohnDoe",
-    email: "lostidentity@gmail.com",
-    hashedPassword: bcrypt.hashSync("doyouknowwhoIam?")
+    email: "johndoe@aa.io",
+    hashedPassword: bcrypt.hashSync("password")
   },
   {
     firstName: "Alan",
     lastName: "Smithee",
     userName: "AlanSmithee",
-    email: "hiddenidentity@gmail.com",
-    hashedPassword: bcrypt.hashSync("whocouldIbe?")
+    email: "AlanSmithee@aa.io",
+    hashedPassword: bcrypt.hashSync("password")
   },
   {
     firstName: "Anon",
     lastName: "Ymous",
     userName: "AnonYmous",
-    email: "deletedidentitys@gmail.com",
-    hashedPassword: bcrypt.hashSync("youdon'tknowwhoIam")
+    email: "AnonYmous@aa.io",
+    hashedPassword: bcrypt.hashSync("password")
   },
   {
     firstName: "Demo",
     lastName: "User",
     userName: "Demo-User",
     email: "demo@aa.io",
-    hashedPassword: bcrypt.hashSync("demopassword")
+    hashedPassword: bcrypt.hashSync("password")
   }
 ]
 

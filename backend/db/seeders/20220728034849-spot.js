@@ -35,7 +35,7 @@ const spots = [
     name: "Second Place",
     description: "Second place to ever exist",
     price: 222.22,
-    previewImg: "https://s5s6c2i4.stackpathcdn.com/wp-content/uploads/2021/08/Pool_Sunset_Beach_Villa_Exterior_1.jpg",
+    previewImg: "https://media.istockphoto.com/id/147205632/photo/modern-home-with-swimming-pool.webp?b=1&s=170667a&w=0&k=20&c=hReI56qpeavaJWkqrORE7Jr-usim0olO2W_-GvZRIRY=",
     numReviews: 0,
     avgStarRating: 0
   },
