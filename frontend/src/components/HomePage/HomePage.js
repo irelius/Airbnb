@@ -2,6 +2,7 @@ import "./HomePage.css"
 import Spots from "./Spots/Spots"
 import Footer from "./Footer";
 
+
 function HomePage() {
     return (
         <>

@@ -9,6 +9,7 @@ import SpotPageForm from "./components/SpotPage/SpotPageForm";
 import SpotDetailPage from "./components/SpotPage/SpotDetailPage/SpotDetailPage";
 import EditSpotForm from "./components/SpotPage/EditSpotForm/EditSpotForm";
 import SubmitReview from "./components/ReviewFormPage/SubmitReview";
+import Main from "./views/main/Main";
 
 import * as sessionActions from "./store/session";
 import UserSpots from "./components/SpotPage/UserSpots";
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route exact path="/submit-review/:spotId">
             <SubmitReview />
+          </Route>
+          <Route exact path="/test">
+            <Main />
           </Route>
         </Switch>
       )}

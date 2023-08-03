@@ -11,12 +11,15 @@ import ProfileDropdownMenu from '../ProfileDropdownMenu';
 function Navigation({ isLoaded }) {
     const dispatch = useDispatch();
     const history = useHistory()
+
     useEffect(() => {
         dispatch(restoreUserThunk());
     }, [dispatch]);
 
 
     const sessionUser = useSelector(state => state.session.user);
+
+    console.log('booba', sessionUser)
 
     const signInDemo = () => {
         const demoUser = {
