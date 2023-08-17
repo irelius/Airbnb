@@ -4,15 +4,18 @@ import { Route, Switch } from "react-router-dom";
 
 import HomePage from "./components/HomePage/HomePage";
 import Navigation from "./components/Navigation";
+// import Navigation from "./reusableComponents/navigation/Navigation";
 import SignUpFormPage from "./components/SignUpFormPage";
 import SpotPageForm from "./components/SpotPage/SpotPageForm";
 import SpotDetailPage from "./components/SpotPage/SpotDetailPage/SpotDetailPage";
 import EditSpotForm from "./components/SpotPage/EditSpotForm/EditSpotForm";
 import SubmitReview from "./components/ReviewFormPage/SubmitReview";
-import Main from "./views/main/Main";
+import Main from "./views/Main/Main";
 
 import * as sessionActions from "./store/session";
 import UserSpots from "./components/SpotPage/UserSpots";
+// import Footer from "./reusableComponents/Footer";
+import Footer from "./reusableComponents/Footer"
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +57,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer />
     </>
 
   );

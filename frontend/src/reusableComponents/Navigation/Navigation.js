@@ -1,4 +1,4 @@
-// frontend/src/components/Navigation/index.js
+// frontend/src/reusableComponents/Navigation/index.js
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
