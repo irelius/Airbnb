@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
-import HomePage from "./components/HomePage/HomePage";
-import Navigation from "./components/Navigation";
-// import Navigation from "./reusableComponents/navigation/Navigation";
+import Header from "./reusableComponents/Header";
 import SignUpFormPage from "./components/SignUpFormPage";
 import SpotPageForm from "./components/SpotPage/SpotPageForm";
 import SpotDetailPage from "./components/SpotPage/SpotDetailPage/SpotDetailPage";
@@ -28,11 +26,11 @@ function App() {
 
   return isLoaded && (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Header isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <HomePage />
+            <Main />
           </Route>
           <Route exact path="/signup">
             <SignUpFormPage />
@@ -51,9 +49,6 @@ function App() {
           </Route>
           <Route exact path="/submit-review/:spotId">
             <SubmitReview />
-          </Route>
-          <Route exact path="/test">
-            <Main />
           </Route>
         </Switch>
       )}

@@ -1,14 +1,14 @@
-// frontend/src/components/Navigation/index.js
+// reusableComponents/Header/Header.js
+import './Header.css';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import LoginFormModal from "../Modals/LoginModal"
-import './Navigation.css';
 import { loginThunk, restoreUserThunk } from '../../store/session';
 
-import ProfileDropdownMenu from '../ProfileDropdownMenu';
+import LoginFormModal from '../../components/Modals/LoginModal/LoginForm';
+import ProfileDropdownMenu from '../../components/ProfileDropdownMenu/ProfileDropdownMenu';
 
-function Navigation({ isLoaded }) {
+function Header({ isLoaded }) {
     const dispatch = useDispatch();
     const history = useHistory()
 
@@ -75,4 +75,4 @@ function Navigation({ isLoaded }) {
 
 }
 
-export default Navigation;
+export default Header;

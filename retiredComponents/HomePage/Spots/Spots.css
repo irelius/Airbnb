@@ -3,7 +3,7 @@
 /* ------------------------------------------------------------------------------------- */
 /* All Spots Main Container */
 
-.all-spots-main-container {
+/* .all-spots-main-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -63,4 +63,4 @@
 
 .spot-price>* {
     font-family: Arial, Helvetica, sans-serif;
-}
+} */

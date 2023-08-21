@@ -1,0 +1,17 @@
+/* src/views/Main/Main.css */
+/* Main Page CSS */
+
+.all-spots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-bottom: 50px;
+}
+
+.all-spots>* {
+    text-decoration: none;
+    color: black;
+}

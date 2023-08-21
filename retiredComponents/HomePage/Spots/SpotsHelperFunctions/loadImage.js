@@ -1,7 +1,7 @@
 const loadImage = (el) => {
     if (el.previewImg) {
         return (
-            <img className="all-spots-images" src={`${el.previewImg}`} alt={`${el.name}`} />
+            <img className="spot-image" src={`${el.previewImg}`} alt={`${el.name}`} />
         )
     } else {
         return (
