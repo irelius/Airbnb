@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink, useHistory } from "react-router-dom";
 import { deleteReviewThunk, loadReviewsThunk } from "../../../store/review";
 // import LoginFormModal from "../../Modals/LoginFormModal";
-import LoginForm from "../../Modals/LoginModal/LoginForm";
+import LoginForm from "../../../reusableComponents/Modals/LoginModal/LoginForm";
+
 import { loadSpotsThunk } from "../../../store/spot";
 
 function SpotDetailPage() {
@@ -18,7 +19,6 @@ function SpotDetailPage() {
     const spotId = useParams();
     const spot = (useSelector(state => state.spot))[spotId.spotId]
     const spotReviews = useSelector(state => Object.values(state.review));
-    console.log(spotReviews, "test")
 
     const currentUser = useSelector(state => state.session.user);
     let userReview; // store user's review for a spot if it exists

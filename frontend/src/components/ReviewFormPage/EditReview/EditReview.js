@@ -15,7 +15,6 @@ function EditReview() {
 
     const reviewId = useParams();
     const userReview = useSelector(state => state.review);
-    console.log(userReview, "user review")
     const userReviewObject = userReview[reviewId.reviewId]
 
 

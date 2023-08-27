@@ -1,11 +1,11 @@
-import "./ProfileDropdownMenu.css"
+import "./ProfileDropDownMenu.css"
 
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import { logoutThunk } from "../../store/session";
+import { logoutThunk } from "../../../store/session"
 
-const ProfileDropdownMenu = ({ user }) => {
+const ProfileDropDownMenu = ({ user }) => {
     const dispatch = useDispatch();
     const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
@@ -59,4 +59,4 @@ const ProfileDropdownMenu = ({ user }) => {
     );
 }
 
-export default ProfileDropdownMenu;
+export default ProfileDropDownMenu;

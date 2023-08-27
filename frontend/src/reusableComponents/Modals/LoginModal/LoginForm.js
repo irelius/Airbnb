@@ -1,4 +1,4 @@
-// frontend/src/components/LoginFormModal/LoginForm.js
+// frontend/src/reusableComponents/Modals/LoginModal/LoginForm.js
 import "./LoginForm.css"
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -25,6 +25,8 @@ function LoginForm() {
             }
         );
     };
+
+    console.log('booba')
 
 
     return (
@@ -59,4 +61,4 @@ function LoginForm() {
     );
 }
 
-export default LoginForm;
+export default LoginForm

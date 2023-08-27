@@ -5,8 +5,9 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk, restoreUserThunk } from '../../store/session';
 
-import LoginFormModal from '../../components/Modals/LoginModal/LoginForm';
-import ProfileDropdownMenu from '../../components/ProfileDropdownMenu/ProfileDropdownMenu';
+import LoginFormModal from '../Modals/LoginModal';
+// import ProfileDropdownMenu from "../../components/ProfileDropdownMenu/ProfileDropdownMenu";
+import ProfileDropdownMenu from '../Modals/ProfileMenuModal';
 
 function Header({ isLoaded }) {
     const dispatch = useDispatch();

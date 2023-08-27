@@ -84,8 +84,6 @@ export const deleteReviewThunk = (reviewId) => async dispatch => {
         method: "DELETE"
     })
 
-    console.log(await response.json())
-
     if(response.ok) {
         console.log("Review successfully deleted.")
     }
