@@ -1,3 +1,3 @@
-import SpotPage from "./SpotPage";
+import Spot from "./Spot";
 
-export default SpotPage
+export default Spot

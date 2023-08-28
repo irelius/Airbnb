@@ -1,11 +1,10 @@
-import "./EditReview.css"
+import "./UpdateReview.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { editReviewThunk } from "../../../store/review";
-import { loadReviewsThunk } from "../../../store/review";
+import { editReviewThunk, loadReviewsThunk } from "../../../store/review";
 
-function EditReview() {
+function UpdateReview() {
     const history = useHistory();
     const currentUser = useSelector(state => state.session.user);
     if (!currentUser) {
@@ -87,4 +86,4 @@ function EditReview() {
     )
 }
 
-export default EditReview;
+export default UpdateReview;

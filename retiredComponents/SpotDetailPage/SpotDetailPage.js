@@ -2,11 +2,11 @@ import "./SpotDetailPage.css"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink, useHistory } from "react-router-dom";
-import { deleteReviewThunk, loadReviewsThunk } from "../../../store/review";
+import { deleteReviewThunk, loadReviewsThunk } from "../../frontend/src/store/review";
 // import LoginFormModal from "../../Modals/LoginFormModal";
-import LoginForm from "../../../reusableComponents/Modals/LoginModal/LoginForm";
+import LoginForm from "../../frontend/src/reusableComponents/Modals/LoginModal/LoginForm";
 
-import { loadSpotsThunk } from "../../../store/spot";
+import { loadSpotsThunk } from "../../frontend/src/store/spot";
 
 function SpotDetailPage() {
     const history = useHistory();

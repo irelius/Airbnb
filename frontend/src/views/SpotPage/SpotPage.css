@@ -1,0 +1,96 @@
+.spot-detail-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 100px;
+}
+
+/* top section */
+.spot-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1000px
+}
+
+.spot-section>* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.spot-name {
+    display: flex;
+    justify-self: start;
+}
+
+.spot-description {
+    margin-bottom: 20px;
+}
+
+/* causes issue on front page of spots */
+.spot-header-image > * {
+    width: 1000px;
+    height: 500px;
+    object-fit: cover;
+
+    border-radius: 10px;
+}
+
+/* ------------------------------------------------------------------------ */
+
+/* review section */
+.review-section {
+    width: 1000px;
+}
+
+.submit-review-button> * {
+    padding: 5px;
+    margin: 0px;
+}
+
+.user-review {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+
+}
+
+.review-date {
+    color: gray;
+    font-size: small;
+    margin-top: 3px;
+}
+
+.review-review {
+    margin: 5px;
+}
+
+.delete-user-review {
+    display: flex;
+    margin: 10px;
+    margin-left: 30px;
+}
+
+.other-reviews-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.other-reviews {
+    margin-bottom: 50px;
+}
+
+.login-container {
+    width: fit-content
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
+}

@@ -1,10 +1,10 @@
-import "./SignUpPage.css"
+import "./SignUp.css"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { signupThunk } from "../../store/session";
 import { Redirect } from "react-router-dom"
 
-function SignUpFormPage() {
+function SignUp() {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user)
     const [firstName, setFirstName] = useState("");
@@ -106,5 +106,4 @@ function SignUpFormPage() {
     )
 }
 
-
-export default SignUpFormPage
+export default SignUp

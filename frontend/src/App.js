@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import Header from "./reusableComponents/Header";
-import SignUpFormPage from "./components/SignUpFormPage";
-import SpotPageForm from "./components/SpotPage/SpotPageForm";
-import SpotDetailPage from "./components/SpotPage/SpotDetailPage/SpotDetailPage";
-import EditSpotForm from "./components/SpotPage/EditSpotForm/EditSpotForm";
-import SubmitReview from "./components/ReviewFormPage/SubmitReview";
+import SignUp from "./views/SignUp";
+import CreateSpotPage from "./views/CreateSpot/CreateSpot";
+import SpotPage from "./views/SpotPage/SpotPage";
+import EditSpot from "./views/EditSpot/EditSpot";
+import CreateReview from "./views/Review/CreateReview";
+import UserSpots from "./views/UserSpots/UserSpots";
 import Main from "./views/Main/Main";
 
 import * as sessionActions from "./store/session";
-import UserSpots from "./components/SpotPage/UserSpots";
 // import Footer from "./reusableComponents/Footer";
 import Footer from "./reusableComponents/Footer"
 
@@ -33,22 +33,22 @@ function App() {
             <Main />
           </Route>
           <Route exact path="/signup">
-            <SignUpFormPage />
+            <SignUp />
           </Route>
           <Route exact path="/become-a-host/property-form">
-            <SpotPageForm />
+            <CreateSpotPage />
           </Route>
           <Route exact path="/manage-listings">
             <UserSpots />
           </Route>
           <Route exact path="/edit-spot/:spotId">
-            <EditSpotForm />
+            <EditSpot />
           </Route>
           <Route exact path="/spot-details/:spotId">
-            <SpotDetailPage />
+            <SpotPage />
           </Route>
           <Route exact path="/submit-review/:spotId">
-            <SubmitReview />
+            <CreateReview />
           </Route>
         </Switch>
       )}

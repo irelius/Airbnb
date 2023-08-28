@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { restoreUserThunk } from "../../../store/session";
-import { loadSpotsThunk } from "../../../store/spot";
+import { restoreUserThunk } from "../../frontend/src/store/session";
+import { loadSpotsThunk } from "../../frontend/src/store/spot";
 
-import { deleteSpotThunk } from "../../../store/spot";
+import { deleteSpotThunk } from "../../frontend/src/store/spot";
 
 import "./UserSpots.css"
 

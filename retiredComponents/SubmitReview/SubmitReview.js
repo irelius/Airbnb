@@ -1,7 +1,7 @@
 import "./SubmitReview.css"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addReviewThunk } from "../../../store/review";
+import { addReviewThunk } from "../../frontend/src/store/review";
 import { useParams, useHistory, NavLink } from "react-router-dom";
 
 function SubmitReview() {

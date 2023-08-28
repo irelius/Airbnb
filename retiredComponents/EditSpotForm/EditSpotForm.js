@@ -2,7 +2,7 @@ import "./EditSpotForm.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import { useHistory, useParams } from "react-router-dom";
-import { editSpotThunk } from "../../../store/spot";
+import { editSpotThunk } from "../../frontend/src/store/spot";
 
 function EditSpotForm() {
     const dispatch = useDispatch();
