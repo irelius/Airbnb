@@ -43,7 +43,7 @@ function Header({ isLoaded }) {
     return (
         <div className="header-main-container">
             <aside className="header-left-container">
-                <section className="header-lairbnb-icon-container" onClick={() => history.push("/")}>
+                <section className="header-lairbnb-icon-container pointer" onClick={() => history.push("/")}>
                     <img id="lairbnb-icon" src="https://raw.githubusercontent.com/irelius/Airbnb/main/frontend/public/assets/favicon-32x32.png"
                         alt="lairbnb-icon"
                     />

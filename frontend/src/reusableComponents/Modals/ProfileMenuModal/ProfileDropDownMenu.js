@@ -50,17 +50,17 @@ const ProfileDropDownMenu = ({ user }) => {
             </button>
             <div id="profile-button-dropdown-container">
                 {showMenu && (
-                    <div id="profile-dropdown" onClick={handleOptionClick}>
+                    <div id="profile-dropdown" className="shadow" onClick={handleOptionClick}>
                         <div id="profile-dropdown-username">
                             {user.userName}
                         </div>
                         <div id="profile-dropdown-email">
                             {user.email}
                         </div>
-                        <div id="manage-listings" onClick={() => history.push("/manage-listings")} className="pointer">
+                        <div id="manage-listings" className="profile-hover pointer" onClick={() => history.push("/manage-listings")}>
                             Manage Your Listings
                         </div>
-                        <div id="logout-button" onClick={logout} className="pointer">
+                        <div id="logout-button" className="profile-hover pointer" onClick={logout}>
                             Log Out
                         </div>
                     </div>
@@ -69,7 +69,7 @@ const ProfileDropDownMenu = ({ user }) => {
         </div>
     ) : (
         <div id="profile-button-main-container">
-            <button id="profile-button" onClick={openMenu} className="pointer">
+            <button id={`profile-button${showMenu ? '-shadow' : ''}`} onClick={openMenu} className="pointer">
                 <i id="profile-button-bars" className="fa-solid fa-bars" />
                 <div id='profile-button-person-container'>
                     <i id="profile-button-person" className="fa-solid fa-user fa-lg" />
@@ -77,14 +77,15 @@ const ProfileDropDownMenu = ({ user }) => {
             </button>
             <div id="profile-button-dropdown-container">
                 {showMenu && (
-                    <div id="profile-dropdown" onClick={handleOptionClick}>
-                        <aside onClick={signInDemo}>
+                    // className={`profile-button-dropdown-container${showMenu ? ' show' : ''}`}
+                    <div id="profile-dropdown" className="shadow" onClick={handleOptionClick}>
+                        <aside id="profile-demo-login" className="profile-hover" onClick={signInDemo}>
                             Sign in as Demo User
                         </aside>
-                        <aside onClick={() => history.push('/signup')}>
+                        <aside id="profile-sign-in" className="profile-hover" onClick={() => history.push('/signup')}>
                             Sign Up
                         </aside>
-                        <aside id="header-right-login-modal" className="modal" onClick={(e) => e.stopPropagation()}>
+                        <aside id="profile-log-in" className="profile-hover" onClick={(e) => e.stopPropagation()}>
                             <LoginFormModal />
                         </aside>
                     </div>
