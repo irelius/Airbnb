@@ -26,15 +26,13 @@ function LoginForm() {
         );
     };
 
-    console.log('booba')
-
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className="login-form">
+            <form onSubmit={handleSubmit} id="login-form">
                 <div>
                     <ul>
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        {errors.map((error, idx) => <div key={idx}>{error}</div>)}
                     </ul>
                 </div>
                 <label>
@@ -55,7 +53,7 @@ function LoginForm() {
                         required
                     />
                 </label>
-                <button type="submit" className="login-button">Log In</button>
+                <button type="submit" id="login-button">Log In</button>
             </form>
         </div>
     );

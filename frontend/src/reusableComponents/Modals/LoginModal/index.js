@@ -7,7 +7,7 @@ function LoginFormModal() {
     const [showModal, setShowModal] = useState(false);
     return (
         <>
-            <button onClick={() => setShowModal(true)} className="header-login-button">Log In</button>
+            <div onClick={() => setShowModal(true)} className="header-login-button">Log In</div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <LoginForm />

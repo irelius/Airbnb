@@ -3,7 +3,8 @@ import "./ProfileDropDownMenu.css"
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import { logoutThunk } from "../../../store/session"
+import { loginThunk, logoutThunk } from "../../../store/session"
+import LoginFormModal from "../LoginModal";
 
 const ProfileDropDownMenu = ({ user }) => {
     const dispatch = useDispatch();
@@ -14,22 +15,32 @@ const ProfileDropDownMenu = ({ user }) => {
         if (showMenu) return;
         setShowMenu(true);
     };
-
-    useEffect(() => {
-        if (!showMenu) return;
-        const closeMenu = () => {
-            setShowMenu(false);
-        };
-        document.addEventListener('click', closeMenu);
-        return () => document.removeEventListener("click", closeMenu);
-    }, [showMenu]);
-
+    const closeMenu = () => {
+        setShowMenu(false);
+    };
     const logout = (e) => {
         e.preventDefault();
         dispatch(logoutThunk());
     };
+    const signInDemo = () => {
+        const demoUser = {
+            credential: "demo@aa.io",
+            password: "password"
+        }
+        dispatch(loginThunk(demoUser));
+    }
+    const handleOptionClick = (e) => {
+        e.stopPropagation();
+        closeMenu(); // Close the menu when any option is clicked
+    };
 
-    return (
+    useEffect(() => {
+        if (!showMenu) return;
+        document.addEventListener('click', closeMenu);
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+
+    return user ? (
         <div id="profile-button-main-container">
             <button id="profile-button" onClick={openMenu} className="pointer">
                 <i id="profile-button-bars" className="fa-solid fa-bars" />
@@ -39,7 +50,7 @@ const ProfileDropDownMenu = ({ user }) => {
             </button>
             <div id="profile-button-dropdown-container">
                 {showMenu && (
-                    <div id="profile-dropdown">
+                    <div id="profile-dropdown" onClick={handleOptionClick}>
                         <div id="profile-dropdown-username">
                             {user.userName}
                         </div>
@@ -56,7 +67,31 @@ const ProfileDropDownMenu = ({ user }) => {
                 )}
             </div>
         </div>
-    );
+    ) : (
+        <div id="profile-button-main-container">
+            <button id="profile-button" onClick={openMenu} className="pointer">
+                <i id="profile-button-bars" className="fa-solid fa-bars" />
+                <div id='profile-button-person-container'>
+                    <i id="profile-button-person" className="fa-solid fa-user fa-lg" />
+                </div>
+            </button>
+            <div id="profile-button-dropdown-container">
+                {showMenu && (
+                    <div id="profile-dropdown" onClick={handleOptionClick}>
+                        <aside onClick={signInDemo}>
+                            Sign in as Demo User
+                        </aside>
+                        <aside onClick={() => history.push('/signup')}>
+                            Sign Up
+                        </aside>
+                        <aside id="header-right-login-modal" className="modal" onClick={(e) => e.stopPropagation()}>
+                            <LoginFormModal />
+                        </aside>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
 }
 
 export default ProfileDropDownMenu;

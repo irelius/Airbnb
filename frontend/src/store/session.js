@@ -46,6 +46,7 @@ export const signupThunk = (user) => async (dispatch) => {
 
 export const loginThunk = (user) => async (dispatch) => {
     const { credential, password } = user;
+    console.log('test thunk')
     const response = await csrfFetch('/api/users/login', {
         method: 'POST',
         headers: {
