@@ -4,17 +4,15 @@ import loadImage from "./HelperFunctions/loadImage"
 
 function Spot({ spot }) {
     return (
-        <NavLink exact to={`/spot-details/${spot.id}`} className="spot-container">
-            <div className="spot">
-                <section className="spot-image">{loadImage(spot)}</section>
-                <div className="spot-description">
-                    <section className="spot-name">
-                        {`${spot.name}`}, {`${spot.state}`}
-                    </section>
-                    <section className="spot-price">
-                        ${(`${spot.price}`)} night
-                    </section>
-                </div>
+        <NavLink exact to={`/spot-details/${spot.id}`} id="spot-container">
+            <section id="spot-image-container">{loadImage(spot)}</section>
+            <div id="spot-description">
+                <section id="spot-name" className="bold">
+                    {`${spot.name}`}, {`${spot.state}`}
+                </section>
+                <section id="spot-price">
+                    ${(`${spot.price}`)} night
+                </section>
             </div>
         </NavLink>
     )

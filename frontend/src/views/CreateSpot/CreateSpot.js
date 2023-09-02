@@ -45,25 +45,24 @@ function CreateSpot() {
     }
 
     return (
-        <div className="create-spot-main">
+        <div id="create-spot-main">
 
-            <div className="left">
-                <h1 className="left-header">
+            <aside id="left">
+                <h1 id="left-header">
                     What kind of place will you host?
                 </h1>
-            </div>
+            </aside>
 
-            <div className="right">
-                <div className="back-button-div">
+            <aside id="right" className="ffffff">
+                <div id="back-button-container">
                     <NavLink exact to="/">
-                        <div className="back-button" >
+                        <div id="back-button" >
                             Exit
                         </div>
                     </NavLink>
                 </div>
-                <div className="right-section">
-
-                    <form onSubmit={handleSubmit} className="create-spot-form">
+                <div id="right-section">
+                    <form onSubmit={handleSubmit} id="create-spot-form">
                         <input
                             type="text"
                             placeholder="Address"
@@ -138,17 +137,17 @@ function CreateSpot() {
                             value={image}
                             onChange={(e) => setImage(e.target.value)}
                         />
-                        <div className="submit-button-div">
-                            <button type="submit" className="submit-button">
+                        <div id="submit-button-div">
+                            <button type="submit" id="submit-button" className="bold">
                                 Host Your Spot
                             </button>
                         </div>
-                        {/* <div className="map-container">
+                        {/* <div id="map-container">
                             <Maps />
                         </div> */}
                     </form>
                 </div>
-            </div>
+            </aside>
         </div>
     )
 }

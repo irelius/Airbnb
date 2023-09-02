@@ -2,7 +2,7 @@ import "./CreateReview.css"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addReviewThunk } from "../../../store/review";
-import { useParams, useHistory, NavLink } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 function CreateReview() {
     const history = useHistory();
@@ -31,16 +31,16 @@ function CreateReview() {
     }
 
     return (
-        <div className="submit-review-main">
-            <form onSubmit={handleSubmit} className="submit-review-form">
-                <p className="submit-review-title">Type Your Review</p>
+        <div id="submit-review-main">
+            <form onSubmit={handleSubmit} id="review-form">
+                <p id="review-title">Type Your Review</p>
                 <input
                     type="text"
                     required
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
                 />
-                <p className="submit-review-title">Give This Location a Rating</p>
+                <p id="review-title">Give This Location a Rating</p>
                 <input
                     type="number"
                     required
@@ -49,7 +49,7 @@ function CreateReview() {
                     value={stars}
                     onChange={(e) => setStars(e.target.value)}
                 />
-                <button type="submit" className="submit-review-button">
+                <button type="submit" id="submit-review-button" className="ffffff">
                     Submit Review
                 </button>
             </form>

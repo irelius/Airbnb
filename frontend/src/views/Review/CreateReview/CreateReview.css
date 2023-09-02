@@ -1,11 +1,11 @@
-.submit-review-main {
+#submit-review-main {
     display: flex;
     justify-content: center;
     margin-top: 100px;
 }
 
 
-.submit-review-form {
+#review-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,7 +13,7 @@
 }
 
 
-.submit-review-button {
+#submit-review-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,11 +25,10 @@
     padding-top: 5px;
     padding-bottom: 5px;
     border: none;
-    background-color: white;
 
     border-radius: 10px;
 }
 
-.submit-review-button:hover {
+#submit-review-button:hover {
     background-color: rgb(230, 230, 230);
 }

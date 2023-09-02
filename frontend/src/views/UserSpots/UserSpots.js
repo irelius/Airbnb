@@ -1,7 +1,7 @@
 import "./UserSpots.css"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
-import { NavLink, Redirect, useHistory } from "react-router-dom";
+import { useEffect } from "react"
+import { NavLink, useHistory } from "react-router-dom";
 import { restoreUserThunk } from "../../store/session";
 import { loadSpotsThunk } from "../../store/spot";
 import { deleteSpotThunk } from "../../store/spot";
@@ -59,12 +59,12 @@ function UserSpots() {
                                         </div>
                                     </div>
                                     <div className="edit">
-                                        <button className="edit-button">
+                                        <button id="edit-button">
                                             <NavLink exact to={`/edit-spot/${el.id}`}>Edit Listing</NavLink>
                                         </button>
                                     </div>
                                     <div className="delete">
-                                        <button onClick={() => { deleteSpot(el) }} className="delete-button">
+                                        <button onClick={() => { deleteSpot(el) }} id="delete-button" className="bold">
                                             Delete Listing
                                         </button>
                                     </div>

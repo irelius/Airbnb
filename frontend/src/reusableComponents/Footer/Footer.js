@@ -2,14 +2,12 @@ import "./Footer.css"
 
 function Footer() {
     return (
-        <div className="footer">
-            <div className="footer-left">
-                <div className="footer-left-list">
-                    <p>2022 Lairbnb</p>
-                </div>
+        <div id="footer" className="ffffff">
+            <div id="footer-left">
+                <p>2022 Lairbnb</p>
             </div>
-            <div className="footer-right">
-                <div className="footer-right-list">
+            <div id="footer-right">
+                <div id="footer-right-list">
                     <a href="https://www.linkedin.com/in/sbkihongbae/">LinkedIn</a>
                     <a href="https://github.com/irelius">GitHub</a>
                 </div>

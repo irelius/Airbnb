@@ -41,53 +41,52 @@ const ProfileDropDownMenu = ({ user }) => {
     }, [showMenu]);
 
     return user ? (
-        <div id="profile-button-main-container">
-            <button id="profile-button" onClick={openMenu} className="pointer">
-                <i id="profile-button-bars" className="fa-solid fa-bars" />
-                <div id='profile-button-person-container'>
-                    <i id="profile-button-person" className="fa-solid fa-user fa-lg" />
+        <div id="profile-main-container">
+            <button id="profile-button-container" className="ffffff pointer" onClick={openMenu}>
+                <i id="profile-bars" className="fa-solid fa-bars" />
+                <div id='profile-icon-container'>
+                    <i id="profile-icon" className="fa-solid fa-user fa-lg" />
                 </div>
             </button>
-            <div id="profile-button-dropdown-container">
+            <div id="profile-dropdown-main-container">
                 {showMenu && (
-                    <div id="profile-dropdown" className="shadow" onClick={handleOptionClick}>
-                        <div id="profile-dropdown-username">
+                    <div id="profile-dropdown-container" className="shadow ffffff" onClick={handleOptionClick}>
+                        <section>
                             {user.userName}
-                        </div>
-                        <div id="profile-dropdown-email">
+                        </section>
+                        <section>
                             {user.email}
-                        </div>
-                        <div id="manage-listings" className="profile-hover pointer" onClick={() => history.push("/manage-listings")}>
+                        </section>
+                        <section className="f7f7f7-hover pointer" onClick={() => history.push("/manage-listings")}>
                             Manage Your Listings
-                        </div>
-                        <div id="logout-button" className="profile-hover pointer" onClick={logout}>
+                        </section>
+                        <section className="f7f7f7-hover pointer" onClick={logout}>
                             Log Out
-                        </div>
+                        </section>
                     </div>
                 )}
             </div>
         </div>
     ) : (
-        <div id="profile-button-main-container">
-            <button id={`profile-button${showMenu ? '-shadow' : ''}`} onClick={openMenu} className="pointer">
-                <i id="profile-button-bars" className="fa-solid fa-bars" />
-                <div id='profile-button-person-container'>
-                    <i id="profile-button-person" className="fa-solid fa-user fa-lg" />
+        <div id="profile-main-container">
+            <button id={`profile-button-container${showMenu ? '-shadow' : ''}`} className="ffffff pointer" onClick={openMenu}>
+                <i id="profile-bars" className="fa-solid fa-bars" />
+                <div id='profile-icon-container'>
+                    <i id="profile-icon" className="fa-solid fa-user fa-lg" />
                 </div>
             </button>
-            <div id="profile-button-dropdown-container">
+            <div id="profile-dropdown-main-container">
                 {showMenu && (
-                    // className={`profile-button-dropdown-container${showMenu ? ' show' : ''}`}
-                    <div id="profile-dropdown" className="shadow" onClick={handleOptionClick}>
-                        <aside id="profile-demo-login" className="profile-hover" onClick={signInDemo}>
+                    <div id="profile-dropdown-container" className="shadow ffffff" onClick={handleOptionClick}>
+                        <section className="f7f7f7-hover pointer bold" onClick={signInDemo}>
                             Sign in as Demo User
-                        </aside>
-                        <aside id="profile-sign-in" className="profile-hover" onClick={() => history.push('/signup')}>
+                        </section>
+                        <section className="f7f7f7-hover pointer" onClick={() => history.push('/signup')}>
                             Sign Up
-                        </aside>
-                        <aside id="profile-log-in" className="profile-hover" onClick={(e) => e.stopPropagation()}>
+                        </section>
+                        <section className="f7f7f7-hover pointer" onClick={(e) => e.stopPropagation()}>
                             <LoginFormModal />
-                        </aside>
+                        </section>
                     </div>
                 )}
             </div>
