@@ -21,6 +21,8 @@ const ProfileDropDownMenu = ({ user }) => {
     const logout = (e) => {
         e.preventDefault();
         dispatch(logoutThunk());
+        history.push('/')
+
     };
     const signInDemo = () => {
         const demoUser = {

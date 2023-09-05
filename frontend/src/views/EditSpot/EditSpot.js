@@ -40,8 +40,8 @@ function EditSpot() {
     }
 
     return (
-        <div className="edit-spot-main">
-            <form onSubmit={handleSubmit} className="edit-spot-form">
+        <div id="edit-spot-main">
+            <form onSubmit={handleSubmit} id="edit-spot-form">
                 Address
                 <input
                     type="text"
@@ -114,7 +114,7 @@ function EditSpot() {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                 />
-                <button type="submit" className="save-button">
+                <button type="submit" id="save-button">
                     Save Edits
                 </button>
             </form>

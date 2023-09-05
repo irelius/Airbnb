@@ -8,6 +8,14 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth, restoreUser, authenticationRequired, authorizationRequiredSpots } = require('../../utils/auth');
 const { User, Spot, Image, Review } = require('../../db/models');
 
+// helper function for a particular element not found
+const notFound = (el, code) => {
+    let error = new Error(`${el} couldn't be found`);
+    error.status = code;
+    error.statusCode = code;
+    return error
+}
+
 
 const validateSpot = [
     check("address")
@@ -214,10 +222,7 @@ router.get("/:spotId", async (req, res, next) => {
     });
     // error if spot doesn't exist
     if (!spot) {
-        let error = new Error(`${el} couldn't be found`);
-        error.status = code;
-        error.statusCode = code;
-        return error;
+        return next(notFound("Spot", 404))
     }
     // get all reviews to find out how many reviews a spot has
     let starTotal = 0;
@@ -285,17 +290,23 @@ router.put("/:spotId", [validateSpot, restoreUser, authenticationRequired, autho
 
 // Delete a Spot
 router.delete("/:spotId", [restoreUser, authenticationRequired, authorizationRequiredSpots], async (req, res, next) => {
+    console.log('booba 1')
+
     // destroy spot
     await Spot.destroy({
         where: {
             id: req.params.spotId
         }
     })
+
+    console.log('booba 2')
     // send message
     res.status(200).json({
         message: "Successfully deleted",
         statusCode: 200
     })
+
+    console.log('booba 3')
 })
 
 

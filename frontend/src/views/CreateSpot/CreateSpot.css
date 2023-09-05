@@ -68,7 +68,6 @@
 
     padding:25px;
 
-    border: none;
     border-radius: 15px;
 }
 
@@ -90,7 +89,6 @@
 
 #back-button {
     display: flex;
-    border: none;
     border-radius: 10px;
     padding: 5px;
     padding-left: 10px;

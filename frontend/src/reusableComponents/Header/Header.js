@@ -22,7 +22,7 @@ function Header({ isLoaded }) {
         sessionLinks = (
             <div id="header-right-container">
                 <aside id="header-host-button-container">
-                    <button id="header-host-button" className="ffffff bold" onClick={() => history.push("/become-a-host/property-form")}>
+                    <button id="header-host-button" className="ffffff f7f7f7-hover bold pointer no-border" onClick={() => history.push("/become-a-host/property-form")}>
                         Become a host
                     </button>
                 </aside>
@@ -40,7 +40,7 @@ function Header({ isLoaded }) {
     return (
         <div id="header-main-container">
             <aside>
-                <section id="header-lairbnb-icon-container" className="pointer" onClick={() => history.push("/")}>
+                <section id="header-lairbnb-icon-container" className="pointer" onClick={() => history.go("/")}>
                     <img id="lairbnb-icon" src="https://raw.githubusercontent.com/irelius/Airbnb/main/frontend/public/assets/favicon-32x32.png"
                         alt="lairbnb-icon"
                     />

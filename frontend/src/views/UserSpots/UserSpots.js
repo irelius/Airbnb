@@ -7,7 +7,6 @@ import { loadSpotsThunk } from "../../store/spot";
 import { deleteSpotThunk } from "../../store/spot";
 
 function UserSpots() {
-    const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(restoreUserThunk());
@@ -15,9 +14,6 @@ function UserSpots() {
     }, [dispatch]);
 
     const user = useSelector(state => state.session.user)
-    if(user === undefined) {
-        window.location.href = "/"
-    }
     const allSpots = useSelector(state => Object.values(state.spot));
     const userSpots = [];
     allSpots.forEach(el => {
@@ -28,7 +24,6 @@ function UserSpots() {
 
     const deleteSpot = (spot) => {
         dispatch(deleteSpotThunk(spot))
-        history.go(0);
     }
 
 
@@ -42,28 +37,26 @@ function UserSpots() {
             )
         } else {
             return (
-                <div className="all-spots">
+                <div id="all-spots">
                     {
                         userSpots.map(el => {
                             return (
-                                <div className="listing">
-                                    <div className="listing-details">
-                                        <div className="listing-image">
-                                            <img src={`${el.previewImg}`} alt={`${el.name}`} />
-                                        </div>
-                                        <div className="listing-name">
+                                <div id="listing">
+                                    <div id="listing-details">
+                                        <img src={`${el.previewImg}`} alt={`${el.name}`} id="listing-image" />
+                                        <div id="listing-name">
                                             {el.name}
                                         </div>
-                                        <div className="listing-address">
+                                        <div id="listing-address">
                                             {el.city}, {el.state}, {el.country}
                                         </div>
                                     </div>
-                                    <div className="edit">
+                                    <div id="edit">
                                         <button id="edit-button">
                                             <NavLink exact to={`/edit-spot/${el.id}`}>Edit Listing</NavLink>
                                         </button>
                                     </div>
-                                    <div className="delete">
+                                    <div id="delete">
                                         <button onClick={() => { deleteSpot(el) }} id="delete-button" className="bold">
                                             Delete Listing
                                         </button>
@@ -80,13 +73,13 @@ function UserSpots() {
 
 
     return (
-        <div className="user-spots-main">
+        <div id="user-spots-main">
             <div>
-                <h1 className="h1">
+                <h1 id="h1">
                     Your Listings
                 </h1>
             </div>
-            <div className="listings">
+            <div id="listings">
                 {showHandleHosting()}
             </div>
         </div>

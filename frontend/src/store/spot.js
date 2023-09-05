@@ -103,7 +103,8 @@ const spotReducer = (state = initialSpot, action) => {
             newState[action.payload.id] = action.payload;
             return newState;
         case DELETE_SPOT:
-            delete newState[action.payload]
+            console.log('booba test test')
+            delete newState[action.payload.id]
             return newState;
         default:
             return newState;

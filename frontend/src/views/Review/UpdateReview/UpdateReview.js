@@ -80,7 +80,7 @@ function UpdateReview() {
     }
 
     return (
-        <div className="edit-review-main">
+        <div id="edit-review-main">
             {loadEditForm()}
         </div>
     )

@@ -56,7 +56,7 @@ function CreateSpot() {
             <aside id="right" className="ffffff">
                 <div id="back-button-container">
                     <NavLink exact to="/">
-                        <div id="back-button" >
+                        <div id="back-button" className="no-border" >
                             Exit
                         </div>
                     </NavLink>
@@ -138,7 +138,7 @@ function CreateSpot() {
                             onChange={(e) => setImage(e.target.value)}
                         />
                         <div id="submit-button-div">
-                            <button type="submit" id="submit-button" className="bold">
+                            <button type="submit" id="submit-button" className="bold no-border">
                                 Host Your Spot
                             </button>
                         </div>

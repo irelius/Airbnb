@@ -85,11 +85,11 @@ function SpotPage() {
     const loadUserReview = () => {
         if (!currentUser) {
             return (
-                <div className="login-container">
+                <div id="login-container">
                     <div>
                         Please log in to submit a review.
                     </div>
-                    <div className="login-button">
+                    <div id="login-button">
                         <LoginForm />
                     </div>
                 </div>
@@ -97,7 +97,7 @@ function SpotPage() {
         }
         if (currentUser && !userReviewStatus) {
             return (
-                <button className="submit-review-button">
+                <button id="submit-review-button">
                     <NavLink exact to={`${location}`}>Submit a Review</NavLink>
                 </button>
             )
@@ -105,13 +105,13 @@ function SpotPage() {
         if (currentUser && userReviewStatus) {
             return (
                 <div>
-                    <div className="review-name">
+                    <div id="review-name">
                         {userReview.User.firstName} {userReview.User.lastName}
                     </div>
-                    <div className="review-date">
+                    <div id="review-date">
                         {userReview.createdAt.slice(0, 10)}
                     </div>
-                    <div className="review-review">
+                    <div id="review-review">
                         {userReview.review}
                     </div>
                 </div>
@@ -126,14 +126,14 @@ function SpotPage() {
                 spotReviews.map(el => {
                     if (el.User) {
                         return (
-                            <div className="other-reviews">
-                                <div className="reviewer-name">
+                            <div id="other-reviews">
+                                <div id="reviewer-name">
                                     {el.User.firstName} {el.User.lastName}
                                 </div>
-                                <div className="review-date">
+                                <div id="review-date">
                                     {el.createdAt.slice(0, 10)}
                                 </div>
-                                <div className="review-review">
+                                <div id="review-review">
                                     {el.review}
                                 </div>
                             </div>
@@ -146,14 +146,14 @@ function SpotPage() {
                 spotReviews.map(el => {
                     if (el.User) {
                         return (
-                            <div className="other-reviews">
-                                <div className="reviewer-name">
+                            <div id="other-reviews">
+                                <div id="reviewer-name">
                                     {el.User.firstName} {el.User.lastName}
                                 </div>
-                                <div className="review-date">
+                                <div id="review-date">
                                     {el.createdAt.slice(0, 10)}
                                 </div>
-                                <div className="review-review">
+                                <div id="review-review">
                                     {el.review}
                                 </div>
                             </div>
@@ -188,38 +188,38 @@ function SpotPage() {
     }
 
     return (
-        <div className="spot-detail-main">
-            <div className="spot-section">
-                <div className="spot-name">
+        <div id="spot-detail-main">
+            <div id="spot-section">
+                <div id="spot-name">
                     {loadSpotName()}
                 </div>
-                <div className="spot-description">
+                <div id="spot-description">
                     {loadSpotLocation()}
                 </div>
-                <div className="spot-rating">
+                <div id="spot-rating">
                     {averageRating}
                 </div>
-                <div className="spot-header-image">
+                <div id="spot-header-image">
                     {loadImage()}
                 </div>
             </div>
 
 
-            <div className="review-section">
-                <div className="review-header">
+            <div id="review-section">
+                <div id="review-header">
                     <h2>
                         Reviews
                     </h2>
                 </div>
-                <div className="user-review">
+                <div id="user-review">
                     <div>
                         {loadUserReview()}
                     </div>
-                    <div className="delete-user-review">
+                    <div id="delete-user-review">
                         {deleteReview()}
                     </div>
                 </div>
-                <div className="other-reviews-container">
+                <div id="other-reviews-container">
                     {loadOtherReviews()}
                 </div>
             </div>

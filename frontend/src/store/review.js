@@ -33,6 +33,8 @@ export const addReview = (review) => {
 }
 
 export const addReviewThunk = (review) => async dispatch => {
+    console.log('booba thunk', review)
+
     const response = await csrfFetch(`/api/reviews/${review.spotId.spotId}`, {
         method: "POST",
         headers: {
