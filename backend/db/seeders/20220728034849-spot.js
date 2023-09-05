@@ -172,7 +172,6 @@ const spots = [
 //             id: spot.ownerId
 //           }
 //         });
-//         // console.log("booba", foundOwner)
 //         spot.ownerId = foundOwner.id
 //         // await Spot.create({
 //         //   ownerId: foundOwner.id,

@@ -26,7 +26,6 @@
 //         );
 //     };
 
-//     console.log('booba')
 
 
 //     return (

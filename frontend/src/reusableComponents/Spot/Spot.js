@@ -2,16 +2,16 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min"
 import "./Spot.css"
 import loadImage from "./HelperFunctions/loadImage"
 
-function Spot({ spot }) {
+function Spot({ el }) {
     return (
-        <NavLink exact to={`/spot-details/${spot.id}`} id="spot-container">
-            <section id="spot-image-container">{loadImage(spot)}</section>
+        <NavLink exact to={`/spot-details/${el.id}`} id="spot-container">
+            <section id="spot-image-container">{loadImage(el)}</section>
             <div id="spot-description">
                 <section id="spot-name" className="bold">
-                    {`${spot.name}`}, {`${spot.state}`}
+                    {`${el.name}`}, {`${el.state}`}
                 </section>
                 <section id="spot-price">
-                    ${(`${spot.price}`)} night
+                    ${(`${el.price}`)} night
                 </section>
             </div>
         </NavLink>

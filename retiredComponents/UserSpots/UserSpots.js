@@ -20,13 +20,10 @@ function UserSpots() {
     if(user === undefined) {
         window.location.href = "/"
     }
-    const allSpots = useSelector(state => Object.values(state.spot));
-    const userSpots = [];
-    allSpots.forEach(el => {
-        if (el.ownerId === user.id) {
-            userSpots.push(el)
-        }
-    })
+
+    const [userSpots, setUserSpots] = useSelector(state => Object.values(state.spot))
+
+    console.log('booba', userSpots)
 
     const deleteSpot = (spot) => {
         dispatch(deleteSpotThunk(spot))

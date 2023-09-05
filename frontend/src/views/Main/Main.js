@@ -1,7 +1,7 @@
 import "./Main.css"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { loadSpotsThunk } from "../../store/spot";
+import { loadSpotsThunk, resetSpot } from "../../store/spot";
 import Spot from "../../reusableComponents/Spot/Spot";
 
 function Main() {
@@ -12,6 +12,10 @@ function Main() {
     useEffect(() => {
         dispatch(loadSpotsThunk())
         setLoad(true)
+
+        return (() => {
+            dispatch(resetSpot())
+        })
     }, [dispatch])
 
     const spots = useSelector(state => Object.values(state.spot))
@@ -20,7 +24,7 @@ function Main() {
         <div id="all-spots">
             {spots.map((el, i) => {
                 return (
-                    <Spot key={i} spot={el}/>
+                    <Spot key={i} el={el}/>
                 )
             })}
         </div>

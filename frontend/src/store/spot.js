@@ -4,24 +4,41 @@ const LOAD_SPOTS = "/spots/load"
 const ADD_SPOT = "/spots/add"
 const EDIT_SPOT = "/spots/edit"
 const DELETE_SPOT = "/spots/delete"
+const CLEAR_SPOT = "/spots/clear"
 
-const initialSpot = {
-    spot: []
-}
+const initialSpot = {}
 
-export const loadSpots = (allSpots) => {
+export const loadSpots = (spots) => {
     return {
         type: LOAD_SPOTS,
-        payload: allSpots
+        payload: spots
     }
 }
 
-export const loadSpotsThunk = () => async dispatch => {
-    const response = await csrfFetch('/api/spots/')
-    if (response.ok) {
-        const allSpots = await response.json();
-        dispatch(loadSpots(allSpots))
+export const loadSpotsThunk = () => async (dispatch) => {
+    try {
+        const response = await csrfFetch('/api/spots');
+        if (response.ok) {
+            const allSpots = await response.json();
+            dispatch(loadSpots(allSpots));
+        }
+    } catch (error) {
+        console.error("Error loading spots:", error);
     }
+    return []
+};
+
+export const loadUserSpotsThunk = () => async (dispatch) => {
+    try {
+        const res = await csrfFetch(`/api/spots/current`)
+        if (res.ok) {
+            const userSpots = await res.json();
+            dispatch(loadSpots(userSpots))
+        }
+    } catch (error) {
+        console.log('Error loading user spots:', error)
+    }
+    return []
 }
 
 export const addSpot = (newSpot) => {
@@ -85,17 +102,28 @@ export const deleteSpotThunk = (deleteSpot) => async dispatch => {
     }
 }
 
+export const resetSpot = () => {
+    return {
+        type: CLEAR_SPOT
+    }
+}
 
+// ----------------------------------------------------------------------------------------------------------
 const spotReducer = (state = initialSpot, action) => {
     const newState = { ...state }
     switch (action.type) {
         case LOAD_SPOTS:
-            const allSpots = {};
-            const spotsArray = action.payload.Spots
-            spotsArray.forEach(el => {
-                allSpots[el.id] = el
+            const spots = {}
+
+            if (!action.payload.Spots) {
+                return spots
+            }
+
+            action.payload.Spots.forEach((el, i) => {
+                spots[el.id] = el
             })
-            return allSpots;
+
+            return spots
         case ADD_SPOT:
             newState[action.payload.id] = action.payload
             return newState;
@@ -103,9 +131,10 @@ const spotReducer = (state = initialSpot, action) => {
             newState[action.payload.id] = action.payload;
             return newState;
         case DELETE_SPOT:
-            console.log('booba test test')
             delete newState[action.payload.id]
             return newState;
+        case CLEAR_SPOT:
+            return initialSpot
         default:
             return newState;
     }
