@@ -6,14 +6,14 @@ import { deleteReviewThunk, loadReviewsThunk } from "../../frontend/src/store/re
 // import LoginFormModal from "../../Modals/LoginFormModal";
 import LoginForm from "../../frontend/src/reusableComponents/Modals/LoginModal/LoginForm";
 
-import { loadSpotsThunk } from "../../frontend/src/store/spot";
+import { loadAllSpotsThunk } from "../../frontend/src/store/spot";
 
 function SpotDetailPage() {
     const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadReviewsThunk(spotId.spotId))
-        dispatch(loadSpotsThunk())
+        dispatch(loadAllSpotsThunk())
     }, [dispatch])
 
     const spotId = useParams();

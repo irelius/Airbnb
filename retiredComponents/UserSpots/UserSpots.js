@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { restoreUserThunk } from "../../frontend/src/store/session";
-import { loadSpotsThunk } from "../../frontend/src/store/spot";
+import { loadAllSpotsThunk } from "../../frontend/src/store/spot";
 
 import { deleteSpotThunk } from "../../frontend/src/store/spot";
 
@@ -13,7 +13,7 @@ function UserSpots() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(restoreUserThunk());
-        dispatch(loadSpotsThunk());
+        dispatch(loadAllSpotsThunk());
     }, [dispatch]);
 
     const user = useSelector(state => state.session.user)

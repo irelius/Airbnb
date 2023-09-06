@@ -8,7 +8,7 @@ import CreateSpotPage from "./views/CreateSpot/CreateSpot";
 import SpotPage from "./views/SpotPage/SpotPage";
 import EditSpot from "./views/EditSpot/EditSpot";
 import CreateReview from "./views/Review/CreateReview";
-import UserSpots from "./views/UserSpots/UserSpots";
+import ManageListings from "./views/ManageListings/ManageListings";
 import Main from "./views/Main/Main";
 
 import * as sessionActions from "./store/session";
@@ -39,7 +39,7 @@ function App() {
             <CreateSpotPage />
           </Route>
           <Route exact path="/manage-listings">
-            <UserSpots />
+            <ManageListings />
           </Route>
           <Route exact path="/edit-spot/:spotId">
             <EditSpot />

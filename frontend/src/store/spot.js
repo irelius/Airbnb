@@ -1,5 +1,6 @@
 import { csrfFetch } from "./csrf"
 
+const LOAD_SPOT = "/spot/load"
 const LOAD_SPOTS = "/spots/load"
 const ADD_SPOT = "/spots/add"
 const EDIT_SPOT = "/spots/edit"
@@ -8,6 +9,13 @@ const CLEAR_SPOT = "/spots/clear"
 
 const initialSpot = {}
 
+export const loadSpot = (spot) => {
+    return {
+        type: LOAD_SPOT,
+        payload: spot
+    }
+}
+
 export const loadSpots = (spots) => {
     return {
         type: LOAD_SPOTS,
@@ -15,7 +23,8 @@ export const loadSpots = (spots) => {
     }
 }
 
-export const loadSpotsThunk = () => async (dispatch) => {
+// thunk action for all spots
+export const loadAllSpotsThunk = () => async (dispatch) => {
     try {
         const response = await csrfFetch('/api/spots');
         if (response.ok) {
@@ -28,6 +37,22 @@ export const loadSpotsThunk = () => async (dispatch) => {
     return []
 };
 
+// thunk action for one specific spot
+export const loadSpotThunk = (spotId) => async (dispatch) => {
+    try {
+        const res = await csrfFetch(`/api/spots/${spotId}`)
+        if (res.ok) {
+            const spot = await res.json();
+            console.log('thunk booba', spot)
+            dispatch(loadSpot(spot))
+        }
+    } catch (error) {
+        console.log("Error loading one spot:", error)
+    }
+    return []
+}
+
+// thunk action for user's listings/spots
 export const loadUserSpotsThunk = () => async (dispatch) => {
     try {
         const res = await csrfFetch(`/api/spots/current`)
@@ -112,6 +137,8 @@ export const resetSpot = () => {
 const spotReducer = (state = initialSpot, action) => {
     const newState = { ...state }
     switch (action.type) {
+        case LOAD_SPOT:
+            return action.payload
         case LOAD_SPOTS:
             const spots = {}
 

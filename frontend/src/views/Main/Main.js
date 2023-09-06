@@ -1,7 +1,7 @@
 import "./Main.css"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { loadSpotsThunk, resetSpot } from "../../store/spot";
+import { loadAllSpotsThunk, resetSpot } from "../../store/spot";
 import Spot from "../../reusableComponents/Spot/Spot";
 
 function Main() {
@@ -10,7 +10,7 @@ function Main() {
     const [load, setLoad] = useState(false)
 
     useEffect(() => {
-        dispatch(loadSpotsThunk())
+        dispatch(loadAllSpotsThunk())
         setLoad(true)
 
         return (() => {

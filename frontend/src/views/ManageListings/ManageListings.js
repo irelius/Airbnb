@@ -1,4 +1,4 @@
-import "./UserSpots.css"
+import "./ManageListings.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom";
@@ -6,7 +6,7 @@ import { restoreUserThunk } from "../../store/session";
 import { loadUserSpotsThunk, resetSpot } from "../../store/spot";
 import { deleteSpotThunk } from "../../store/spot";
 
-function UserSpots() {
+function ManageListings() {
     const dispatch = useDispatch();
     const [load, setLoad] = useState(false)
     const [noSpots, setNoSpots] = useState(false)
@@ -21,6 +21,9 @@ function UserSpots() {
         })
     }, [dispatch]);
     const userSpots = useSelector(state => Object.values(state.spot));
+
+    console.log('booba', userSpots)
+
 
     const deleteSpot = (spot) => {
         if (userSpots.length === 1) {
@@ -92,4 +95,4 @@ function UserSpots() {
     )
 }
 
-export default UserSpots
+export default ManageListings

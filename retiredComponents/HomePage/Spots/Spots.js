@@ -2,7 +2,7 @@
 // import { useDispatch, useSelector } from "react-redux";
 // import { NavLink } from "react-router-dom";
 // import { useEffect, useState } from "react";
-// import { loadSpotsThunk } from "../../../store/spot";
+// import { loadAllSpotsThunk } from "../../../store/spot";
 
 // import loadImage from "./SpotsHelperFunctions/loadImage";
 
@@ -10,7 +10,7 @@
 //     const dispatch = useDispatch();
 //     const [load, setLoad] = useState(false)
 //     useEffect(() => {
-//         dispatch(loadSpotsThunk())
+//         dispatch(loadAllSpotsThunk())
 //         if (allSpots.length > 0) {
 //             setLoad(true)
 //         }
