@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink, useHistory } from "react-router-dom";
 import { deleteReviewThunk, loadReviewsThunk, loadUserReviewThunk, resetReview } from "../../store/review";
-import { loadAllSpotsThunk, loadSpotThunk, resetSpot } from "../../store/spot";
+import { loadSpotThunk, resetSpot } from "../../store/spot";
 
 import LoginForm from "../../reusableComponents/Modals/LoginModal/LoginForm";
 import calculateStars from "../../utils/calculateStars";
@@ -14,7 +14,6 @@ function SpotPage() {
     const dispatch = useDispatch();
     const [load, setLoad] = useState(false)
     const [spotId, setSpotId] = useState(useParams().spotId)
-    const [location, setLocation] = useState()
 
     useEffect(() => {
         dispatch(loadSpotThunk(spotId))
@@ -34,7 +33,7 @@ function SpotPage() {
     const userReview = useSelector(state => state.review.user)
     const user = useSelector(state => state.session.user)
 
-    console.log('booba', user)
+
 
     const loadUserReview = () => {
         if (!user.id) {
@@ -73,11 +72,6 @@ function SpotPage() {
         }
     }
 
-    console.log('booba', user)
-
-    Object.values(allReviews).forEach(el => {
-
-    })
 
     const loadOtherReviews = () => {
         return (
