@@ -55,6 +55,36 @@ router.get("/current", [restoreUser, authenticationRequired], async (req, res, n
 })
 
 
+// Get the review of a particular spot that belongs to the current user
+router.get("/:spotId/current", [restoreUser, authenticationRequired], async (req, res, next) => {
+    const review = await Review.findAll({
+        where: {
+            userId: req.user.id,
+            spotId: req.params.spotId
+        },
+        include: [
+            {
+                model: User,
+                attributes: ["id", "firstName", "lastName"]
+            },
+            {
+                model: Spot,
+                attributes: { exclude: ["description", "numReviews", "avgStarRating", "createdAt", "updatedAt", "OwnerId"] }
+            },
+            {
+                model: Image,
+                attributes: ["id", ["spotId", "imageableId"], ["reviewId", "imageableId"], "url"]
+            }
+        ]
+    })
+    if(review.length === 0) {
+        return next(notFound("Review", 404))
+    } else {
+        res.json(review)
+    }
+})
+
+
 // Get all Reviews by a Spot's id
 // TODO: response should include User and images as included tables
 router.get("/:spotId", async (req, res, next) => {
@@ -79,7 +109,7 @@ router.get("/:spotId", async (req, res, next) => {
             }
         ]
     })
-    res.json({ Reviews })
+    res.json(Reviews)
 })
 
 

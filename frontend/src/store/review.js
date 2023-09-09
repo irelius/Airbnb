@@ -1,12 +1,21 @@
 import { csrfFetch } from "./csrf"
 
+const LOAD_REVIEW = "api/loadReview"
 const LOAD_REVIEWS = "/api/loadReviews"
 const ADD_REVIEW = "/api/addReview"
 const EDIT_REVIEW = "/api/editReview"
 const DELETE_REVIEW = "/api/deleteReview"
 
 const initialReviews = {
-    reviews: []
+    user: {},
+    all: {},
+}
+
+export const loadReview = (review) => {
+    return {
+        type: LOAD_REVIEW,
+        payload: review
+    }
 }
 
 export const loadReviews = (reviews) => {
@@ -22,6 +31,15 @@ export const loadReviewsThunk = (spotId) => async dispatch => {
     const allReviews = await response.json();
     dispatch(loadReviews(allReviews))
     return response;
+}
+
+
+export const loadUserReviewThunk = () => async dispatch => {
+    const res = await csrfFetch(`/api/reviews/current`)
+
+    const userReview = await res.json();
+    dispatch(loadReview(userReview))
+    return res
 }
 
 
@@ -41,7 +59,7 @@ export const addReviewThunk = (review) => async dispatch => {
         body: JSON.stringify(review)
     })
 
-    if(response.ok) {
+    if (response.ok) {
         const review = await response.json();
         dispatch(addReview(review))
     }
@@ -84,7 +102,7 @@ export const deleteReviewThunk = (reviewId) => async dispatch => {
         method: "DELETE"
     })
 
-    if(response.ok) {
+    if (response.ok) {
         console.log("Review successfully deleted.")
     }
 }
@@ -92,13 +110,14 @@ export const deleteReviewThunk = (reviewId) => async dispatch => {
 const reviewReducer = (state = initialReviews, action) => {
     const newState = { ...state }
     switch (action.type) {
+        case LOAD_REVIEW:
+            newState.user = {...action.payload[0]}
+            return newState
         case LOAD_REVIEWS:
-            const allReviews = {};
-            const reviewsArray = action.payload.Reviews
-            reviewsArray.forEach(el => {
-                allReviews[el.id] = el
+            action.payload.forEach(el => {
+                newState.all[el.id] = el
             })
-            return allReviews;
+            return newState;
         case ADD_REVIEW:
             newState[action.payload.id] = action.payload;
             return newState;

@@ -2,7 +2,7 @@ import "./SpotPage.css"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink, useHistory } from "react-router-dom";
-import { deleteReviewThunk, loadReviewsThunk } from "../../store/review";
+import { deleteReviewThunk, loadReviewsThunk, loadUserReviewThunk } from "../../store/review";
 import { loadAllSpotsThunk, loadSpotThunk, resetSpot } from "../../store/spot";
 
 import LoginForm from "../../reusableComponents/Modals/LoginModal/LoginForm";
@@ -16,6 +16,8 @@ function SpotPage() {
 
     useEffect(() => {
         dispatch(loadSpotThunk(spotId))
+        dispatch(loadReviewsThunk(spotId))
+        dispatch(loadUserReviewThunk())
         setLoad(true)
 
         return (() => {
@@ -25,15 +27,72 @@ function SpotPage() {
     }, [dispatch])
 
     const spot = useSelector(state => state.spot)
-    console.log('booba', spot)
+    const allReviews = useSelector(state => state.review.all)
+    const userReview = useSelector(state => state.review.user)
+    const user = useSelector(state => state.session.user)
+
+    console.log('booba', userReview)
+
+    const loadUserReview = () => {
+        if (!user) {
+            return (
+                <div id="login-container">
+                    <div>
+                        Please log in to submit a review.
+                    </div>
+                    <div id="login-button">
+                        <LoginForm />
+                    </div>
+                </div>
+            )
+        }
+        if(user ) {
+
+        }
+    }
 
 
-    return (
-        <div>
-            test
+
+    return load ? (
+        <div id="spot-detail-main">
+            <div id="spot-section">
+                <div id="spot-name">
+                    <h1>{spot.name}</h1>
+                </div>
+                <div id="spot-description">
+                    {spot.city}, {spot.state}, {spot.country}
+                </div>
+                <div id="spot-rating">
+                    {/* {averageRating} */}
+                </div>
+                <div id="spot-header-image">
+                    <img src={`${spot.previewImg}`} alt={`${spot.name}`} />
+                </div>
+            </div>
+
+
+            <div id="review-section">
+                <div id="review-header">
+                    <h2>
+                        Reviews
+                    </h2>
+                </div>
+                {/* <div id="user-review">
+                    <div>
+                        {loadUserReview()}
+                    </div>
+                    <div id="delete-user-review">
+                        {deleteReview()}
+                    </div>
+                </div>
+                <div id="other-reviews-container">
+                    {loadOtherReviews()}
+                </div> */}
+            </div>
         </div>
+    ) : (
+        <div></div>
     )
-
 
     // const history = useHistory();
     // const dispatch = useDispatch();

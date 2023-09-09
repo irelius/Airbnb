@@ -212,7 +212,7 @@ router.get("/current", [restoreUser, authenticationRequired], async (req, res) =
         }
 
         return res.json({
-            Spots,
+            Spots
         });
     } catch (error) {
         // Handle any unexpected errors here

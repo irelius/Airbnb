@@ -23,8 +23,6 @@ function UserSpots() {
 
     const [userSpots, setUserSpots] = useSelector(state => Object.values(state.spot))
 
-    console.log('booba', userSpots)
-
     const deleteSpot = (spot) => {
         dispatch(deleteSpotThunk(spot))
         history.go(0);

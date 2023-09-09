@@ -43,7 +43,6 @@ export const loadSpotThunk = (spotId) => async (dispatch) => {
         const res = await csrfFetch(`/api/spots/${spotId}`)
         if (res.ok) {
             const spot = await res.json();
-            console.log('thunk booba', spot)
             dispatch(loadSpot(spot))
         }
     } catch (error) {
