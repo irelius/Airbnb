@@ -10,8 +10,9 @@ function Spot({ el }) {
                 <section id="spot-name" className="bold">
                     {`${el.name}`}, {`${el.state}`}
                 </section>
-                <section id="spot-price">
-                    ${(`${el.price}`)} night
+                <section id="spot-city">{`${el.city}`}</section>
+                <section id="spot-price-container">
+                    <section id="spot-price" className="bold">${(`${el.price}`)} </section> night
                 </section>
             </div>
         </NavLink>

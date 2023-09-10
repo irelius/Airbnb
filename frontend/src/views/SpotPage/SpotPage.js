@@ -7,18 +7,20 @@ import { loadSpotThunk, resetSpot } from "../../store/spot";
 
 import LoginForm from "../../reusableComponents/Modals/LoginModal/LoginForm";
 import calculateStars from "../../utils/calculateStars";
+import formatMonthAndYear from "../../utils/formatMonthAndYear";
 
 
 function SpotPage() {
-    const history = useHistory();
     const dispatch = useDispatch();
+    const history = useHistory();
+    const spotId = useParams().spotId
     const [load, setLoad] = useState(false)
-    const [spotId, setSpotId] = useState(useParams().spotId)
+    const [spotOwner, setSpotOwner] = useState(null)
 
     useEffect(() => {
-        dispatch(loadSpotThunk(spotId))
         dispatch(loadReviewsThunk(spotId))
         dispatch(loadUserReviewThunk(spotId))
+        dispatch(loadSpotThunk(spotId))
         setLoad(true)
 
         return (() => {
@@ -28,11 +30,17 @@ function SpotPage() {
 
     }, [dispatch])
 
+
     const spot = useSelector(state => state.spot)
     const allReviews = useSelector(state => state.review.all)
     const userReview = useSelector(state => state.review.user)
-    const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session.user) || -1
 
+    useEffect(() => {
+        if (spot.Owner) {
+            setSpotOwner(`${spot.Owner.firstName} ${spot.Owner.lastName}`)
+        }
+    }, [spot])
 
 
     const loadUserReview = () => {
@@ -42,27 +50,26 @@ function SpotPage() {
                     <div>
                         Please log in to submit a review.
                     </div>
-                    <div id="login-button">
+                    {/* <div id="login-button">
                         <LoginForm />
-                    </div>
+                    </div> */}
                 </div>
             )
-        }
-        if (user.id && Object.keys(userReview).length === 0) {
+        } else if (user.id && Object.keys(userReview).length === 0) {
             return (
-                <button id="submit-review-button">
-                    <NavLink exact to={`/submit-review/${spotId}`}>Submit a Review</NavLink>
-                </button>
+                <div id="submit-review-button" className="black-border semi-bold pointer f7f7f7-bg-hover" onClick={() => history.push(`/submit-review/${spotId}`)}>
+                    Submit a Review
+                </div>
+                // <NavLink id="submit-review-button" className="black-border semi-bold" exact to={`/submit-review/${spotId}`}>Submit a Review</NavLink>
             )
-        }
-        if (user.id && Object.keys(userReview).length > 0) {
+        } else if (user.id && Object.keys(userReview).length > 0) {
             return (
                 <div>
                     <div id="review-name">
                         {userReview.User.firstName} {userReview.User.lastName}
                     </div>
                     <div id="review-date">
-                        {userReview.createdAt.slice(0, 10)}
+                        {formatMonthAndYear(userReview.createdAt.slice(0, 10))}
                     </div>
                     <div id="review-review">
                         {userReview.review}
@@ -76,7 +83,6 @@ function SpotPage() {
     const loadOtherReviews = () => {
         return (
             Object.values(allReviews).map(el => {
-                console.log('booba asdf', el)
                 if (el.userId === user.id) {
                     return null;
                 } else if (el.User.id) {
@@ -86,7 +92,7 @@ function SpotPage() {
                                 {el.User.firstName} {el.User.lastName}
                             </div>
                             <div id="review-date">
-                                {el.createdAt.slice(0, 10)}
+                                {formatMonthAndYear(el.createdAt.slice(0, 10))}
                             </div>
                             <div id="review-review">
                                 {el.review}
@@ -105,37 +111,55 @@ function SpotPage() {
         history.go(0);
     }
 
-
-
     return load ? (
         <div id="spot-detail-main">
             <div id="spot-section">
-                <div id="spot-name">
-                    <h1>{spot.name}</h1>
+                <div id="spot-header" className="semi-bold">
+                    {spot.name}
                 </div>
-                <div id="spot-description">
-                    {spot.city}, {spot.state}, {spot.country}
+                <div id="spot-subheader">
+                    <aside>
+                        <i id="spot-star-icon" class="fa-solid fa-star fa"></i>
+                        <p className="semi-bold">
+                            {calculateStars(allReviews)}
+                        </p>
+                    </aside>
+                    <aside>-</aside>
+                    <aside className="bold underline">
+                        {Object.values(allReviews).length} reviews
+                    </aside>
+                    <aside>-</aside>
+                    <aside>
+                        {spotOwner}
+                    </aside>
+                    <aside>-</aside>
+                    <aside className="semi-bold underline">
+                        {spot.city}, {spot.state}, {spot.country}
+                    </aside>
                 </div>
-                <div id="spot-rating">
-                    {calculateStars(allReviews)}
-                </div>
-                <div id="spot-header-image">
-                    <img src={`${spot.previewImg}`} alt={`${spot.name}`} />
-                </div>
+                <img id="spot-header-image" src={`${spot.previewImg}`} alt={`${spot.name}`} />
             </div>
+            <div id="spot-line"></div>
 
 
             <div id="review-section">
                 <div id="review-header">
-                    <h2>
-                        Reviews
-                    </h2>
+                    <aside>
+                        <i id="spot-star-icon" class="fa-solid fa-star fa"></i>
+                        <p className="semi-bold">
+                            {calculateStars(allReviews)}
+                        </p>
+                    </aside>
+                    <aside>-</aside>
+                    <aside className="semi-bold">
+                        {Object.values(allReviews).length} reviews
+                    </aside>
                 </div>
                 <div id="user-review">
                     <div>
                         {loadUserReview()}
                     </div>
-                    <button onClick={handleDelete}>Delete your Review</button>
+                    {/* <button onClick={handleDelete}>Delete your Review</button> */}
                     <div id="other-reviews-container">
                         {loadOtherReviews()}
                     </div>
@@ -145,21 +169,6 @@ function SpotPage() {
     ) : (
         <div></div>
     )
-
-    // // calculating stars
-    // let starRating = 0;
-    // let reviewTotal = 0;
-    // let averageRating = 0;
-    // spotReviews.forEach(el => {
-    //     starRating += el.stars;
-    //     reviewTotal++
-    // })
-    // if (starRating) {
-    //     averageRating = (starRating / reviewTotal).toFixed(2);
-    // } else {
-    //     averageRating = 0;
-    // }
-
 }
 
 export default SpotPage

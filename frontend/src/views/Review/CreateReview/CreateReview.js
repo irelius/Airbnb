@@ -49,7 +49,7 @@ function CreateReview() {
                     value={stars}
                     onChange={(e) => setStars(e.target.value)}
                 />
-                <button type="submit" id="submit-review-button" className="ffffff no-border">
+                <button type="submit" id="submit-review-button" className="ffffff-bg no-border">
                     Submit Review
                 </button>
             </form>

@@ -120,7 +120,7 @@ const reviewReducer = (state = initialReviews, action) => {
     const newState = { ...state }
     switch (action.type) {
         case LOAD_REVIEW:
-            newState.user = {...action.payload[0]}
+            newState.user = { ...action.payload[0] }
             return newState
         case LOAD_REVIEWS:
             action.payload.forEach(el => {
@@ -134,7 +134,10 @@ const reviewReducer = (state = initialReviews, action) => {
             newState[action.payload.spotId] = action.payload;
             return newState;
         case CLEAR_REVIEW:
-            return initialReviews
+            return {
+                user: {},
+                all: {},
+            }
         default:
             return newState;
 

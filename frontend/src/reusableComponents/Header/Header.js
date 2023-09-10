@@ -22,7 +22,7 @@ function Header({ isLoaded }) {
         sessionLinks = (
             <div id="header-right-container">
                 <aside id="header-host-button-container">
-                    <button id="header-host-button" className="ffffff f7f7f7-hover bold pointer no-border" onClick={() => history.push("/become-a-host/property-form")}>
+                    <button id="header-host-button" className="ffffff-bg f7f7f7-bg-hover bold pointer no-border" onClick={() => history.push("/become-a-host/property-form")}>
                         Become a host
                     </button>
                 </aside>

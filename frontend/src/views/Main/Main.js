@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loadAllSpotsThunk, resetSpot } from "../../store/spot";
 import Spot from "../../reusableComponents/Spot/Spot";
+import { resetReview } from "../../store/review";
 
 function Main() {
     const dispatch = useDispatch();

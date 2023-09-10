@@ -53,7 +53,7 @@ function CreateSpot() {
                 </h1>
             </aside>
 
-            <aside id="right" className="ffffff">
+            <aside id="right" className="ffffff-bg">
                 <div id="back-button-container">
                     <NavLink exact to="/">
                         <div id="back-button" className="no-border" >

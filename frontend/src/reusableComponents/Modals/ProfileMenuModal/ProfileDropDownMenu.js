@@ -44,25 +44,25 @@ const ProfileDropDownMenu = ({ user }) => {
 
     return user ? (
         <div id="profile-main-container">
-            <button id="profile-button-container" className="ffffff pointer" onClick={openMenu}>
+            <button id="profile-button-container" className="ffffff-bg pointer" onClick={openMenu}>
                 <i id="profile-bars" className="fa-solid fa-bars" />
-                <div id='profile-icon-container'>
+                <div id='profile-icon-container' className="">
                     <i id="profile-icon" className="fa-solid fa-user fa-lg" />
                 </div>
             </button>
             <div id="profile-dropdown-main-container">
                 {showMenu && (
-                    <div id="profile-dropdown-container" className="shadow ffffff" onClick={handleOptionClick}>
+                    <div id="profile-dropdown-container" className="shadow ffffff-bg" onClick={handleOptionClick}>
                         <section>
                             {user.userName}
                         </section>
                         <section>
                             {user.email}
                         </section>
-                        <section className="f7f7f7-hover pointer" onClick={() => history.push("/manage-listings")}>
+                        <section className="f7f7f7-bg-hover pointer" onClick={() => history.push("/manage-listings")}>
                             Manage Your Listings
                         </section>
-                        <section className="f7f7f7-hover pointer" onClick={logout}>
+                        <section className="f7f7f7-bg-hover pointer" onClick={logout}>
                             Log Out
                         </section>
                     </div>
@@ -71,7 +71,7 @@ const ProfileDropDownMenu = ({ user }) => {
         </div>
     ) : (
         <div id="profile-main-container">
-            <button id={`profile-button-container${showMenu ? '-shadow' : ''}`} className="ffffff pointer" onClick={openMenu}>
+            <button id={`profile-button-container${showMenu ? '-shadow' : ''}`} className="ffffff-bg pointer" onClick={openMenu}>
                 <i id="profile-bars" className="fa-solid fa-bars" />
                 <div id='profile-icon-container'>
                     <i id="profile-icon" className="fa-solid fa-user fa-lg" />
@@ -79,14 +79,14 @@ const ProfileDropDownMenu = ({ user }) => {
             </button>
             <div id="profile-dropdown-main-container">
                 {showMenu && (
-                    <div id="profile-dropdown-container" className="shadow ffffff" onClick={handleOptionClick}>
-                        <section className="f7f7f7-hover pointer bold" onClick={signInDemo}>
+                    <div id="profile-dropdown-container" className="shadow ffffff-bg" onClick={handleOptionClick}>
+                        <section className="f7f7f7-bg-hover pointer bold" onClick={signInDemo}>
                             Sign in as Demo User
                         </section>
-                        <section className="f7f7f7-hover pointer" onClick={() => history.push('/signup')}>
+                        <section className="f7f7f7-bg-hover pointer" onClick={() => history.push('/signup')}>
                             Sign Up
                         </section>
-                        <section className="f7f7f7-hover pointer" onClick={(e) => e.stopPropagation()}>
+                        <section className="f7f7f7-bg-hover pointer" onClick={(e) => e.stopPropagation()}>
                             <LoginFormModal />
                         </section>
                     </div>

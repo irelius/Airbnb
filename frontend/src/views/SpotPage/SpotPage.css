@@ -4,7 +4,11 @@
     align-items: center;
     justify-content: center;
 
-    margin-top: 100px;
+    margin-top: 10px;
+}
+
+#spot-detail-main * {
+    max-width: 90vw;
 }
 
 /* top section */
@@ -20,34 +24,69 @@
     margin: 0px;
 }
 
-#spot-name {
+#spot-header {
     display: flex;
     justify-self: start;
+    font-size: 28px;
 }
 
-#spot-description {
-    margin-bottom: 20px;
+#spot-subheader {
+    display: flex;
+    flex-direction: row;
+
+    height: 30px;
+}
+
+#spot-subheader>* {
+    display: flex;
+    align-items: center;
+
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+#spot-star-icon {
+    padding-right: 3px;
 }
 
 /* causes issue on front page of spots */
-#spot-header-image > * {
-    width: 1000px;
-    height: 500px;
+#spot-header-image {
+    margin-top: 25px;
     object-fit: cover;
-
     border-radius: 10px;
 }
+
+
+
+/* ------------------------------------------------------------------------ */
+#spot-line {
+    border-bottom: 2px solid #f7f7f7;
+    width: 100%;
+
+    margin-top: 30px;
+}
+
+
 
 /* ------------------------------------------------------------------------ */
 
 /* review section */
 #review-section {
-    width: 1000px;
+    max-width: 90vw;
+    width: 100%;
 }
 
-#submit-review-button> * {
-    padding: 5px;
-    margin: 0px;
+#review-header {
+    display: flex;
+    flex-direction: row;
+}
+
+#review-header * {
+    display: flex;
+    align-items: center;
+
+    padding-right: 5px;
+    font-size: 20px;
 }
 
 #user-review {
@@ -56,6 +95,14 @@
     margin: 10px;
 
 }
+
+#submit-review-button {
+    height: 40px;
+    padding: 30px;
+    color: black;
+
+}
+
 
 #review-date {
     color: gray;
@@ -76,21 +123,10 @@
 #other-reviews-container {
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 #other-reviews {
-    margin-bottom: 50px;
-}
-
-#login-container {
-    width: fit-content
-}
-
-#login-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-
+    margin-bottom: 30px;
 }

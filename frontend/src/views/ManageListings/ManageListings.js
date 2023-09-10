@@ -22,7 +22,7 @@ function ManageListings() {
     }, [dispatch]);
     const userSpots = useSelector(state => Object.values(state.spot));
 
-    console.log('booba', userSpots)
+    // console.log('booba', userSpots)
 
 
     const deleteSpot = (spot) => {
