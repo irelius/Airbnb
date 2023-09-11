@@ -48,8 +48,11 @@
     width: 30px;
     height: 30px;
 
-    background-color: rgb(113, 113, 113);
+    background-color: #242424;
     border-radius: 90%;
+
+    color: white;
+    font-size: 10px;
 }
 
 

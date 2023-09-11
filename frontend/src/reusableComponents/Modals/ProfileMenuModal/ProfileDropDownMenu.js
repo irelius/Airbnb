@@ -11,6 +11,8 @@ const ProfileDropDownMenu = ({ user }) => {
     const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
 
+    console.log('booba', user)
+
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
@@ -46,17 +48,17 @@ const ProfileDropDownMenu = ({ user }) => {
         <div id="profile-main-container">
             <button id="profile-button-container" className="ffffff-bg pointer" onClick={openMenu}>
                 <i id="profile-bars" className="fa-solid fa-bars" />
-                <div id='profile-icon-container' className="">
-                    <i id="profile-icon" className="fa-solid fa-user fa-lg" />
+                <div id='profile-icon-container'>
+                    {user.userName.slice(0, 1)}
                 </div>
             </button>
             <div id="profile-dropdown-main-container">
                 {showMenu && (
                     <div id="profile-dropdown-container" className="shadow ffffff-bg" onClick={handleOptionClick}>
-                        <section>
+                        <section className="semi-bold">
                             {user.userName}
                         </section>
-                        <section>
+                        <section className="semi-bold">
                             {user.email}
                         </section>
                         <section className="f7f7f7-bg-hover pointer" onClick={() => history.push("/manage-listings")}>

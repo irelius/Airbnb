@@ -1,17 +1,22 @@
+/* ------------------------------------------------------------------------ */
+/* page general */
+
 #spot-detail-main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 #spot-detail-main * {
     max-width: 90vw;
 }
 
-/* top section */
+
+/* ------------------------------------------------------------------------ */
+/* spot section */
+
 #spot-section {
     display: flex;
     flex-direction: column;
@@ -59,6 +64,8 @@
 
 
 /* ------------------------------------------------------------------------ */
+/* divider line */
+
 #spot-line {
     border-bottom: 2px solid #f7f7f7;
     width: 100%;
@@ -69,16 +76,14 @@
 
 
 /* ------------------------------------------------------------------------ */
-
 /* review section */
+
 #review-section {
-    max-width: 90vw;
     width: 100%;
 }
 
 #review-header {
     display: flex;
-    flex-direction: row;
 }
 
 #review-header * {
@@ -89,11 +94,25 @@
     font-size: 20px;
 }
 
-#user-review {
+#review-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 90%;
+    background-color: #242424;
+
+    font-size: 10px;
+    color: white;
+}
+
+#reviews {
     display: flex;
     flex-direction: column;
-    margin: 10px;
-
 }
 
 #submit-review-button {
@@ -103,6 +122,11 @@
 
 }
 
+#review-user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
 #review-date {
     color: gray;
@@ -111,7 +135,7 @@
 }
 
 #review-review {
-    margin: 5px;
+    margin-top: 5px;
 }
 
 #delete-user-review {

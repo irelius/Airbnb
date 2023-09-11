@@ -42,6 +42,8 @@ function SpotPage() {
         }
     }, [spot])
 
+    console.log('booba userReviews', userReview)
+
 
     const loadUserReview = () => {
         if (!user.id) {
@@ -60,40 +62,52 @@ function SpotPage() {
                 <div id="submit-review-button" className="black-border semi-bold pointer f7f7f7-bg-hover" onClick={() => history.push(`/submit-review/${spotId}`)}>
                     Submit a Review
                 </div>
-                // <NavLink id="submit-review-button" className="black-border semi-bold" exact to={`/submit-review/${spotId}`}>Submit a Review</NavLink>
             )
-        } else if (user.id && Object.keys(userReview).length > 0) {
+        } else {
             return (
                 <div>
-                    <div id="review-name">
-                        {userReview.User.firstName} {userReview.User.lastName}
-                    </div>
-                    <div id="review-date">
-                        {formatMonthAndYear(userReview.createdAt.slice(0, 10))}
-                    </div>
-                    <div id="review-review">
+                    <section id="review-user-info">
+                        <div id='review-icon-container'>
+                            {userReview.User.firstName.slice(0, 1)}
+                        </div>
+                        <aside>
+                            <section id="review-name">
+                                {userReview.User.firstName} {userReview.User.lastName}
+                            </section>
+                            <section id="review-date">
+                                {formatMonthAndYear(userReview.createdAt.slice(0, 10))}
+                            </section>
+                        </aside>
+                    </section>
+                    <section id="review-review">
                         {userReview.review}
-                    </div>
+                    </section>
                 </div>
             )
         }
     }
 
-
-    const loadOtherReviews = () => {
+    const loadReview = (reviews) => {
         return (
-            Object.values(allReviews).map(el => {
+            Object.values(reviews).map(el => {
                 if (el.userId === user.id) {
                     return null;
                 } else if (el.User.id) {
                     return (
                         <div id="other-reviews">
-                            <div id="reviewer-name">
-                                {el.User.firstName} {el.User.lastName}
-                            </div>
-                            <div id="review-date">
-                                {formatMonthAndYear(el.createdAt.slice(0, 10))}
-                            </div>
+                            <section id="review-user-info">
+                                <div id='review-icon-container'>
+                                    {el.User.firstName.slice(0, 1)}
+                                </div>
+                                <aside>
+                                    <section id="review-name">
+                                        {el.User.firstName} {el.User.lastName}
+                                    </section>
+                                    <section id="review-date">
+                                        {formatMonthAndYear(el.createdAt.slice(0, 10))}
+                                    </section>
+                                </aside>
+                            </section>
                             <div id="review-review">
                                 {el.review}
                             </div>
@@ -104,6 +118,7 @@ function SpotPage() {
             })
         )
     }
+
 
     const handleDelete = () => {
         dispatch(deleteReviewThunk(userReview.id))
@@ -155,13 +170,13 @@ function SpotPage() {
                         {Object.values(allReviews).length} reviews
                     </aside>
                 </div>
-                <div id="user-review">
+                <div id="reviews">
                     <div>
                         {loadUserReview()}
                     </div>
                     {/* <button onClick={handleDelete}>Delete your Review</button> */}
                     <div id="other-reviews-container">
-                        {loadOtherReviews()}
+                        {loadReview(allReviews)}
                     </div>
                 </div>
             </div>
