@@ -27,7 +27,7 @@ export const loadReviews = (reviews) => {
 }
 
 export const loadReviewsThunk = (spotId) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${spotId}`)
+    const response = await csrfFetch(`/api/reviews/spot/${spotId}`)
 
     const allReviews = await response.json();
     dispatch(loadReviews(allReviews))
@@ -36,11 +36,14 @@ export const loadReviewsThunk = (spotId) => async dispatch => {
 
 
 export const loadUserReviewThunk = (spotId) => async dispatch => {
-    const res = await csrfFetch(`/api/reviews/${spotId}/current`)
+    const res = await csrfFetch(`/api/reviews/spot/${spotId}/current`)
 
-    const userReview = await res.json();
-    dispatch(loadReview(userReview))
-    return res
+    if (res.ok) {
+        const userReview = await res.json()
+        dispatch(loadReview(userReview))
+        return userReview
+    }
+    return null;
 }
 
 
@@ -52,7 +55,7 @@ export const addReview = (review) => {
 }
 
 export const addReviewThunk = (review) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${review.spotId.spotId}`, {
+    const response = await csrfFetch(`/api/reviews/spot/${review.spotId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -61,8 +64,9 @@ export const addReviewThunk = (review) => async dispatch => {
     })
 
     if (response.ok) {
-        const review = await response.json();
-        dispatch(addReview(review))
+        const newReview = await response.json();
+        console.log('booba thunk', newReview)
+        dispatch(addReview(newReview))
     }
 }
 
@@ -104,6 +108,7 @@ export const deleteReviewThunk = (reviewId) => async dispatch => {
     })
 
     if (response.ok) {
+        dispatch(deleteReview(reviewId))
         console.log("Review successfully deleted.")
     }
 }
@@ -133,6 +138,11 @@ const reviewReducer = (state = initialReviews, action) => {
         case EDIT_REVIEW:
             newState[action.payload.spotId] = action.payload;
             return newState;
+        case DELETE_REVIEW:
+            return {
+                user: {},
+                all: { ...newState.all }
+            }
         case CLEAR_REVIEW:
             return {
                 user: {},

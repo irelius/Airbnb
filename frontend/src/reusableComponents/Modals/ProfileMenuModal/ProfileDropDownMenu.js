@@ -11,8 +11,6 @@ const ProfileDropDownMenu = ({ user }) => {
     const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
 
-    console.log('booba', user)
-
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);

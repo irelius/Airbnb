@@ -1,13 +1,15 @@
 import "./ManageListings.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { restoreUserThunk } from "../../store/session";
 import { loadUserSpotsThunk, resetSpot } from "../../store/spot";
 import { deleteSpotThunk } from "../../store/spot";
 
 function ManageListings() {
     const dispatch = useDispatch();
+    const history = useHistory();
+
     const [load, setLoad] = useState(false)
     const [noSpots, setNoSpots] = useState(false)
 
@@ -21,8 +23,6 @@ function ManageListings() {
         })
     }, [dispatch]);
     const userSpots = useSelector(state => Object.values(state.spot));
-
-    // console.log('booba', userSpots)
 
 
     const deleteSpot = (spot) => {
@@ -56,8 +56,8 @@ function ManageListings() {
                                     </div>
                                 </div>
                                 <div id="edit">
-                                    <button id="edit-button">
-                                        <NavLink exact to={`/edit-spot/${el.id}`}>Edit Listing</NavLink>
+                                    <button id="edit-button" className="semi-bold" onClick={() => history.push(`/edit-spot/${el.id}`)}>
+                                        Edit Listing
                                     </button>
                                 </div>
                                 <div id="delete">

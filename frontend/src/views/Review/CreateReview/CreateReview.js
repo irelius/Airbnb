@@ -7,7 +7,7 @@ import { useParams, useHistory } from "react-router-dom";
 function CreateReview() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const spotId = useParams();
+    const spotId = useParams().spotId;
     const currentUser = useSelector(state => state.session);
     if (!currentUser) {
         history.push("/")
@@ -15,7 +15,6 @@ function CreateReview() {
 
     const [review, setReview] = useState("");
     const [stars, setStars] = useState(1);
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,12 +26,12 @@ function CreateReview() {
         }
 
         dispatch(addReviewThunk(newReview))
-        window.location.href = `/spot-details/${spotId.spotId}`
+        history.push(`/spot-details/${spotId}`)
     }
 
     return (
         <div id="submit-review-main">
-            <form onSubmit={handleSubmit} id="review-form">
+            <form onSubmit={(e) => handleSubmit(e)} id="review-form">
                 <p id="review-title">Type Your Review</p>
                 <input
                     type="text"

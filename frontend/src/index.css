@@ -88,6 +88,17 @@ button {
     cursor: pointer;
 }
 
+.hidden {
+    display: none;
+}
+
+.hidden-container {
+    position: relative;
+}
+
+.hidden-container:hover .hidden{
+    display: block;
+}
 
 
 /* ---------------------------------------------------------------------------------------------------------------- */

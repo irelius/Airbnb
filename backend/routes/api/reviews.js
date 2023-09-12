@@ -51,12 +51,34 @@ router.get("/current", [restoreUser, authenticationRequired], async (req, res, n
             }
         ]
     })
-    res.json(allReviews)
+    if(allReviews.length === 0) {
+        return next(notFound("Review", 404))
+    } else {
+        res.json(allReviews)
+    }
+})
+
+
+// Get a Review by its ID number
+router.get("/:reviewId", [restoreUser, authenticationRequired], async (req, res, next) => {
+    const review = await Review.findByPk(req.params.reviewId, {
+        include: [
+            {
+                model: User,
+                attributes: ["id", "firstName", "lastName"]
+            },
+            {
+                model: Spot,
+                attributes: { exclude: ["description", "numReviews", "avgStarRating", "createdAt", "updatedAt", "OwnerId"] }
+            }
+        ]
+    })
+    res.json(review)
 })
 
 
 // Get the review of a particular spot that belongs to the current user
-router.get("/:spotId/current", [restoreUser, authenticationRequired], async (req, res, next) => {
+router.get("/spot/:spotId/current", [restoreUser, authenticationRequired], async (req, res, next) => {
     const review = await Review.findAll({
         where: {
             userId: req.user.id,
@@ -77,17 +99,14 @@ router.get("/:spotId/current", [restoreUser, authenticationRequired], async (req
             }
         ]
     })
-    if(review.length === 0) {
-        return next(notFound("Review", 404))
-    } else {
+    if (review.length > 0) {
         res.json(review)
     }
 })
 
 
 // Get all Reviews by a Spot's id
-// TODO: response should include User and images as included tables
-router.get("/:spotId", async (req, res, next) => {
+router.get("/spot/:spotId", async (req, res, next) => {
     const spotId = await Spot.findByPk(req.params.spotId);
     // error if spot doesn't exist
     if (!spotId) {
@@ -114,7 +133,7 @@ router.get("/:spotId", async (req, res, next) => {
 
 
 // Create a Review for a Spot based on the Spot's id
-router.post("/:spotId", [validateReviews, restoreUser, authenticationRequired], async (req, res, next) => {
+router.post("/spot/:spotId", [validateReviews, restoreUser, authenticationRequired], async (req, res, next) => {
     const { review, stars } = req.body;
     const currentReviews = await Review.findAll({
         where: {

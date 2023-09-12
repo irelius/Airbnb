@@ -30,7 +30,6 @@ function SpotPage() {
 
     }, [dispatch])
 
-
     const spot = useSelector(state => state.spot)
     const allReviews = useSelector(state => state.review.all)
     const userReview = useSelector(state => state.review.user)
@@ -42,8 +41,12 @@ function SpotPage() {
         }
     }, [spot])
 
-    console.log('booba userReviews', userReview)
+    const handleDelete = (e) => {
+        e.preventDefault();
 
+        dispatch(deleteReviewThunk(userReview.id))
+        dispatch(loadReviewsThunk(spotId))
+    }
 
     const loadUserReview = () => {
         if (!user.id) {
@@ -65,7 +68,7 @@ function SpotPage() {
             )
         } else {
             return (
-                <div>
+                <div className="hidden-container">
                     <section id="review-user-info">
                         <div id='review-icon-container'>
                             {userReview.User.firstName.slice(0, 1)}
@@ -78,8 +81,11 @@ function SpotPage() {
                                 {formatMonthAndYear(userReview.createdAt.slice(0, 10))}
                             </section>
                         </aside>
+                        <aside id='review-delete-container' className="hidden">
+                            <i className="pointer fa-regular fa-circle-xmark fa-xl" onClick={(e) => { handleDelete(e) }}></i>
+                        </aside>
                     </section>
-                    <section id="review-review">
+                    <section id="review">
                         {userReview.review}
                     </section>
                 </div>
@@ -89,12 +95,12 @@ function SpotPage() {
 
     const loadReview = (reviews) => {
         return (
-            Object.values(reviews).map(el => {
+            Object.values(reviews).map((el, i) => {
                 if (el.userId === user.id) {
                     return null;
                 } else if (el.User.id) {
                     return (
-                        <div id="other-reviews">
+                        <div id="other-reviews" key={i}>
                             <section id="review-user-info">
                                 <div id='review-icon-container'>
                                     {el.User.firstName.slice(0, 1)}
@@ -108,7 +114,7 @@ function SpotPage() {
                                     </section>
                                 </aside>
                             </section>
-                            <div id="review-review">
+                            <div id="review">
                                 {el.review}
                             </div>
                         </div>
@@ -119,12 +125,7 @@ function SpotPage() {
         )
     }
 
-
-    const handleDelete = () => {
-        dispatch(deleteReviewThunk(userReview.id))
-        dispatch(loadReviewsThunk(spotId.spotId))
-        history.go(0);
-    }
+    // console.log('booba', spot.previewImg)
 
     return load ? (
         <div id="spot-detail-main">
@@ -134,7 +135,7 @@ function SpotPage() {
                 </div>
                 <div id="spot-subheader">
                     <aside>
-                        <i id="spot-star-icon" class="fa-solid fa-star fa"></i>
+                        <i id="spot-star-icon" className="fa-solid fa-star fa"></i>
                         <p className="semi-bold">
                             {calculateStars(allReviews)}
                         </p>
@@ -152,7 +153,11 @@ function SpotPage() {
                         {spot.city}, {spot.state}, {spot.country}
                     </aside>
                 </div>
-                <img id="spot-header-image" src={`${spot.previewImg}`} alt={`${spot.name}`} />
+                {spot.previewImg ? (
+                    <img id="spot-header-image" src={`${spot.previewImg}`} alt={`${spot.name}`} />
+                ) : (
+                    <div></div>
+                )}
             </div>
             <div id="spot-line"></div>
 
@@ -160,7 +165,7 @@ function SpotPage() {
             <div id="review-section">
                 <div id="review-header">
                     <aside>
-                        <i id="spot-star-icon" class="fa-solid fa-star fa"></i>
+                        <i id="spot-star-icon" className="fa-solid fa-star fa"></i>
                         <p className="semi-bold">
                             {calculateStars(allReviews)}
                         </p>
@@ -174,7 +179,6 @@ function SpotPage() {
                     <div>
                         {loadUserReview()}
                     </div>
-                    {/* <button onClick={handleDelete}>Delete your Review</button> */}
                     <div id="other-reviews-container">
                         {loadReview(allReviews)}
                     </div>

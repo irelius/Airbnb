@@ -100,8 +100,8 @@
     align-items: center;
     margin-right: 10px;
 
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
 
     border-radius: 90%;
     background-color: #242424;
@@ -134,14 +134,29 @@
     margin-top: 3px;
 }
 
-#review-review {
-    margin-top: 5px;
+#review {
+    margin-top: 15px;
 }
 
 #delete-user-review {
     display: flex;
     margin: 10px;
     margin-left: 30px;
+}
+
+#review-delete-container {
+    margin-left: 30px;
+    border-radius: 90%;
+}
+
+#review-delete-container:hover {
+    box-shadow: 0 1mm 1mm rgba(219, 219, 219);
+}
+
+#review-delete {
+    width: 100px;
+    color: black;
+    text-decoration: none;
 }
 
 #other-reviews-container {
