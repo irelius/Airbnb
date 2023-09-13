@@ -38,6 +38,7 @@ const ProfileDropDownMenu = ({ user }) => {
         }
         dispatch(loginThunk(demoUser));
     }
+
     const handleOptionClick = (e) => {
         e.stopPropagation();
         closeMenu(); // Close the menu when any option is clicked
