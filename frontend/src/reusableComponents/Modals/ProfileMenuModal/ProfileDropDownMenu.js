@@ -15,16 +15,23 @@ const ProfileDropDownMenu = ({ user }) => {
         if (showMenu) return;
         setShowMenu(true);
     };
+
     const closeMenu = () => {
         setShowMenu(false);
     };
+
     const logout = (e) => {
         e.preventDefault();
         dispatch(logoutThunk());
         history.push('/')
 
     };
-    const signInDemo = () => {
+
+    const signInDemo = (e) => {
+        console.log('test test, demo sign in func entered')
+
+        e.preventDefault();
+
         const demoUser = {
             credential: "demo@aa.io",
             password: "password"
@@ -80,7 +87,7 @@ const ProfileDropDownMenu = ({ user }) => {
             <div id="profile-dropdown-main-container">
                 {showMenu && (
                     <div id="profile-dropdown-container" className="shadow ffffff-bg" onClick={handleOptionClick}>
-                        <section className="f7f7f7-bg-hover pointer bold" onClick={signInDemo}>
+                        <section className="f7f7f7-bg-hover pointer bold" onClick={(e) => signInDemo(e)}>
                             Sign in as Demo User
                         </section>
                         <section className="f7f7f7-bg-hover pointer" onClick={() => history.push('/signup')}>
