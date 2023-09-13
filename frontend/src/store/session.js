@@ -52,30 +52,22 @@ export const signupThunk = (user) => async (dispatch) => {
 }
 
 export const loginThunk = (user) => async (dispatch) => {
-    try {
-        const { credential, password } = user;
-        console.log('booba test thunk');
-        const response = await csrfFetch('/api/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                credential,
-                password,
-            }),
-        });
+    const { credential, password } = user;
 
-        if (response.ok) {
-            const userData = await response.json();
-            dispatch(setUser(userData));
-        } else {
-            const errorData = await response.json(); // parse the error response
-            console.error('Login failed:', errorData);
-        }
-    } catch (error) {
-        console.error('An unexpected error occurred:', error);
-    }
+    const response = await csrfFetch('/api/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            credential,
+            password,
+        }),
+    });
+
+    const userData = await response.json();
+    dispatch(setUser(userData));
+
 };
 
 

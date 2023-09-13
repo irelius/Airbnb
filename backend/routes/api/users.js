@@ -98,6 +98,11 @@ router.post('/login', validateLogin, async (req, res, next) => {
     res.json(user);
 });
 
+// // Log in demo user
+// router.post('/login/demo', validateLogin, async(req, res, next) => {
+
+// })
+
 // Log out
 router.delete('/logout', (_req, res) => {
     res.clearCookie('token');

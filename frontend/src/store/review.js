@@ -65,7 +65,6 @@ export const addReviewThunk = (review) => async dispatch => {
 
     if (response.ok) {
         const newReview = await response.json();
-        console.log('booba thunk', newReview)
         dispatch(addReview(newReview))
     }
 }

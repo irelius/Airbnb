@@ -125,8 +125,6 @@ function SpotPage() {
         )
     }
 
-    // console.log('booba', spot.previewImg)
-
     return load ? (
         <div id="spot-detail-main">
             <div id="spot-section">
