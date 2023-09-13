@@ -83,7 +83,7 @@ const checkEmail = async (req, res, next) => {
 // ________________________________________________________________________________________
 
 // Log in
-router.post('/login', [validateLogin], async (req, res, next) => {
+router.post('/login', validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
     const user = await User.login({ credential, password });
     // errors if credentials are invalid
