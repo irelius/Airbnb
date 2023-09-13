@@ -51,8 +51,11 @@ router.get("/current", [restoreUser, authenticationRequired], async (req, res, n
             }
         ]
     })
-    if(allReviews.length === 0) {
-        return next(notFound("Review", 404))
+
+    console.log('booba')
+
+    if (allReviews.length === 0) {
+        res.json([])
     } else {
         res.json(allReviews)
     }
@@ -73,7 +76,11 @@ router.get("/:reviewId", [restoreUser, authenticationRequired], async (req, res,
             }
         ]
     })
-    res.json(review)
+    if (review) {
+        res.json(review)
+    } else {
+        res.json({})
+    }
 })
 
 
@@ -99,9 +106,8 @@ router.get("/spot/:spotId/current", [restoreUser, authenticationRequired], async
             }
         ]
     })
-    if (review.length > 0) {
-        res.json(review)
-    }
+    res.json(review)
+
 })
 
 
@@ -113,7 +119,7 @@ router.get("/spot/:spotId", async (req, res, next) => {
         return next(notFound("Spot", 404))
     }
     // find all reviews based on spot id
-    const Reviews = await Review.findAll({
+    const reviews = await Review.findAll({
         where: {
             spotId: req.params.spotId
         },
@@ -128,7 +134,7 @@ router.get("/spot/:spotId", async (req, res, next) => {
             }
         ]
     })
-    res.json(Reviews)
+    res.json(reviews)
 })
 
 

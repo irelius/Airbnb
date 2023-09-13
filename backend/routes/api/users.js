@@ -93,8 +93,9 @@ router.post('/login', [validateLogin], async (req, res, next) => {
         err.statusCode = 401;
         return next(err);
     }
-    setTokenCookie(res, user);
-    user.dataValues.test = req.cookies.token
+    await setTokenCookie(res, user);
+
+    console.log('booba', user)
     res.json(user);
 });
 
