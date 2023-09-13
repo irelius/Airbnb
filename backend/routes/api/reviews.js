@@ -52,8 +52,6 @@ router.get("/current", [restoreUser, authenticationRequired], async (req, res, n
         ]
     })
 
-    console.log('booba')
-
     if (allReviews.length === 0) {
         res.json([])
     } else {

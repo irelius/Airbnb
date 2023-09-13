@@ -95,7 +95,6 @@ router.post('/login', validateLogin, async (req, res, next) => {
     }
     await setTokenCookie(res, user);
 
-    console.log('booba', user)
     res.json(user);
 });
 
