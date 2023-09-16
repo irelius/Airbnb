@@ -94,14 +94,9 @@ router.post('/login', validateLogin, async (req, res, next) => {
         return next(err);
     }
     await setTokenCookie(res, user);
-
+    user.dataValues.test = req.cookies.token
     res.json(user);
 });
-
-// // Log in demo user
-// router.post('/login/demo', validateLogin, async(req, res, next) => {
-
-// })
 
 // Log out
 router.delete('/logout', (_req, res) => {
