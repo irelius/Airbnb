@@ -11,28 +11,24 @@ const user = [
   {
     firstName: "John",
     lastName: "Doe",
-    userName: "JohnDoe",
     email: "johndoe@aa.io",
     hashedPassword: bcrypt.hashSync("password")
   },
   {
     firstName: "Alan",
     lastName: "Smithee",
-    userName: "AlanSmithee",
     email: "AlanSmithee@aa.io",
     hashedPassword: bcrypt.hashSync("password")
   },
   {
     firstName: "Anon",
     lastName: "Ymous",
-    userName: "AnonYmous",
     email: "AnonYmous@aa.io",
     hashedPassword: bcrypt.hashSync("password")
   },
   {
     firstName: "Demo",
     lastName: "User",
-    userName: "Demo-User",
     email: "demo@aa.io",
     hashedPassword: bcrypt.hashSync("password")
   }

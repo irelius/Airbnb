@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     toSafeObject() {
-      const { id, userName, email } = this; // context will be the User instance
-      return { id, userName, email };
+      const { id, email } = this; // context will be the User instance
+      return { id, email };
     }
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
@@ -14,26 +14,21 @@ module.exports = (sequelize, DataTypes) => {
     static getCurrentUserById(id) {
       return User.scope('currentUser').findByPk(id);
     }
-    static async login({ credential, password }) {
-      const { Op } = require('sequelize');
+    static async login(email, password) {
       const user = await User.scope('loginUser').findOne({
         where: {
-          [Op.or]: {
-            email: credential,
-            userName: credential
-          }
+            email: email,
         }
       });
       if (user && user.validatePassword(password)) {
         return await User.scope('currentUser').findByPk(user.id);
       }
     }
-    static async signup({ firstName, lastName, userName, email, password }) {
+    static async signup(firstName, lastName, email, password) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         firstName,
         lastName,
-        userName,
         email,
         hashedPassword
       });
@@ -62,11 +57,6 @@ module.exports = (sequelize, DataTypes) => {
     lastName: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    userName:  {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
     },
     email: {
       type: DataTypes.STRING,

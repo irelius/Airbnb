@@ -19,9 +19,6 @@ const validateSignup = [
     check('lastName')
         .exists({ checkFalsy: true })
         .withMessage('Last Name is required'),
-    check('userName')
-        .exists({checkFalsy: true})
-        .withMessage("Username is required"),
     check('password')
         .notEmpty()
         .withMessage('Password is required'),
@@ -38,26 +35,6 @@ const validateLogin = [
     handleValidationErrors
 ];
 
-
-// helper function to see if user exists
-const checkUserName = async (req, res, next) => {
-    const { userName } = req.body
-    const findUserName = await User.findOne({
-        where: {
-            userName: userName
-        }
-    })
-    if(findUserName) {
-        const error = new Error("Validation Error");
-        error.status = 403;
-        error.statusCode = 403;
-        error.errors = {
-            "userName": "User with that user name already exists"
-        }
-        return next(error)
-    }
-    return next();
-}
 
 const checkEmail = async (req, res, next) => {
     const { email } = req.body
@@ -85,7 +62,7 @@ const checkEmail = async (req, res, next) => {
 // Log in
 router.post('/login', validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
-    const user = await User.login({ credential, password });
+    const user = await User.login(credential, password);
     // errors if credentials are invalid
     if (!user) {
         const err = new Error('Invalid credentials');
@@ -93,8 +70,7 @@ router.post('/login', validateLogin, async (req, res, next) => {
         err.statusCode = 401;
         return next(err);
     }
-    await setTokenCookie(res, user);
-    user.dataValues.test = req.cookies.token
+    setTokenCookie(res, user);
     res.json(user);
 });
 
@@ -110,7 +86,7 @@ router.get('/restore', restoreUser, (req, res) => {
     const { user } = req;
     if (user) {
         return res.json({
-            user: user.toSafeObject()
+            user: user
         });
     } else return res.json({});
 });
@@ -118,9 +94,9 @@ router.get('/restore', restoreUser, (req, res) => {
 
 
 // Sign up
-router.post('/signup', [validateSignup, checkUserName, checkEmail], async (req, res, next) => {
-    const { firstName, lastName, userName, email, password } = req.body;
-    const user = await User.signup({ firstName, lastName, userName, email, password });
+router.post('/signup', [validateSignup, checkEmail], async (req, res, next) => {
+    const { firstName, lastName, email, password } = req.body;
+    const user = await User.signup(firstName, lastName, email, password);
     await setTokenCookie(res, user);
     user.dataValues.token = req.cookies.token;
     return res.json(user);

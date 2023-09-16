@@ -28,18 +28,7 @@ const ProfileDropDownMenu = ({ user }) => {
     };
 
     const signInDemo = (e) => {
-        console.log('test test, demo sign in func entered')
-
-        // e.preventDefault();
-
-        const credential = "demo@aa.io"
-        const password = "password"
-
-        const demoUser = {
-            credential: "demo@aa.io",
-            password: "password"
-        }
-        return dispatch(loginThunk({credential, password}));
+        dispatch(loginThunk("demo@aa.io", "password"));
     }
 
     const handleOptionClick = (e) => {
@@ -58,14 +47,14 @@ const ProfileDropDownMenu = ({ user }) => {
             <button id="profile-button-container" className="ffffff-bg pointer" onClick={openMenu}>
                 <i id="profile-bars" className="fa-solid fa-bars" />
                 <div id='profile-icon-container'>
-                    {user.userName.slice(0, 1)}
+                    {user.firstName.slice(0, 1)}
                 </div>
             </button>
             <div id="profile-dropdown-main-container">
                 {showMenu && (
                     <div id="profile-dropdown-container" className="shadow ffffff-bg" onClick={handleOptionClick}>
                         <section className="semi-bold">
-                            {user.userName}
+                            {user.firstName} {user.lastName}
                         </section>
                         <section className="semi-bold">
                             {user.email}
@@ -91,7 +80,7 @@ const ProfileDropDownMenu = ({ user }) => {
             <div id="profile-dropdown-main-container">
                 {showMenu && (
                     <div id="profile-dropdown-container" className="shadow ffffff-bg" onClick={handleOptionClick}>
-                        <section className="f7f7f7-bg-hover pointer bold" onClick={(e) => signInDemo(e)}>
+                        <section className="f7f7f7-bg-hover pointer bold" onClick={signInDemo}>
                             Sign in as Demo User
                         </section>
                         <section className="f7f7f7-bg-hover pointer" onClick={() => history.push('/signup')}>

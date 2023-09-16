@@ -50,10 +50,7 @@ export const signupThunk = (user) => async (dispatch) => {
         dispatch(newUser(user));
     }
 }
-
-export const loginThunk = (user) => async (dispatch) => {
-    const { credential, password } = user;
-
+export const loginThunk = (credential, password) => async (dispatch) => {
     const response = await csrfFetch('/api/users/login', {
         method: 'POST',
         headers: {

@@ -10,6 +10,7 @@ import EditSpot from "./views/EditSpot/EditSpot";
 import CreateReview from "./views/Review/CreateReview";
 import ManageListings from "./views/ManageListings/ManageListings";
 import Main from "./views/Main/Main";
+import Test from "./Test";
 
 import * as sessionActions from "./store/session";
 import Footer from "./reusableComponents/Footer"
@@ -48,6 +49,9 @@ function App() {
           </Route>
           <Route exact path="/submit-review/:spotId">
             <CreateReview />
+          </Route>
+          <Route exact path="/test-login">
+            <Test />
           </Route>
         </Switch>
       )}

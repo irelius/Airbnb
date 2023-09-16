@@ -13,7 +13,8 @@ function LoginForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(loginThunk({ credential, password })).catch(
+
+        return dispatch(loginThunk({credential, password})).catch(
             async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
@@ -36,7 +37,7 @@ function LoginForm() {
                     </ul>
                 </div>
                 <label>
-                    Username or Email
+                    Email
                     <input
                         type="text"
                         value={credential}
