@@ -35,12 +35,9 @@ function SignUp() {
             return dispatch(signupThunk(newUser))
                 .catch(async (res) => {
                     const data = await res.json();
-                    if (data && data.errors) {
-                        setErrors(data.errors);
+                    if (data.errors) {
+                        setErrors([Object.values(data.errors)]);
                     }
-                    if (data.statusCode === 403) {
-                        setErrors([data.message])
-                    };
                 });
         } else {
             return setErrors(['Confirm Password field must be the same as the Password field']);
@@ -51,9 +48,6 @@ function SignUp() {
     return (
         <div id="signup-main">
             <form onSubmit={handleSubmit} id="signup-form">
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
                 <input
                     type="text"
                     placeholder="First Name"
@@ -93,6 +87,9 @@ function SignUp() {
                     Sign Up
                 </button>
             </form>
+            <div>
+                {errors.map((error, idx) => <p key={idx}>{error}</p>)}
+            </div>
         </div>
     )
 }

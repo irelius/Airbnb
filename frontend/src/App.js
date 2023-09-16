@@ -50,9 +50,9 @@ function App() {
           <Route exact path="/submit-review/:spotId">
             <CreateReview />
           </Route>
-          <Route exact path="/test-login">
+          {/* <Route exact path="/test-login">
             <Test />
-          </Route>
+          </Route> */}
         </Switch>
       )}
       <Footer />

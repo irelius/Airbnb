@@ -27,9 +27,6 @@ function LoginForm() {
         );
     };
 
-    console.log('booba', password)
-
-
     return (
         <div>
             <form onSubmit={handleSubmit} id="login-form">
