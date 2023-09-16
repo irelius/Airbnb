@@ -14,7 +14,7 @@ function LoginForm() {
         e.preventDefault();
         setErrors([]);
 
-        return dispatch(loginThunk({credential, password})).catch(
+        return dispatch(loginThunk(credential, password)).catch(
             async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
@@ -26,6 +26,8 @@ function LoginForm() {
             }
         );
     };
+
+    console.log('booba', password)
 
 
     return (
