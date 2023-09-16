@@ -30,7 +30,7 @@ const ProfileDropDownMenu = ({ user }) => {
     const signInDemo = (e) => {
         console.log('test test, demo sign in func entered')
 
-        e.preventDefault();
+        // e.preventDefault();
 
         const demoUser = {
             credential: "demo@aa.io",
