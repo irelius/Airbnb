@@ -32,11 +32,14 @@ const ProfileDropDownMenu = ({ user }) => {
 
         // e.preventDefault();
 
+        const credential = "demo@aa.io"
+        const password = "password"
+
         const demoUser = {
             credential: "demo@aa.io",
             password: "password"
         }
-        dispatch(loginThunk(demoUser));
+        return dispatch(loginThunk({credential, password}));
     }
 
     const handleOptionClick = (e) => {
