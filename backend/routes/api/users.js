@@ -84,6 +84,7 @@ router.delete('/logout', (_req, res) => {
 // Restore session user
 router.get('/restore', restoreUser, (req, res) => {
     const { user } = req;
+
     if (user) {
         return res.json({
             user: user

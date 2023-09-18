@@ -79,8 +79,8 @@ export const logoutThunk = () => async (dispatch) => {
 export const restoreUserThunk = () => async (dispatch) => {
     const response = await csrfFetch("/api/users/restore")
 
-    const user = await response.json();
-    dispatch(setUser(user.user));
+    const {user} = await response.json();
+    dispatch(setUser(user));
     return response
 }
 
