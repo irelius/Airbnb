@@ -6,12 +6,12 @@ let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
+options.tableName = "Users";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    options.tableName = "Users";
-    await queryInterface.bulkInsert(options.tableName, [
+    await queryInterface.bulkInsert(options, [
       {
         email: 'demo@aa.io',
         firstName: "Demo",
@@ -34,7 +34,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    options.tableName = "Users";
-    await queryInterface.bulkDelete(options.tableName, {}, {});
+    await queryInterface.bulkDelete(options, {}, {});
   }
 };
