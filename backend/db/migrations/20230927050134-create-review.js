@@ -9,7 +9,6 @@ options.tableName = "Reviews"
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    options.tableName = "Reviews"
     await queryInterface.createTable(options.tableName, {
       id: {
         allowNull: false,
@@ -50,7 +49,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Reviews"
     await queryInterface.dropTable(options.tableName, options);
   }
 };
