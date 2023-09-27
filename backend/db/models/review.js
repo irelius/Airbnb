@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Review extends Model {
     static associate(models) {
@@ -25,9 +24,11 @@ module.exports = (sequelize, DataTypes) => {
   Review.init({
     userId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
     spotId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
     review: {
       type: DataTypes.STRING,

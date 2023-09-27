@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Image extends Model {
     static associate(models) {
@@ -15,10 +16,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Image.init({
     reviewId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     spotId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     url: {
       type: DataTypes.STRING,

@@ -9,17 +9,15 @@ const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
+const { ValidationError } = require('sequelize');
+const routes = require('./routes');
+
 const app = express();
 
 app.use(morgan('dev'));
-
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-const routes = require('./routes');
-
-const { ValidationError } = require('sequelize');
 
 
 //________________________________________________________________________

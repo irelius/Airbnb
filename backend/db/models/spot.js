@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
     static associate(models) {
@@ -26,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
           hooks: true
         }
       )
-
       Spot.belongsTo(
         models.User,
         {
@@ -35,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       )
     }
+
   }
   Spot.init({
     ownerId: {

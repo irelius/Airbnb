@@ -70,7 +70,7 @@ router.post('/login', validateLogin, async (req, res, next) => {
         err.statusCode = 401;
         return next(err);
     }
-    setTokenCookie(res, user);
+    await setTokenCookie(res, user);
     res.json(user);
 });
 
@@ -102,6 +102,7 @@ router.post('/signup', [validateSignup, checkEmail], async (req, res, next) => {
     user.dataValues.token = req.cookies.token;
     return res.json(user);
 });
+
 
 // get Current user
 router.get("/current", [restoreUser, authenticationRequired], (req, res, next) => {

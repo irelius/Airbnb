@@ -29,7 +29,7 @@ function App() {
       <Header isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/">
+          {/* <Route exact path="/">
             <Main />
           </Route>
           <Route exact path="/signup">
@@ -49,10 +49,10 @@ function App() {
           </Route>
           <Route exact path="/submit-review/:spotId">
             <CreateReview />
-          </Route>
-          {/* <Route exact path="/test-login">
-            <Test />
           </Route> */}
+          <Route exact path="/">
+            <Test />
+          </Route>
         </Switch>
       )}
       <Footer />
