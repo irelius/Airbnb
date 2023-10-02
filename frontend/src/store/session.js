@@ -35,21 +35,6 @@ export const clearUsers = () => {
     }
 }
 
-export const signupThunk = (user) => async (dispatch) => {
-
-    const response = await csrfFetch("/api/users/signup", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(user)
-    })
-
-    if (response.ok) {
-        const user = await response.json();
-        dispatch(newUser(user));
-    }
-}
 export const loginThunk = (credential, password) => async (dispatch) => {
     const response = await csrfFetch('/api/users/login', {
         method: 'POST',
@@ -74,6 +59,22 @@ export const logoutThunk = () => async (dispatch) => {
     })
     dispatch(removeUser());
     return response;
+}
+
+export const signupThunk = (user) => async (dispatch) => {
+
+    const response = await csrfFetch("/api/users/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+    })
+
+    if (response.ok) {
+        const user = await response.json();
+        dispatch(newUser(user));
+    }
 }
 
 export const restoreUserThunk = () => async (dispatch) => {
